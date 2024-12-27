@@ -4,6 +4,7 @@ import express from "express"
 import dotenv from "dotenv"
 import useRoutes from "./Routes/user.js"
 import connectDB from "./Config/db.js"
+import imageRoutes from "../Backend/Routes/Image.js"
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ res.send("Ma Ashirwad API is working fine")
 })
 
 app.use('/user', useRoutes)
+app.use('/image', imageRoutes); 
 
 const PORT=process.env.PORT || 5000
 
