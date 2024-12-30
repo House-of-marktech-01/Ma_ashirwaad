@@ -81,7 +81,7 @@ const Testimonials = () => {
         {/* Reviews Section */}
         <div className="mb-16">
           <div className=" mb-12">
-            <h1 className="text-3xl md:text-5xl text-[#3D390F]  text-left mb-4 py-8 lg:pl-32">
+            <h1 className="text-3xl md:text-5xl text-blue-950  text-left mb-4 py-8 lg:pl-32">
               Our Reviews
             </h1>
             {/* <p className="text-gray-600 text-left">
@@ -90,7 +90,7 @@ const Testimonials = () => {
             </p> */}
           </div>
 
-          <div className="bg-[#3D390F] p-6 md:p-12 min-h-[60vh]  ">
+          <div className="bg-blue-950 p-6 md:p-12 min-h-[60vh]  ">
             <div className="bg-white/60 rounded-lg p-6 md:p-8 max-w-3xl mx-auto shadow-xl min-h-[40vh]">
               <div className="flex flex-col ">
                 <div className="flex items-center mb-6">

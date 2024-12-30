@@ -183,7 +183,7 @@ const SearchPage = () => {
               />
               <button
                 type="submit"
-                className="absolute right-2.5 bottom-2.5 bg-blue-500 text-white rounded-lg text-sm px-4 py-2 hover:bg-blue-600 transition-colors"
+                className="absolute right-2.5 bottom-2.5 bg-blue-800 text-white rounded-lg text-sm px-4 py-2 hover:bg-blue-950 transition-colors"
               >
                 <Search className="w-5 h-5" />
               </button>
@@ -208,7 +208,7 @@ const SearchPage = () => {
                   <p className="text-blue-600 font-bold">
                     ${item.price.toFixed(2)}
                   </p>
-                  <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors">
+                  <button className="mt-4 w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-950 transition-colors">
                     Add to Cart
                   </button>
                 </div>

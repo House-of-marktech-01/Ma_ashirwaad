@@ -189,8 +189,8 @@ const Inbox = () => {
                 onClick={() => setShowFilterModal(true)}
                 className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg ${
                   Object.values(filters).some((value) => value !== "all")
-                    ? "bg-blue-100 text-blue-700"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
+                    ? "bg-blue-400 text-blue-700"
+                    : "bg-blue-950 text-white hover:bg-blue-950"
                 }`}
               >
                 <Filter className="h-5 w-5" />
@@ -241,7 +241,7 @@ const Inbox = () => {
                             className={`inline-flex px-2 py-1 rounded-full text-xs font-medium
                             ${
                               message.type === "inquiry"
-                                ? "bg-blue-100 text-blue-800"
+                                ? "bg-blue-400 text-blue-800"
                                 : message.type === "support"
                                 ? "bg-yellow-100 text-yellow-800"
                                 : "bg-green-100 text-green-800"
@@ -297,7 +297,7 @@ const Inbox = () => {
                                 e.stopPropagation();
                                 /* View message details */
                               }}
-                              className="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-100 rounded-md transition-colors duration-200"
+                              className="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-400 rounded-md transition-colors duration-200"
                             >
                               Reply
                             </button>
@@ -426,7 +426,7 @@ const Inbox = () => {
                     Clear All
                   </button>
                   <button
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    className="px-4 py-2 text-sm font-medium text-white bg-blue-950 rounded-md hover:bg-blue-950"
                     onClick={() => setShowFilterModal(false)}
                   >
                     Apply Filters

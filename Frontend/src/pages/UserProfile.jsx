@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
   Package,
   ChevronDown,
@@ -47,14 +47,16 @@ const UserProfile = () => {
     {
       id: 1,
       status: "Delivered",
-      image: "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
+      image:
+        "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
       description: "Wireless Noise-Canceling Headphones - Black",
       orderDate: "2024-03-15",
     },
     {
       id: 2,
       status: "In Transit",
-      image: "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
+      image:
+        "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
       description: "Smart Fitness Watch - Premium Edition",
       orderDate: "2024-03-20",
     },
@@ -82,7 +84,7 @@ const UserProfile = () => {
               <h2 className="text-2xl font-semibold text-gray-800">
                 {profileData.fullName}
               </h2>
-              <button className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">
+              <button className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-full hover:bg-blue-950 transition-colors">
                 <Edit2 size={18} />
                 <span>Edit Profile</span>
               </button>

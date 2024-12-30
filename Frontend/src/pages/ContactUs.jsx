@@ -129,7 +129,7 @@ export default function ContactUs() {
           <div className="col-span-1 md:col-span-2">
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-colors"
+              className="w-full bg-blue-950 text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-colors"
             >
               Submit
             </button>

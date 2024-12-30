@@ -14,7 +14,7 @@ import Dashboard from "./admin/Dashboard";
 import Users from "./admin/Users";
 import Orders from "./admin/Orders";
 import LoginRegister from "./pages/LoginRegister";
-import Inbox from './admin/Inbox';
+import Inbox from "./admin/Inbox";
 
 const blogs = [
   {

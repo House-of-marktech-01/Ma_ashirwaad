@@ -7,14 +7,16 @@ const Cart = () => {
       id: 1,
       name: "Wireless Noise-Canceling Headphones",
       price: 299.99,
-      image: "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
+      image:
+        "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
       quantity: 1,
     },
     {
       id: 2,
       name: "Smart Fitness Watch",
       price: 199.99,
-      image: "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
+      image:
+        "https://s3-alpha-sig.figma.com/img/936b/1557/31b6d01d5b50b07fa972374ca95ee810?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=B2gSOuYsTahaGwtbLyKVluNPDchw7ukEd9dJK2BkkMnA08RKKv4HEt3m~ZQ5gotbrG4WrAAM4KJ16R4bAQ42fJKSxYNpYNW1X1Ft6MuR5vdJRA7LtxjVQxmZn5b5Plg3h-khXwHiXaqmcvgqPt9LDQTpeRVDb14aI9A0iEavzZiqgKRMuxgo6xvaPyOBF9olLJMrUvvVE1Ko2kf~RDSM7oL1kZ0M3efnzfb~eiaeZnIltbZLlWo6k0Xn9ee1WZLEC-FQtopghr6fEAdlkk2VdSPhkU6T5JiKdGL0hmycGgRxLlGCsiLvupW0CibzVgNue~3O-Rd7rQrpEkkyFW9rgw__",
       quantity: 2,
     },
   ]);
@@ -56,7 +58,7 @@ const Cart = () => {
             Start adding some items to your cart!
           </p>
           <div className="mt-6">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+            <button className="bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-950 transition-colors">
               Continue Shopping
             </button>
           </div>
@@ -148,7 +150,7 @@ const Cart = () => {
                 </dl>
               </div>
               <div className="mt-6">
-                <button className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                <button className="w-full bg-blue-800 text-white py-3 px-4 rounded-lg hover:bg-blue-950 transition-colors">
                   Proceed to Checkout
                 </button>
               </div>

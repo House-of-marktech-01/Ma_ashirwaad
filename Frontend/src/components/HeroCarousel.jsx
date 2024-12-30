@@ -62,7 +62,7 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="relative min-h-[100vh] overflow-hidden bg-black pt ">
+    <div className="relative min-h-[80vh] overflow-hidden bg-black ">
    
       {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 transition-transform duration-1000 ease-out transform scale-105 ">
@@ -80,14 +80,14 @@ const HeroCarousel = () => {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
         {/* Animated Tag */}
-        <div className="overflow-hidden">
+        {/* <div className="overflow-hidden">
           <p
             className="text-lg mb-4 px-6 py-2 border border-white/30 backdrop-blur-sm rounded-full 
                        animate-fade-in-up font-light tracking-wider"
           >
             {slides[currentSlide].tag}
           </p>
-        </div>
+        </div> */}
 
         {/* Title with Split Animation */}
         <div className="overflow-hidden text-center mb-8">
