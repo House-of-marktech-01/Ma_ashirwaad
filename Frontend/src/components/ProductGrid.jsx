@@ -109,7 +109,7 @@ const ProductGrid = ({ title = "", products = [] }) => {
             <>
               <button
                 onClick={prevSlide}
-                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 bg-white p-1 md:p-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 ${
+                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:translate-x-4 bg-white p-1 md:p-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 ${
                   startIndex === 0 ? "opacity-0" : "opacity-100"
                 }`}
                 disabled={startIndex === 0}
@@ -119,7 +119,7 @@ const ProductGrid = ({ title = "", products = [] }) => {
 
               <button
                 onClick={nextSlide}
-                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 bg-white p-1 md:p-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 ${
+                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:-translate-x-4 bg-white p-1 md:p-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 ${
                   startIndex >= products.length - currentItemsPerView
                     ? "opacity-0"
                     : "opacity-100"

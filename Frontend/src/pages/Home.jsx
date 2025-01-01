@@ -63,7 +63,7 @@ const Home = () => {
       </div>
       <HeroCarousel />
       <CategoryShowcase />
-      <ProductGrid title="Sarees" products={sarees} />
+      <ProductGrid title="Women nighties" products={sarees} />
 
       <DesignDisplay />
       <Gallery />

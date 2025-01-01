@@ -137,8 +137,13 @@ const CategoryCircle = () => {
                   key={index}
                   className="flex flex-col items-center transform hover:scale-110 transition-transform duration-500"
                 >
-                  <div className="w-32 h-32 md:w-56 md:h-56 rounded-full border-4 md:border-8 border-blue-950 flex items-center justify-center hover:border-blue-400 hover:shadow-2xl transition-all duration-300 cursor-pointer bg-white group">
-                    <div className="transform group-hover:rotate-6 transition-transform duration-300">
+                  <div className="w-32 h-32 md:w-56 md:h-56 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer bg-white group relative">
+                    {/* Decorative border with gradient and animation */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-800 via-purple-500 to-blue-700 animate-spin-slow"></div>
+                    {/* Inner white background */}
+                    <div className="absolute inset-1 rounded-full bg-white"></div>
+                    {/* Content */}
+                    <div className="relative transform group-hover:rotate-6 transition-transform duration-300">
                       {category.icon}
                     </div>
                   </div>
