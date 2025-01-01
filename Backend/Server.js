@@ -2,11 +2,11 @@ import mongoose from "mongoose"
 import cors from "cors"
 import express from "express"
 import dotenv from "dotenv"
-import useRoutes from "./Routes/user.js"
+import authRoutes from "./Routes/authRoutes.js"
 import connectDB from "./Config/db.js"
-import imageRoutes from "../Backend/Routes/Image.js"
+import imageRoutes from "./Routes/imageRoutes.js"
 import bodyParser from "body-parser"
-import exchangeRoutes from "../Backend/Routes/Exchange.js"
+import exchangeRoutes from "./Routes/exchangeRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -24,7 +24,7 @@ app.get('/',(req, res)=>{
 res.send("Ma Ashirwad API is working fine")
 })
 
-app.use('/user', useRoutes)
+app.use('/auth', authRoutes);
 app.use('/image', imageRoutes); 
 app.use('/apiexchange', exchangeRoutes);
 
