@@ -9,3 +9,13 @@ body {
   font-family: "Poppins", serif;
 
 }
+
+
+
+
+.antonio {
+  font-family: "Antonio", serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+}
