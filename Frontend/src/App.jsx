@@ -15,6 +15,9 @@ import Users from "./admin/Users";
 import Orders from "./admin/Orders";
 import LoginRegister from "./pages/LoginRegister";
 import Inbox from "./admin/Inbox";
+import ShopPage from "./pages/ShopPage";
+import NewArrivals from "./pages/NewArrivals";
+
 
 const blogs = [
   {
@@ -89,6 +92,9 @@ function App() {
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/shop" element={<ShopPage />} />
+                <Route path="/new-arrival" element={<NewArrivals/>} />
+              
               </Routes>
             </Layout>
           }

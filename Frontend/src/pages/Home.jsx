@@ -5,7 +5,7 @@ import HeroCarousel from "../components/HeroCarousel";
 import Testimonials from "../components/Testimonials";
 
 import CategoryCircle from "../components/CategoryCircle";
-import ProductGrid from "./../components/ProductGrid";
+import ProductGrid from "../components/ProductGrid";
 
 const sarees = [
   {
