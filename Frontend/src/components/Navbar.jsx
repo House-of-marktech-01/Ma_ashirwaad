@@ -71,7 +71,9 @@ export default function Navbar() {
 
             {/* Icons */}
             <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
+              <Link to='/profile'>
               <User className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
+              </Link>
               <Heart className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
               <ShoppingBag className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
             </div>
