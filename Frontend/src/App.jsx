@@ -17,6 +17,7 @@ import LoginRegister from "./pages/LoginRegister";
 import Inbox from "./admin/Inbox";
 import ShopPage from "./pages/ShopPage";
 import NewArrivals from "./pages/NewArrivals";
+import Men from "./pages/Men";
 
 
 const blogs = [
@@ -93,6 +94,7 @@ function App() {
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<ShopPage />} />
+                <Route path="/men" element={<Men />} />
                 <Route path="/new-arrival" element={<NewArrivals/>} />
               
               </Routes>

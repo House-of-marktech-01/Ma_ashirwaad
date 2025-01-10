@@ -1,12 +1,4 @@
 import { useState } from "react";
-import {
-  ChevronRight,
-  X,
-  ArrowRight,
-  Heart,
-  Share2,
-  Bookmark,
-} from "lucide-react";
 
 const CategoryShowcase = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -17,65 +9,41 @@ const CategoryShowcase = () => {
       id: 1,
       name: "Traditional Kurtas",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/v/y/w/l-blue-double-dandiya-aakarshana-original-imah6heghrtyk96n.jpeg",
       description:
         "Discover our exquisite collection of traditional kurtas, featuring timeless designs and intricate craftsmanship that celebrates heritage.",
-      subcategories: ["Wedding", "Festival", "Casual", "Party Wear"],
-      featured: ["Chikan", "Lucknowi", "Jaipuri", "Block Print"],
-      stats: {
-        items: "120+",
-        designers: "25",
-        newArrivals: "15",
-      },
+      price: "$45",
+      colors: ["#FF5733", "#33FF57", "#3357FF", "#FFC300", "#D32F2F"],
     },
     {
       id: 2,
       name: "Modern Fusion",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       description:
         "Contemporary styles that blend traditional aesthetics with modern sensibilities, perfect for the fashion-forward gentleman.",
-      subcategories: ["Indo-Western", "Asymmetric", "Designer", "Casual"],
-      featured: ["Short Kurtas", "Kurta Sets", "Printed", "Embroidered"],
-      stats: {
-        items: "85+",
-        designers: "18",
-        newArrivals: "12",
-      },
+      price: "$60",
+      colors: ["#FF5733", "#33FF57", "#3357FF", "#FFC300", "#D32F2F"],
     },
     {
       id: 3,
       name: "Occasion Wear",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
       description:
         "Elevate your special moments with our carefully curated collection of luxurious occasion wear kurtas.",
-      subcategories: ["Wedding", "Reception", "Sangeet", "Festival"],
-      featured: ["Silk", "Brocade", "Velvet", "Designer"],
-      stats: {
-        items: "95+",
-        designers: "20",
-        newArrivals: "8",
-      },
+      price: "$75",
+      colors: ["#FF5733", "#33FF57", "#3357FF", "#FFC300", "#D32F2F"],
     },
     {
       id: 4,
       name: "Daily Wear",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
       description:
         "Comfortable, stylish, and versatile kurtas designed for everyday elegance and effortless sophistication.",
-      subcategories: ["Cotton", "Linen", "Casual", "Office Wear"],
-      featured: ["Plain", "Printed", "Stripes", "Textured"],
-      stats: {
-        items: "150+",
-        designers: "15",
-        newArrivals: "20",
-      },
+      price: "$30",
+      colors: ["#FF5733", "#33FF57", "#3357FF", "#FFC300", "#D32F2F"],
     },
   ];
 
@@ -86,8 +54,9 @@ const CategoryShowcase = () => {
           {/* Header Section */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold font-serif mb-4 bg-blue-950 bg-clip-text text-transparent">
-              Explore Our Collections
+              Fashion Of Your Sense
             </h1>
+            
             <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
               Discover our curated selection of finest ethnic wear, crafted for
               every occasion
@@ -99,43 +68,41 @@ const CategoryShowcase = () => {
             {categories.map((category) => (
               <div
                 key={category.id}
-                onMouseEnter={() => setHoveredCategory(category.id)}
-                onMouseLeave={() => setHoveredCategory(null)}
                 onClick={() => setSelectedCategory(category)}
-                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                className="group relative rounded-xl overflow-hidden shadow-lg cursor-pointer"
               >
-                {/* Card Content */}
-                <div className="relative h-[60vh] overflow-hidden">
+                {/* Product Card Content */}
+                <div className="relative">
                   <img
                     src={category.image}
                     alt={category.name}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-[500px] object-cover"
                   />
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-
-                  {/* Content */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end transform transition-transform duration-500">
-                    <h3 className="text-2xl font-serif text-white mb-2">
+                  {/* Product Details */}
+                  <div className="p-4">
+                    <h3 className="text-xl font-semibold text-gray-800">
                       {category.name}
                     </h3>
-                    <p className="text-gray-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                      {category.description}
-                    </p>
+                    <p className="text-gray-600 text-sm">{category.description}</p>
+                    <div className="mt-4 flex items-center justify-between">
+                      {/* Price */}
+                      <span className="text-lg font-semibold text-emerald-700">
+                        {category.price}
+                      </span>
 
-                    {/* Stats */}
-                    <div className="flex justify-between items-center text-white text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                      <span>{category.stats.items} Items</span>
-                      <span>{category.stats.designers} Designers</span>
-                      <span>{category.stats.newArrivals} New</span>
+                      {/* Colors */}
+                      <div className="flex space-x-2">
+                        {category.colors.map((color, index) => (
+                          <div
+                            key={index}
+                            className="w-6 h-6 rounded-full"
+                            style={{ backgroundColor: color }}
+                          ></div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-
-                  {/* Action Button */}
-                  <button className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                    <ArrowRight className="w-5 h-5 text-white" />
-                  </button>
                 </div>
               </div>
             ))}
@@ -153,23 +120,12 @@ const CategoryShowcase = () => {
                   <h3 className="text-2xl font-serif text-emerald-900">
                     {selectedCategory.name}
                   </h3>
-                  <div className="flex items-center gap-4">
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Heart className="w-5 h-5 text-gray-600" />
-                    </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Share2 className="w-5 h-5 text-gray-600" />
-                    </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Bookmark className="w-5 h-5 text-gray-600" />
-                    </button>
-                    <button
-                      onClick={() => setSelectedCategory(null)}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors ml-2"
-                    >
-                      <X className="w-6 h-6" />
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => setSelectedCategory(null)}
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors ml-2"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
                 </div>
 
                 {/* Modal Content */}
@@ -177,97 +133,38 @@ const CategoryShowcase = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Left Column */}
                     <div>
-                      <div className="relative rounded-xl overflow-hidden shadow-lg">
-                        <img
-                          src={selectedCategory.image}
-                          alt={selectedCategory.name}
-                          className="w-full h-[500px] object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      </div>
-                      <p className="mt-6 text-gray-600 leading-relaxed">
-                        {selectedCategory.description}
-                      </p>
+                      <img
+                        src={selectedCategory.image}
+                        alt={selectedCategory.name}
+                        className="w-full h-[500px] object-cover"
+                      />
                     </div>
 
                     {/* Right Column */}
-                    <div className="space-y-8">
-                      {/* Subcategories */}
-                      <div>
-                        <h4 className="text-xl font-medium mb-4">
-                          Browse by Style
-                        </h4>
-                        <div className="grid grid-cols-2 gap-4">
-                          {selectedCategory.subcategories.map((sub, idx) => (
-                            <button
-                              key={idx}
-                              className="px-6 py-4 text-left rounded-xl border-2 hover:border-emerald-600 hover:bg-emerald-50 transition-all duration-300 group"
-                            >
-                              <span className="text-gray-900 group-hover:text-emerald-700 transition-colors">
-                                {sub}
-                              </span>
-                            </button>
+                    <div>
+                      <h4 className="text-2xl font-medium mb-4">
+                        {selectedCategory.name}
+                      </h4>
+                      <p className="text-gray-600 mb-4">
+                        {selectedCategory.description}
+                      </p>
+                      <span className="text-lg font-semibold text-emerald-700">
+                        {selectedCategory.price}
+                      </span>
+                      <div className="mt-4">
+                        <h5 className="text-xl font-medium mb-2">Available Colors</h5>
+                        <div className="flex space-x-2">
+                          {selectedCategory.colors.map((color, index) => (
+                            <div
+                              key={index}
+                              className="w-8 h-8 rounded-full"
+                              style={{ backgroundColor: color }}
+                            ></div>
                           ))}
-                        </div>
-                      </div>
-
-                      {/* Featured Items */}
-                      <div>
-                        <h4 className="text-xl font-medium mb-4">
-                          Featured Designs
-                        </h4>
-                        <div className="grid grid-cols-2 gap-4">
-                          {selectedCategory.featured.map((item, idx) => (
-                            <button
-                              key={idx}
-                              className="px-6 py-4 text-left rounded-xl border-2 hover:border-emerald-600 hover:bg-emerald-50 transition-all duration-300 group"
-                            >
-                              <span className="text-gray-900 group-hover:text-emerald-700 transition-colors">
-                                {item}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-3 gap-4 mt-8">
-                        <div className="text-center p-4 rounded-xl bg-emerald-50">
-                          <div className="text-2xl font-bold text-emerald-700">
-                            {selectedCategory.stats.items}
-                          </div>
-                          <div className="text-sm text-emerald-600">Items</div>
-                        </div>
-                        <div className="text-center p-4 rounded-xl bg-emerald-50">
-                          <div className="text-2xl font-bold text-emerald-700">
-                            {selectedCategory.stats.designers}
-                          </div>
-                          <div className="text-sm text-emerald-600">
-                            Designers
-                          </div>
-                        </div>
-                        <div className="text-center p-4 rounded-xl bg-emerald-50">
-                          <div className="text-2xl font-bold text-emerald-700">
-                            {selectedCategory.stats.newArrivals}
-                          </div>
-                          <div className="text-sm text-emerald-600">
-                            New Arrivals
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Modal Footer */}
-                <div className="p-6 border-t bg-gray-50">
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className="w-full py-4 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors text-lg font-medium flex items-center justify-center gap-2"
-                  >
-                    <span>Browse All {selectedCategory.name}</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
                 </div>
               </div>
             </div>
