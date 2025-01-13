@@ -20,6 +20,8 @@ import NewArrivals from "./pages/NewArrivals";
 import Men from "./pages/Men";
 
 
+
+
 const blogs = [
   {
     id: 1,
@@ -96,6 +98,7 @@ function App() {
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/men" element={<Men />} />
                 <Route path="/new-arrival" element={<NewArrivals/>} />
+
               
               </Routes>
             </Layout>

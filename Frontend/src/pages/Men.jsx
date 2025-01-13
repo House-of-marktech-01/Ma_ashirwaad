@@ -28,7 +28,7 @@ const products = [
   {
     id: 4,
     name: "Men's Jeans",
-    image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/c/1/g/l-blue-double-dandiya-aakarshana-original-imah6hegcfghhhzg.jpeg",
+    image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
     price: "$69.99",
     category: "Men",
   },
@@ -50,7 +50,7 @@ const ProductSection = ({ category, wishlist, toggleWishlist, filterCategory, se
 
   return (
     <div className="max-w-7xl mx-auto py-10 px-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-8 border-b-2 border-gray-800 pb-2">
+      <h2 className="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-gray-800 pb-2">
         {category} Collection
       </h2>
 
@@ -74,11 +74,11 @@ const ProductSection = ({ category, wishlist, toggleWishlist, filterCategory, se
         {filteredProducts.slice(0, visibleCount).map((product) => (
           <div
             key={product.id}
-            className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-300"
+            className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl relative"
           >
             {/* Wishlist Button */}
             <button
-              className="absolute top-4 right-4 text-xl"
+              className="absolute top-4 right-4 text-2xl"
               onClick={() => toggleWishlist(product.id)}
             >
               {wishlist.includes(product.id) ? (
@@ -88,21 +88,19 @@ const ProductSection = ({ category, wishlist, toggleWishlist, filterCategory, se
               )}
             </button>
 
-            {/* Image */}
-            <div className="relative h-[300px]">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover rounded-t-lg"
-              />
-            </div>
-
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-[500] object-cover"
+            />
+            <div className="p-5">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {product.name}
+              </h3>
               <p className="text-gray-600 text-md font-medium">{product.price}</p>
               <Link
                 to={`/product/${product.id}`}
-                className="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg font-medium transition duration-300"
+                className="mt-4 inline-block bg-gray-900 hover:bg-gray-700 text-white px-5 py-2 rounded-lg font-medium transition duration-300"
               >
                 View Details
               </Link>
@@ -117,14 +115,14 @@ const ProductSection = ({ category, wishlist, toggleWishlist, filterCategory, se
           {visibleCount < filteredProducts.length ? (
             <button
               onClick={() => setVisibleCount((prev) => prev + 4)}
-              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+              className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition duration-300"
             >
               View More
             </button>
           ) : (
             <button
               onClick={() => setVisibleCount(4)}
-              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+              className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition duration-300"
             >
               View Less
             </button>
@@ -149,8 +147,8 @@ export default function Men() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
-      {/* HeroCarousel */}
+    <div className="bg-gray-100 min-h-screen py-12">
+      {/* HeroCarousel is now only rendered once here */}
       <div className="pt-24">
         <HeroCarousel />
       </div>
