@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import users from '../Models/authModel.js'
+import users from '../Models/User.js'
 
 export const signup = async (req, res) =>{
   const {name, email, password} = req.body;
