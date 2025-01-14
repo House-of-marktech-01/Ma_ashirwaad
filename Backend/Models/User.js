@@ -37,11 +37,11 @@ const userSchema = new mongoose.Schema({
     default: false,
   },
   otp: {
-    type: String, // Store OTP as a string
+    type: String, 
     required: false,
   },
   otpGeneratedAt: {
-    type: Date, // Store the time when OTP was generated
+    type: Date, 
     required: false,
   },
   cart: {

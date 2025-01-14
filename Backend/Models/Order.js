@@ -34,7 +34,8 @@ const orderSchema = new mongoose.Schema({
     statusHistory: [{
         status: {
             type: String,
-            enum: ['pending','placed', 'packed', 'shipped', 'delivered', 'cancelled','returned','refund initiated','refund completed']
+            enum: ['pending','placed', 'packed', 'shipped', 'delivered', 'cancelled','returned','refund initiated','refund completed'],
+            default:'pending'
         },
         updatedAt: {
             type: Date,

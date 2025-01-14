@@ -17,7 +17,7 @@ const AddressSchema = new mongoose.Schema({
     state: { type: String, required: true }, 
     country: { type: String, required: true, default: 'India' },
     pincode: { type: String, required: true }, 
-    contactNo: { type: String, required: true }, 
+    contactNumber: { type: String, required: true }, 
     email: { type: String, required: true }, 
     coordinates: { 
         type: {

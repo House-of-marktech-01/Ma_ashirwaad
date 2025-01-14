@@ -1,11 +1,19 @@
-import express from "express"
-import { login, signup } from "../Controllers/authController.js";
-import authmodel from "../Models/authModel.js";
-
+// server/routes/authRoutes.js
+import express from 'express';
 const router = express.Router();
+import {authenticateToken} from '../middlewares/authMiddleware.js';
+import {register,googleSignup,login,verifyEmail,getAllUsers,getUser} from '../Controllers/authController.js';
 
-router.post('/signup', signup);
+// Register Route
+router.post('/register', register);
+router.post('/google-signup', googleSignup);
+
+// Login Route
 router.post('/login', login);
 
-export default router;
+// Verify email
+router.post('/verify-email', verifyEmail);
+router.get('/getAllUsers', getAllUsers);
+router.get('/getUser/:id',authenticateToken, getUser);
 
+export default router;

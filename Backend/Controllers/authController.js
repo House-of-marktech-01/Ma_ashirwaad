@@ -6,7 +6,6 @@ import fetch from 'node-fetch';
 
 dotenv.config();
 
-// Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -16,13 +15,10 @@ const transporter = nodemailer.createTransport({
 });
 // console.log(transporter);
 // console.log(process.env.EMAIL_USER,process.env.EMAIL_PASS)
-// Generate OTP
 const generateOTP = () => {
-  // Generate a 6-digit OTP
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-// Register user with email verification
 export const register = async (req, res) => {
   try {
     const { emailorphone, password, name } = req.body;
@@ -83,7 +79,7 @@ export const register = async (req, res) => {
     } else {
       const formatContactNumber = (contactNumber) => {
         if (contactNumber.startsWith("+91")) {
-          return contactNumber.slice(3); // Remove +91
+          return contactNumber.slice(3); 
         }
         return contactNumber;
       };
@@ -121,7 +117,6 @@ export const register = async (req, res) => {
   }
 };
 
-// Login user
 export const login = async (req, res) => {
   try {
     const { emailorphone, password } = req.body;
@@ -176,7 +171,6 @@ export const login = async (req, res) => {
   }
 };
 
-// Verify OTP
 export const verifyEmail = async (req, res) => {
   try {
     const { emailorphone, otp } = req.body;
@@ -224,7 +218,6 @@ export const verifyEmail = async (req, res) => {
   }
 };
 
-// Get all users
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -234,7 +227,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// Google Signup
 export const googleSignup = async (req, res) => {
   try {
     const response = req.body;
@@ -311,14 +303,12 @@ export const googleSignup = async (req, res) => {
 };
 
 
-// Get user by ID
 export const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select('-password').populate('address');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    const { _id, name, email, phone, role, isWebsiteCreated } = user;
     res.status(200).json({ user });
   }
   catch (err) {

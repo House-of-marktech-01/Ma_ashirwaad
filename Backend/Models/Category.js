@@ -5,6 +5,11 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    for:{
+        type:String,
+        enum:['Men','Women','Both','New Arrivals'],
+        default:'Both'
     }
 }, { timestamps: true });
 
