@@ -1,202 +1,126 @@
 import { useState } from "react";
-import { Edit2, Mail, Phone, MapPin, Calendar, Package, Heart } from "lucide-react";
-import { ChevronDown, ChevronUp } from 'lucide-react';
-
-const UserProfile = () => {
-  const [expandedOrder, setExpandedOrder] = useState(null);
-  const [wishlist, setWishlist] = useState([]); // State to manage wishlist items
-  const [activeSection, setActiveSection] = useState("profile");
-
-  const [products] = useState([
-    { id: 1, name: "Wireless Headphones", description: "Noise-canceling headphones", price: "$120", imageUrl: "https://source.unsplash.com/100x100/?headphones" },
-    { id: 2, name: "Smart Watch", description: "Track your fitness goals", price: "$200", imageUrl: "https://source.unsplash.com/100x100/?smartwatch" },
-    { id: 3, name: "Bluetooth Speaker", description: "Portable speaker for all your music needs", price: "$60", imageUrl: "https://source.unsplash.com/100x100/?speaker" },
-  ]);
-
-  const profileData = {
-    fullName: "Vedang Rane",
-    emailId: "vedang.rane@email.com",
-    phoneNumber: "+1 (555) 123-4567",
-    gender: "Male",
-    dateOfBirth: "1992-04-15",
-    location: "Mumbai, India",
-    alternatePhone: "+1 (555) 987-6543",
-    address: "123 Tech Park Avenue, Suite 456, Mumbai, India",
-  };
-
-  const orders = [
-    {
-      id: 1,
-      status: "Delivered",
-      image: "https://source.unsplash.com/100x100/?headphones,tech",
-      description: "Wireless Noise-Canceling Headphones - Black",
-      orderDate: "2024-03-15",
-    },
-    {
-      id: 2,
-      status: "In Transit",
-      image: "https://source.unsplash.com/100x100/?smartwatch,tech",
-      description: "Smart Fitness Watch - Premium Edition",
-      orderDate: "2024-03-20",
-    },
-  ];
-
-  const savedAddresses = [
-    "123 Tech Park Avenue, Suite 456, Mumbai, India",
-    "456 City Center, New York, USA",
-  ];
-
-  // Add or remove item from wishlist
-  const toggleWishlist = (item) => {
-    if (wishlist.some((wishlistItem) => wishlistItem.id === item.id)) {
-      setWishlist(wishlist.filter((wishlistItem) => wishlistItem.id !== item.id));
-    } else {
-      setWishlist([...wishlist, item]);
-    }
+import CustomInput from "./../components/CustomInput";
+import CustomSelect from "./../components/CustomSelect";
+import profile from "../assets/images/profile.jpg";
+import sms from "../assets/images/sms.png";
+import CustomButton from "../components/CustomButton";
+const Profile = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phoneNumber: "",
+    alternatePhone: "",
+    gender: "",
+    city: "",
+    language: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-12 pt-32">
-      <h1 className="text-4xl font-bold mb-6 text-gray-900">Hello, Vedang</h1>
-      
-      {/* Navigation */}
-      <div className="flex space-x-12 text-lg font-semibold text-gray-800 mb-6">
-        {[ 
-          { name: "My Profile", section: "profile" }, 
-          { name: "Order Details", section: "orders" },
-          { name: "Wishlist", section: "wishlist" }, 
-          { name: "Saved Address", section: "address" },
-        ].map((item) => (
-          <div key={item.section} className="relative group">
-            <span
-              className={`cursor-pointer hover:text-gray-600 ${activeSection === item.section ? "text-gray-600" : ""}`}
-              onClick={() => setActiveSection(item.section)}
-            >
-              {item.name}
-            </span>
-          </div>
-        ))}
+    <div className="rounded shadow-md font-poppins pb-14">
+      <div className="primaryColorBg rounded-t font-poppins text-white p-4 text-center">
+        <h1 className="text-lg">Profile</h1>
       </div>
-
-      {/* Profile Section */}
-      {activeSection === "profile" && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">My Profile</h2>
-          <div className="bg-white shadow-xl rounded-lg p-8">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-800">{profileData.fullName}</h3>
-              <button className="flex items-center space-x-2 bg-gray-800 text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition duration-300">
-                <Edit2 size={18} />
-                <span>Edit Profile</span>
-              </button>
+      <div className="flex flex-col mt-8 px-6">
+        <div className=" flex fex-row justify-between">
+          <div className="flex fex-row gap-4 items-center ">
+            <div>
+              <img
+                src={profile}
+                alt="Profile"
+                className="rounded-full w-20 h-20"
+              />
             </div>
-            <p className="text-lg text-gray-600">{profileData.address}</p>
+            <div>
+              <p className="font-semibold text-lg">Alexa Rawles</p>
+              <p className="text-gray-500 text-base">alexarawles@gmail.com</p>
+            </div>
+          </div>
+
+          <div>
+            {/* <button className="text-blue-500 ml-auto">Edit</button> */}
+            <CustomButton
+              textCase="capitalize"
+              text="Edit"
+              borderColor="border-[#9A3131]"
+              onClick={() => console.log("Learn More Clicked!")}
+            />
           </div>
         </div>
-      )}
 
-      {/* Orders Section */}
-      {activeSection === "orders" && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Order Details</h2>
-          <div className="space-y-4">
-            {orders.map((order) => (
-              <div key={order.id} className="bg-white shadow-lg rounded-lg p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <Package className="h-6 w-6 text-gray-500" />
-                    <span className={`${order.status === "Delivered" ? "text-green-600" : "text-blue-600"}`}>
-                      {order.status}
-                    </span>
-                    <span className="text-sm text-gray-500">Ordered on {new Date(order.orderDate).toLocaleDateString()}</span>
-                  </div>
-                  <button onClick={() => setExpandedOrder(expandedOrder === order.id ? null : order.id)}>
-                    {expandedOrder === order.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </button>
-                </div>
-                {expandedOrder === order.id && (
-                  <div className="mt-4 flex items-center space-x-4">
-                    <img src={order.image} alt="Product" className="w-24 h-24 object-cover rounded-lg" />
-                    <p className="text-gray-600">{order.description}</p>
-                    <button onClick={() => toggleWishlist(order)} className="text-red-500 hover:text-red-700 transition">
-                      <Heart size={22} className={`${wishlist.some((wishlistItem) => wishlistItem.id === order.id) ? "text-red-700" : ""}`} />
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
+        <div>
+          <div className="grid grid-cols-2 my-6 gap-6">
+            <CustomInput
+              type="text"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              name="fullName"
+              label="Full Name"
+            />
+            <CustomInput
+              type="text"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              name="phoneNumber"
+              label="Phone Number"
+            />
+            <CustomSelect
+              options={["Male", "Female", "Other"]}
+              value={formData.gender}
+              onChange={handleChange}
+              name="gender"
+              label="Gender"
+            />
+            <CustomSelect
+              options={["New York", "Los Angeles", "Chicago"]}
+              value={formData.city}
+              onChange={handleChange}
+              name="city"
+              label="City"
+            />
+            <CustomSelect
+              options={["English", "Spanish", "French"]}
+              value={formData.language}
+              onChange={handleChange}
+              name="language"
+              label="Language"
+            />
+            <CustomInput
+              type="text"
+              placeholder="Alternate Phone Number"
+              value={formData.alternatePhone}
+              onChange={handleChange}
+              name="alternatePhone"
+              label="Alternate Phone Number"
+            />
           </div>
         </div>
-      )}
-
-      {/* Products Section */}
-      <h2 className="text-3xl font-semibold mb-6 text-gray-900">Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product) => (
-          <div key={product.id} className="bg-white shadow-lg rounded-lg p-6">
-            <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded-lg mb-4" />
-            <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-            <p className="text-gray-600 mb-4">{product.description}</p>
-            <p className="text-lg font-semibold text-gray-800">{product.price}</p>
-            <button
-              onClick={() => toggleWishlist(product)}
-              className="mt-4 text-red-500 hover:text-red-700 transition duration-300"
-            >
-              <Heart size={24} className={`${wishlist.some(item => item.id === product.id) ? "text-red-700" : "text-gray-500"}`} />
-              {wishlist.some(item => item.id === product.id) ? "Remove from Wishlist" : "Add to Wishlist"}
-            </button>
-          </div>
-        ))}
       </div>
-
-      {/* My Wishlist Section */}
-      <h2 className="text-3xl font-semibold mt-12 mb-6 text-gray-900">My Wishlist</h2>
-      {wishlist.length === 0 ? (
-        <p className="text-gray-600">Your wishlist is empty.</p>
-      ) : (
-        <div className="space-y-4">
-          {wishlist.map((item) => (
-            <div key={item.id} className="bg-white shadow-lg rounded-lg p-6 flex justify-between items-center">
-              <div className="flex items-center space-x-4">
-                <img src={item.imageUrl} alt={item.name} className="w-16 h-16 object-cover rounded-lg" />
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => toggleWishlist(item)}
-                className="text-red-500 hover:text-red-700 transition duration-300"
-              >
-                <Heart size={24} className="text-red-500" />
-                Remove from Wishlist
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Saved Address Section */}
-      {activeSection === "address" && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Saved Addresses</h2>
-          <div className="space-y-4">
-            {savedAddresses.map((address, index) => (
-              <div key={index} className="bg-white shadow-lg rounded-lg p-6">
-                <div className="flex justify-between items-center">
-                  <p className="text-gray-600">{address}</p>
-                  <button className="text-blue-500 hover:text-blue-700 transition duration-300">
-                    <MapPin size={20} />
-                    <span>Set as default</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+      <div className="mt-4 px-6">
+        <p className="font-semibold poppins text-lg">My email Address</p>
+        <div className="pt-2 flex flex-row gap-6 items-center">
+          <div className="bg-blue-100 rounded-full justify-center flex items-center w-10 h-10">
+            <img src={sms} alt="sms" />
+          </div>
+          <div>
+            <p className="font-medium popins">alexarawles@gmail.com</p>
+            <p className="text-gray-500 poppins mt-1 text-sm">1 month ago</p>
           </div>
         </div>
-      )}
+
+        <button className="text-blue-500 bg-blue-100 mt-8 rounded-md p-2 px-4">
+          +Add Email Address
+        </button>
+      </div>
     </div>
   );
 };
 
-export default UserProfile;
+export default Profile;

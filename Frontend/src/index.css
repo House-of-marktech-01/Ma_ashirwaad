@@ -9,9 +9,19 @@ body {
   font-family: "Poppins", serif;
 
 }
+.primaryColorBg{
+  background: #9A3131;
 
+}
+.primaryColor{
+  color: #9A3131
+}
+.fustat {
+  font-family: "Fustat", serif;
+  font-optical-sizing: auto;
 
-
+  font-style: normal;
+}
 
 .antonio {
   font-family: "Antonio", serif;

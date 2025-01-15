@@ -18,8 +18,11 @@ import Inbox from "./admin/Inbox";
 import ShopPage from "./pages/ShopPage";
 import NewArrivals from "./pages/NewArrivals";
 import Men from "./pages/Men";
+import OrderDetails from './pages/OrderDetails';
+import SavedAddress from './pages/SavedAddress';
 
-
+import ProfileLayout from './components/ProfileLayout';
+import WishList from "./pages/WishList";
 
 
 const blogs = [
@@ -93,14 +96,20 @@ function App() {
                 <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
                 <Route path="/explore-products" element={<ExploreProducts />} />
                 <Route path="/contact" element={<ContactUs />} />
-                <Route path="/profile" element={<UserProfile />} />
+               
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/men" element={<Men />} />
-                <Route path="/new-arrival" element={<NewArrivals/>} />
-
-              
+                <Route path="/new-arrival" element={<NewArrivals />} />
+                
+                <Route path="/" element={<ProfileLayout />}>
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/order-details" element={<OrderDetails />} />
+                  <Route path="/wishlist" element={<WishList />} />
+                  <Route path="/saved-address" element={<SavedAddress />} />
+                </Route>
               </Routes>
+              
             </Layout>
           }
         />
