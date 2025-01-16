@@ -20,7 +20,6 @@ import NewArrivals from "./pages/NewArrivals";
 import Men from "./pages/Men";
 import OrderDetails from './pages/OrderDetails';
 import SavedAddress from './pages/SavedAddress';
-
 import ProfileLayout from './components/ProfileLayout';
 import WishList from "./pages/WishList";
 
