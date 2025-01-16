@@ -18,11 +18,13 @@ import Inbox from "./admin/Inbox";
 import ShopPage from "./pages/ShopPage";
 import NewArrivals from "./pages/NewArrivals";
 import Men from "./pages/Men";
+import Women from "./pages/Women";
+import ProductDetail from "./pages/ProductDetail";
+import { ContextProvider } from "./context/cartContext";
 import OrderDetails from './pages/OrderDetails';
 import SavedAddress from './pages/SavedAddress';
 import ProfileLayout from './components/ProfileLayout';
 import WishList from "./pages/Wishlist";
-
 
 const blogs = [
   {
@@ -60,7 +62,7 @@ const blogs = [
     content: [
       "This festive season brings exciting new trends in kurta designs, combining traditional craftsmanship with contemporary aesthetics.",
       "Bold color combinations are making a strong statement, with designers experimenting with unexpected color pairings. Jewel tones remain popular, but with modern twists in styling and embellishments.",
-      "Sustainable fashion is influencing festive wear, with many collections featuring handwoven fabrics and natural dyes. These eco-friendly options not only look good but also support traditional artipoppins.",
+      "Sustainable fashion is influencing festive wear, with many collections featuring handwoven fabrics and natural dyes. These eco-friendly options not only look good but also support traditional artisanal work.",
       "Accessories play a crucial role in festive kurta styling. From traditional jewelry to modern accessories, the right combination can elevate your festive look to new heights.",
     ],
   },
@@ -76,44 +78,45 @@ const Layout = ({ children }) => (
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/admin-Panel" element={<AdminPanel />} />
-        <Route path="/admin-panel/dashboard" element={<Dashboard />} />
-        <Route path="/admin-panel/users" element={<Users />} />
-        <Route path="/admin-panel/orders" element={<Orders />} />
-        <Route path="/admin-panel/inbox" element={<Inbox />} />
-        <Route path="/login-register" element={<LoginRegister />} />
-        <Route
-          path="/*"
-          element={
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/blog" element={<Blog blogs={blogs} />} />
-                <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
-                <Route path="/explore-products" element={<ExploreProducts />} />
-                <Route path="/contact" element={<ContactUs />} />
-               
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/shop" element={<ShopPage />} />
-                <Route path="/men" element={<Men />} />
-                <Route path="/new-arrival" element={<NewArrivals />} />
-                
-                <Route path="/" element={<ProfileLayout />}>
-                  <Route path="/profile" element={<UserProfile />} />
-                  <Route path="/order-details" element={<OrderDetails />} />
-                  <Route path="/wishlist" element={<WishList />} />
-                  <Route path="/saved-address" element={<SavedAddress />} />
-                </Route>
-              </Routes>
-              
-            </Layout>
-          }
-        />
-      </Routes>
-    </Router>
+    <ContextProvider>
+      <Router>
+        <Routes>
+          <Route path="/admin-panel" element={<AdminPanel />} />
+          <Route path="/admin-panel/dashboard" element={<Dashboard />} />
+          <Route path="/admin-panel/users" element={<Users />} />
+          <Route path="/admin-panel/orders" element={<Orders />} />
+          <Route path="/admin-panel/inbox" element={<Inbox />} />
+          <Route path="/login-register" element={<LoginRegister />} />
+          <Route
+            path="/*"
+            element={
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/blog" element={<Blog blogs={blogs} />} />
+                  <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
+                  <Route path="/explore-products" element={<ExploreProducts />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/shop" element={<ShopPage />} />
+                  <Route path="/men" element={<Men />} />
+                  <Route path="/women" element={<Women />} />
+                  <Route path="/new-arrival" element={<NewArrivals />} />
+                  <Route path="/product/:id" element={<ProductDetail />} />
+                  <Route path="/profile" element={<ProfileLayout />}>
+                    <Route path="/profile/user" element={<UserProfile />} />
+                    <Route path="/order-details" element={<OrderDetails />} />
+                    <Route path="/wishlist" element={<WishList />} />
+                    <Route path="/saved-address" element={<SavedAddress />} />
+                  </Route>
+                </Routes>
+              </Layout>
+            }
+          />
+        </Routes>
+      </Router>
+    </ContextProvider>
   );
 }
 

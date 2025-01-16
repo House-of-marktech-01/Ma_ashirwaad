@@ -1,76 +1,78 @@
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const CategoryCircle = () => {
   const scrollContainer = useRef(null);
 
   const categories = [
-    { name: "Long Kurti", image: "https://via.placeholder.com/150" },
-    { name: "Short Kurti", image: "https://via.placeholder.com/150" },
-    { name: "Saree", image: "https://via.placeholder.com/150" },
-    { name: "Gown", image: "https://via.placeholder.com/150" },
-    { name: "Woollen", image: "https://via.placeholder.com/150" },
-    { name: "Jeans", image: "https://via.placeholder.com/150" },
-    { name: "T-Shirt", image: "https://via.placeholder.com/150" },
-    { name: "Jacket", image: "https://via.placeholder.com/150" },
-    { name: "Dress", image: "https://via.placeholder.com/150" },
-    { name: "Coat", image: "https://via.placeholder.com/150" },
+    {
+      name: "Long Kurti",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    {
+      name: "Woollen Kurti",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    {
+      name: "Short Kurti",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    {
+      name: "Men's Kurta",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    {
+      name: "Night Suit",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    {
+      name: "Pathani Kurta",
+      image:
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    },
+    // ... more categories
   ];
 
-  const scrollLeft = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({ left: -250, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({ left: 250, behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className="w-full py-10 bg-white">
-      <div className="max-w-6xl mx-auto px-4 relative">
-        {/* Title */}
-        <h2 className="text-3xl font-semibold text-center mb-6">Categories</h2>
-
-        {/* Left Arrow */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 -translate-y-1/2 p-3 bg-gray-200 hover:bg-gray-300 rounded-full shadow-md"
-        >
-          <ChevronLeft className="w-6 h-6 text-gray-600" />
-        </button>
+    <div className="w-full py-10 bg-white ">
+      <div className="max-w-7xl mx-auto px-4 relative">
+        {/* Categories Title Card */}
+        <div className="bg-red-500 text-white rounded-lg py-3 px-6 absolute left-0 top-1/2 -translate-y-1/2 z-10 shadow-md w-28 h-28 flex items-center justify-center">
+          <h2 className="text-lg font-medium text-center">Categories</h2>
+        </div>
 
         {/* Scrollable Categories Container */}
         <div
           ref={scrollContainer}
-          className="flex overflow-x-auto space-x-4 px-10 scrollbar-hide"
-          style={{ scrollBehavior: "smooth", scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex overflow-x-auto space-x-4 ml-32 scrollbar-hide"
+          style={{
+            scrollBehavior: "smooth",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center min-w-[140px] sm:min-w-[160px] p-4 shadow-lg bg-white rounded-lg transition hover:scale-105"
+              className="flex flex-col items-center min-w-[150px] p-3 shadow-md bg-white rounded-lg transition hover:scale-105 w-28" // Removed fixed height
             >
-              <img
-                src={category.image}
-                alt={category.name}
-                className="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-md"
-              />
-              <h3 className="text-gray-900 font-medium mt-2">{category.name}</h3>
+              <div className="w-full pt-[100%] relative"> {/* Added a wrapper div with padding-top trick */}
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover rounded-lg absolute top-0 left-0" // Added absolute positioning
+                />
+              </div>
+              <h3 className="text-gray-900 font-medium text-center">
+                {category.name}
+              </h3>
             </div>
           ))}
         </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 -translate-y-1/2 p-3 bg-gray-200 hover:bg-gray-300 rounded-full shadow-md"
-        >
-          <ChevronRight className="w-6 h-6 text-gray-600" />
-        </button>
       </div>
     </div>
   );

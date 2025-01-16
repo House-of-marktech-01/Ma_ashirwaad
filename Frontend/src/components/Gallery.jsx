@@ -1,75 +1,71 @@
-import { ChevronRight } from "lucide-react";
+import React from "react";
 
 const Gallery = () => {
   const categories = [
     {
       id: 1,
-      name: "Traditional Wear",
-      description: "Explore our collection of timeless traditional outfits",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://s3-alpha-sig.figma.com/img/c54d/b53b/eb4cbf56217b758b72a2bcde3c897919?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CGkPw1k61mZQ~6rFrnDNA~mNrZOliAD~Ja0HsYmU-M6mvN-HWqjQ4Swh-Kujj1R8kfhHAekvXxJjCqNtsInZj9ruvLO4QHC61iPIwqCJ7QhO6tIiBEujDnM3wmVE2EGKj1AV1LRQcMPNsRDAuYkvv4A9a1KJZY3g8ThQrvfv59-C63RnmQQB9u~BiOu1OhqDXHpVxkS0820ZN5eIOk5g8bwKNliZfBaQoh-JRenohkhz4OEPv42GT5edXSjZJMlaJp66w5Sa1V~wXjEZfx0b0f6eLxcvylz-BsBmJZgYUfGTwTDsbzFW6AZp6hBN2gpe59DyLC8GFa9i5miKpX1Ucg__",
+      size: "row-span-3",
     },
     {
       id: 2,
-      name: "Modern Fashion",
-      description: "Discover contemporary styles for every occasion",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://s3-alpha-sig.figma.com/img/0eea/39a4/ad05873c972e6c23a1ae28cad64c5000?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Nd6ZCEYXSrNut27R0Zf1T4VrIT04PQUbj-9oAfu~4GUfGlo3j1PRHEFS7mnO0ENwwNuHMFPyyTwLamfGggS6NGrhzJeHVO8vHMkvOQ0dz5olczLxiTauRGKaoDScpzEBpqBXtYPXOoEZOr4NkPC0TNeQ5-CAer-Tm0aqs-pZz43WcGZFJePhUQTT-HBJ12v3OQTGgRc322UKwZxXLF44uIAoJuSrjlIjQRoFkWFUXGTAtSOxhfVAZxsKqbRQr9DrmKr82aYdHLN2QLYWjbwSJIWxCTsdlZ46l6v-z5eompr~uNVQb7qur7b7sBNmX6zApV9FYaUFdv0PvZHbhXq9qw__",
+      size: "row-span-4",
     },
     {
       id: 3,
-      name: "Accessories",
-      description: "Complete your look with our curated accessories",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://s3-alpha-sig.figma.com/img/88d9/ff90/24d74fb572955c74a08256108724c819?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cTjYQDSsqzqMg-jBCZzpVm7LR4wIxUBG0K-l5E2RoLq2VA46T5AuEa66ZdampB-kF9LhDFDCxsLcHFBBV0BsmoWKylGoq3ugVQuBA0UbklOngA-~APdfKk5TSx6juUb05WV4t8EdPRqFNeMt3lsoVDUcEK1zEbsOx37JmJZE-ktWE4xpwW56v5pA-~0jdrr4MYBUMm6PSra1yArFLZY64rMzaf-wnIWVbBZplYqSF1Gaq5bNZhCzmLem87azSM6CUk3xACvUqUsKSpaGtibb4gpjPGNGvses9YekTqyZpGPh4zqL5Y0VdrZmG7M7GwzPgourm53JsdcUnVX6uErQXA__",
+      size: "row-span-5",
     },
     {
       id: 4,
-      name: "Seasonal Collection",
-      description: "Stay trendy with our latest seasonal offerings",
       image:
-        "https://images.pexels.com/photos/14768019/pexels-photo-14768019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://s3-alpha-sig.figma.com/img/28c7/5265/836787e5bbe2a4630d33f0d1e2b6e126?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ca1HEObllLZ-8t3yey2Be0J-I7rFrhMZ4Vzqw5LoP3cLDNyIvBE1G6NC-q63McZPWB~D5-uolqXXDhNIm-Ez7Ai-580MVZIwXu-Kv2oXhgq-txmZs21kMYF4RX6mIg89P1Iz9FFMacrM-sr55UEXb7J9JmzUrrNGeIm70l7uZtw4Y4l5yHClVHGllxUmqBvPAHVAzt3W7XlhqwncxacsIdiyrRHH-qBptI~C2-eU7nIYpo24bfurpq2H2TNzwoPBY3rJ9OmXOcr~ncsERLXPxA0Z9U4KrBhSxWbmMPDT9C-QDqX7jB6eC8ZYXhA7-4TLUuL9KCJLYcZ9F9hX2O-W4g__",
+      size: "row-span-2",
     },
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12 lg:px-32">
-      <h1 className="text-3xl md:text-5xl text-blue-950 text-left mb-4 py-8">
-        Fashionable Looks
-      </h1>
+    <div className="relative px-6 py-12 bg-gradient-to-b from-gray-50 to-gray-200">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" style={{marginBottom:"10px"}}>
+  
+  <rect width="800" height="120" fill="#8C2D2D" rx="8"/>
+  
+ 
+  <text x="20" y="25" fill="white" font-size="20">✨</text>
+  <text x="20" y="110" fill="white" font-size="20">✨</text>
+  
+  
+  <text x="400" y="70" fill="white" font-size="36" font-weight="800" text-anchor="middle" font-family="Arial, sans-serif">
+    Best Indian Designs For your Wardrobe
+  </text>
+  
+ 
+  <text x="760" y="25" fill="white" font-size="20">✨</text>
+  <text x="760" y="110" fill="white" font-size="20">✨</text>
+</svg>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+
+      {/* Improved Grid Layout */}
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
         {categories.map((category) => (
           <div
             key={category.id}
-            className="group relative overflow-hidden rounded-lg aspect-[16/11]"
+            className={`relative overflow-hidden rounded-xl shadow-lg group ${category.size}`}
           >
-            {/* Image Container with Adjusted Aspect Ratio */}
-            <div className="absolute inset-0">
-              <img
-                src={category.image}
-                alt={category.name}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
+            {/* Image */}
+            <img
+              src={category.image}
+              alt={`Gallery Image ${category.id}`}
+              className="w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110"
+            />
 
-            {/* Content */}
-            <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between text-white">
-              <div className="text-xl md:text-2xl font-semibold tracking-wide backdrop-blur-sm bg-black/20 w-fit px-4 py-2 rounded-lg">
-                {category.name}
-              </div>
-              <div className="transform translate-y-8 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                <p className="mb-4 text-sm md:text-lg">
-                  {category.description}
-                </p>
-                <button className="flex items-center space-x-2 bg-white text-black px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-gray-100 transition-colors duration-300">
-                  <span className="text-sm md:text-base">
-                    Explore Collection
-                  </span>
-                  <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-                </button>
-              </div>
-            </div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-500"></div>
           </div>
         ))}
       </div>

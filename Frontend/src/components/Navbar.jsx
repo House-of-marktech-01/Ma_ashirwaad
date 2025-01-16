@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, Search, User, Heart, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../context/cartContext.jsx";
 
 export default function Navbar() {
+  const { items, setItems } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -11,119 +13,165 @@ export default function Navbar() {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?query=${searchQuery}`);
-      setSearchQuery(""); // Clear input after searching
+      setSearchQuery("");
     }
   };
 
   return (
     <nav className="fixed w-full z-50 font-sans">
-      <div className="bg-[#9A3131] py-1 sm:py-2 text-white text-center text-sm sm:text-base">
+      {/* Announcement Bar */}
+      <div className="bg-[#9A3131] py-2 text-white text-center text-sm">
         Buy 20% Off
       </div>
 
+      {/* Main Navbar */}
       <div className="bg-black text-white">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
-            <Link to="/" className="text-xl sm:text-2xl font-bold text-white">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Uq1enZ_ZR0Hc4F_g0jH2aT39Us3rwd0JC8tz3TMDMpGg7ywOrLkh6Id-q2h0GWIfGXs&usqp=CAU"
-                alt="Logo"
-                className="h-12 sm:h-16 w-auto object-contain rounded-full"
-              />
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-              <Link to="/" className="text-sm lg:text-base text-white hover:text-gray-300 transition-colors">
-                Home
-              </Link>
-              <Link to="/women" className="text-sm lg:text-base text-white hover:text-gray-300 transition-colors">
-                Women
-              </Link>
-              <Link to="/men" className="text-sm lg:text-base text-white hover:text-gray-300 transition-colors">
-                Men
-              </Link>
-              <Link to="/shop" className="text-sm lg:text-base text-white hover:text-gray-300 transition-colors">
-                Shop
-              </Link>
-              <Link to="/new-arrival" className="text-sm lg:text-base text-white hover:text-gray-300 transition-colors">
-                New Arrival
-              </Link>
-            </div>
-
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="hidden md:block max-w-md w-full mx-4 lg:mx-8">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search Products and Categories"
-                  className="w-full px-3 lg:px-4 py-1.5 lg:py-2 rounded-full bg-white text-black focus:outline-none text-sm lg:text-base"
-                />
-                <button type="submit" className="absolute right-3 top-1.5 lg:top-2.5">
-                  <Search className="h-5 w-5 text-gray-400 cursor-pointer" />
-                </button>
+        <div className="max-w-screen-xl mx-auto px-6">
+          {/* Layout Container */}
+          <div className="flex flex-col items-center">
+            {/* Top Row - Logo, Search, and Icons */}
+            <div className="w-full flex items-center justify-between py-4">
+              {/* Logo */}
+              <div className="w-1/3">
+                <Link to="/" className="text-3xl font-light text-white">
+                  Logo
+                </Link>
               </div>
-            </form>
 
-            {/* Icons */}
-            <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
-              <Link to="/profile">
-                <User className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
-              </Link>
-              <Link to="/wishlist">
-              <Heart className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
-              </Link>
-              <ShoppingBag className="h-5 w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-gray-300 transition-colors" />
+              {/* Search Bar */}
+              <form
+                onSubmit={handleSearch}
+                className="hidden md:block w-1/3"
+              >
+                <div className="relative w-full">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search Products and Categories"
+                    className="w-full pl-10 pr-4 py-2 rounded-md bg-white text-black focus:outline-none text-sm"
+                  />
+                </div>
+              </form>
+
+              {/* Icons */}
+              <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
+                <Link to="/profile">
+                  <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                </Link>
+                <Link to="/wishlist">
+                  <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                </Link>
+                <Link to="/cart">
+                  <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                </Link>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden text-white"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white p-2">
-              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
-            </button>
+            {/* Navigation Links - Now centered with the search box */}
+            <div className="hidden md:flex justify-center w-full pb-3">
+              <div className="w-1/3 flex items-center justify-between">
+                <Link
+                  to="/"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/women"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  Women
+                </Link>
+                <Link
+                  to="/men"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  Men
+                </Link>
+                <Link
+                  to="/shop"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  Shop
+                </Link>
+                <Link
+                  to="/new-arrival"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  New arrival
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden border-t border-gray-800">
-            <div className="px-4 py-3 space-y-3 sm:space-y-4">
+            <div className="px-4 py-3 space-y-3">
               <form onSubmit={handleSearch} className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search Products and Categories"
-                  className="w-full px-3 py-1.5 rounded-full bg-white text-black text-sm"
+                  className="w-full pl-10 pr-4 py-2 rounded-full bg-white text-black text-sm"
                 />
-                <button type="submit" className="absolute right-3 top-1.5">
-                  <Search className="h-5 w-5 text-gray-400 cursor-pointer" />
-                </button>
               </form>
 
-              <div className="flex justify-center space-x-6">
-                <User className="h-5 w-5 sm:h-6 sm:w-6" />
-                <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
-                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
+              <div className="flex justify-start gap-4">
+                <Link to="/profile" className="text-white hover:text-gray-300">
+                  <User className="h-5 w-5" />
+                </Link>
+                <Link to="/wishlist" className="text-white hover:text-gray-300">
+                  <Heart className="h-5 w-5" />
+                </Link>
+                <Link to="/cart" className="text-white hover:text-gray-300">
+                  <ShoppingBag className="h-5 w-5" />
+                </Link>
               </div>
 
-              <div className="flex flex-col space-y-3 sm:space-y-4">
-                <Link to="/" className="text-sm sm:text-base text-white hover:text-gray-300 transition-colors">
+              <div className="flex flex-col space-y-2 mt-4">
+                <Link
+                  to="/"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
                   Home
                 </Link>
-                <Link to="/women" className="text-sm sm:text-base text-white hover:text-gray-300 transition-colors">
+                <Link
+                  to="/women"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
                   Women
                 </Link>
-                <Link to="/men" className="text-sm sm:text-base text-white hover:text-gray-300 transition-colors">
+                <Link
+                  to="/men"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
                   Men
                 </Link>
-                <Link to="/shop" className="text-sm sm:text-base text-white hover:text-gray-300 transition-colors">
+                <Link
+                  to="/shop"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
                   Shop
                 </Link>
-                <Link to="/new-arrival" className="text-sm sm:text-base text-white hover:text-gray-300 transition-colors">
-                  New Arrival
+                <Link
+                  to="/new-arrival"
+                  className="text-sm text-white hover:text-gray-300 transition-colors"
+                >
+                  New arrival
                 </Link>
               </div>
             </div>

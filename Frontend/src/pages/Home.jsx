@@ -60,9 +60,7 @@ const Home = () => {
       </div>
       <CategoryCircle />
       <CategoryShowcase />
-      <ProductGrid title="Women nighties" products={sarees} />
-
-      <DesignDisplay />
+      {/* <ProductGrid title="Women nighties" products={sarees} /> */}
       <Gallery />
       <Testimonials />
     </div>
@@ -70,3 +68,5 @@ const Home = () => {
 };
 
 export default Home;
+
+
