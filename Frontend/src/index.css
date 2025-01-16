@@ -22,10 +22,20 @@ body {
 
   font-style: normal;
 }
+.lato {
+  font-family: "Lato", serif;
+  font-optical-sizing: auto;
 
+  font-style: normal;
+}
 .antonio {
   font-family: "Antonio", serif;
   font-optical-sizing: auto;
   /* font-weight: <weight>; */
+  font-style: normal;
+}
+.dm-serif-display {
+  font-family: "DM Serif Display", serif;
+  /* font-weight: 400; */
   font-style: normal;
 }
