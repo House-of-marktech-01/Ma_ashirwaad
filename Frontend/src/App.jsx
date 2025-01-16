@@ -104,8 +104,8 @@ function App() {
                   <Route path="/women" element={<Women />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
-                  <Route path="/profile" element={<ProfileLayout />}>
-                    <Route path="/profile/user" element={<UserProfile />} />
+                  <Route path="/" element={<ProfileLayout />}>
+                    <Route path="/profile" element={<UserProfile />} />
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
                     <Route path="/saved-address" element={<SavedAddress />} />
