@@ -1,11 +1,5 @@
-const CustomInput = ({
-  type,
-  placeholder,
-  label,
-  value,
-  onChange,
-  className,
-}) => {
+const CustomInput = (props) => {
+  const { type, placeholder, label, value, onChange, className, name } = props;
   return (
     <div className="flex flex-col">
       {label && (
@@ -13,6 +7,7 @@ const CustomInput = ({
       )}
 
       <input
+        name={name}
         type={type}
         placeholder={placeholder}
         value={value}

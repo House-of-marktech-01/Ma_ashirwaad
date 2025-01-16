@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { MoreHorizontal,  ChevronLeft, ChevronRight  } from "lucide-react";
+import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,menuItems }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const {
@@ -14,8 +14,9 @@ const ProductCard = ({ product }) => {
     status,
     deliveryDate,
     sizes,
+    
   } = product;
-
+console.log(menuItems)
   const bgStyles = {
     // "Delivery by": "text-gray-500",
     Delivered: "bg-[#ECEAEA] opacity-60",
@@ -50,7 +51,9 @@ const ProductCard = ({ product }) => {
           <h3 className="text-xl fustat   font-bold">{title}</h3>
           <div className="flex mt-3 items-center gap-3">
             <p className="text-lg lato font-semibold">{price}</p>
-            <p className="line-through lato  text-gray-500 text-[0.95rem]">{discount}</p>
+            <p className="line-through lato  text-gray-500 text-[0.95rem]">
+              {discount}
+            </p>
             <span className="bg-black text-white lato px-[6px] py-1 text-xs rounded-sm">
               -50%
             </span>
@@ -77,11 +80,13 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           {/* {deliveryDate && <p className="mt-2">{deliveryDate}</p>} */}
-          <div
-            className={`mt-4 py-1 rounded fustat font-bold text-[1.1rem] ${colorStyles[status]}`}
-          >
-            {status}
-          </div>
+          {status && (
+            <div
+              className={`mt-4 py-1 rounded fustat font-bold text-[1.1rem] ${colorStyles[status]}`}
+            >
+              {status}
+            </div>
+          )}
         </div>
 
         <div className="relative pr-10">
@@ -94,18 +99,20 @@ const ProductCard = ({ product }) => {
 
           {isMenuOpen && (
             <div className="absolute right-[-2rem] top-[1.2rem] bg-white shadow-lg rounded-md border-1 border-gray-600 text-sm fustat border z-10">
-              <button className="flex items-center gap-2 w-full text-left px-3 font-semibold py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
-               
-                Cancel
-              </button>
-              <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
-               
-                Return
-              </button>
-              <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
-               
-                Rate
-              </button>
+              {menuItems &&
+                menuItems.map((item,index) => (
+                  <>
+                    <button key={index} className="flex items-center gap-2 w-full text-left px-3 font-semibold py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
+                      {item}
+                    </button>
+                    {/* <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
+                      Return
+                    </button>
+                    <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
+                      Rate
+                    </button> */}
+                  </>
+                ))}
             </div>
           )}
         </div>

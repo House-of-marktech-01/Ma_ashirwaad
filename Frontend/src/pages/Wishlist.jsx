@@ -13,7 +13,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Delivery by 15 Jan",
+      // status: "Delivery by 15 Jan",
       // deliveryDate: "Delivery by 15 Jan",
     },
     {
@@ -24,7 +24,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Out for delivery",
+      // status: "Out for delivery",
     },
     {
       image: long_kurti,
@@ -34,7 +34,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Delivered",
+      // status: "Delivered",
     },
     {
       image: long_kurti,
@@ -44,7 +44,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Cancelled",
+      // status: "Cancelled",
     },
     {
       image: long_kurti,
@@ -54,7 +54,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Delivered",
+      // status: "Delivered",
     },
     {
       image: long_kurti,
@@ -64,7 +64,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Cancelled",
+      // status: "Cancelled",
     },
     {
       image: long_kurti,
@@ -74,7 +74,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Delivery by 15 Jan",
+      // status: "Delivery by 15 Jan",
       // deliveryDate: "Delivery by 15 Jan",
     },
     {
@@ -85,7 +85,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Out for delivery",
+      // status: "Out for delivery",
     },
     {
       image: long_kurti,
@@ -95,7 +95,7 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Delivery by 15 Jan",
+      // status: "Delivery by 15 Jan",
       // deliveryDate: "Delivery by 15 Jan",
     },
     {
@@ -106,9 +106,10 @@ const WishList = () => {
       size: "M",
       sizes: ["S", "M", "L", "XL"],
       quantity: 2,
-      status: "Out for delivery",
+      // status: "Out for delivery",
     },
   ];
+  const menuItems = ["Remove"]
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -139,7 +140,7 @@ const WishList = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-5 mt-8 px-6">
           {currentProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard menuItems={menuItems} key={index} product={product} />
           ))}
         </div>
       </div>

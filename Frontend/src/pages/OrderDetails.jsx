@@ -130,6 +130,7 @@ const OrderDetails = () => {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
+  const menuItems = ["Cancel", "Return", "Rate"];
   return (
     <>
       <div className="rounded shadow-md font-poppins pb-10">
@@ -139,7 +140,7 @@ const OrderDetails = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-5 mt-8 px-6">
           {currentProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard  key={index} product={product} menuItems={menuItems} />
           ))}
         </div>
       </div>
