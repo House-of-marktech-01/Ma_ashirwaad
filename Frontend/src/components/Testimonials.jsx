@@ -11,7 +11,8 @@ const Testimonials = () => {
       rating: 5,
       role: "Verified Buyer",
       text: "The quality of the clothes exceeded my expectations. The attention to detail in the stitching and the premium fabric used make these pieces stand out. The customer service team was incredibly helpful throughout my purchase journey.",
-      image: "https://your-image-url.com/your-image.jpg", // Manually added image URL here
+      image:
+        "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
       clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
     },
     {
@@ -20,7 +21,8 @@ const Testimonials = () => {
       rating: 5,
       role: "Fashion Designer",
       text: "As a fashion designer, I'm particularly impressed with the craftsmanship. The fusion of traditional and modern elements is executed beautifully. The clothing not only looks great but is also comfortable for daily wear.",
-      image: "https://your-image-url.com/your-image.jpg", // Manually added image URL here
+      image:
+        "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
       clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
     },
     {
@@ -29,7 +31,8 @@ const Testimonials = () => {
       rating: 5,
       role: "Regular Customer",
       text: "I've been a regular customer for over a year now, and I'm consistently impressed with the quality and style of each piece. The shipping is always prompt, and the packaging is excellent.",
-      image: "https://your-image-url.com/your-image.jpg", // Manually added image URL here
+      image:
+        "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
       clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
     },
   ];
@@ -51,7 +54,7 @@ const Testimonials = () => {
         <div className="flex flex-col items-center">
           <div className="flex justify-center items-center flex-row mb-6">
             {/* Left Review Box */}
-            <div className="w-[400px] h-[400px] bg-blue-950 p-6 mx-4 rounded-lg shadow-xl text-white flex flex-col justify-between">
+            <div className="w-[400px] h-[400px] bg-white p-6 mx-4 rounded-lg shadow-xl text-black flex flex-col justify-between">
               <div className="flex flex-col justify-center items-center mb-4">
                 {/* Reviewer's Rounded Photo */}
                 <img
@@ -60,22 +63,30 @@ const Testimonials = () => {
                   className="w-24 h-24 rounded-full object-cover mb-2"
                 />
                 {/* Reviewer's Name */}
-                <p className="text-xl font-semibold">{reviews[currentReviewIndex].name}</p>
-                <p className="text-sm text-olive-300">{reviews[currentReviewIndex].role}</p>
+                <p className="text-xl font-semibold">
+                  {reviews[currentReviewIndex].name}
+                </p>
+                <p className="text-sm text-olive-300">
+                  {reviews[currentReviewIndex].role}
+                </p>
               </div>
 
               <div className="flex flex-col justify-between h-full">
                 <div className="flex flex-col justify-between w-full mb-4">
                   {/* Review Text */}
-                  <p className="text-sm leading-relaxed mb-4">{reviews[currentReviewIndex].text}</p>
+                  <p className="text-sm leading-relaxed mb-4">
+                    {reviews[currentReviewIndex].text}
+                  </p>
                   {/* Star Rating in the center */}
                   <div className="flex justify-center mb-4">
-                    {[...Array(reviews[currentReviewIndex].rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-current text-yellow-400 inline-block"
-                      />
-                    ))}
+                    {[...Array(reviews[currentReviewIndex].rating)].map(
+                      (_, i) => (
+                        <Star
+                          key={i}
+                          className="w-5 h-5 fill-current text-yellow-400 inline-block"
+                        />
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -93,16 +104,16 @@ const Testimonials = () => {
           </div>
 
           {/* Arrows Below Review Box */}
-          <div className="flex justify-center w-full max-w-[400px] mt-6 space-x-2">
+          <div className="flex justify-start w-full max-w-[550px] mt-6 space-x-2 pl-0 ml-0">
             <button
               onClick={prevReview}
-              className="p-4 text-white bg-blue-700 hover:bg-blue-800 rounded-full transition"
+              className="p-4 text-black border-2 text-2xl font-extrabold border-black bg-white hover:bg-blue-800  transition"
             >
               ←
             </button>
             <button
               onClick={nextReview}
-              className="p-4 text-white bg-blue-700 hover:bg-blue-800 rounded-full transition"
+              className="p-4 text-black border-2 text-2xl font-bold border-black bg-white hover:bg-blue-800  transition"
             >
               →
             </button>

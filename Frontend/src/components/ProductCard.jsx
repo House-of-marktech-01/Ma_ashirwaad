@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 
-const ProductCard = ({ product,menuItems }) => {
+const ProductCard = ({ product, menuItems }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const menuRef = useRef();
+  
   const {
     image,
     title,
@@ -14,9 +15,8 @@ const ProductCard = ({ product,menuItems }) => {
     status,
     deliveryDate,
     sizes,
-    
   } = product;
-console.log(menuItems)
+  console.log(menuItems);
   const bgStyles = {
     // "Delivery by": "text-gray-500",
     Delivered: "bg-[#ECEAEA] opacity-60",
@@ -29,6 +29,22 @@ console.log(menuItems)
     "Out for delivery": "text-green-600",
     Cancelled: "text-red-600",
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+ 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
 
   return (
     <div
@@ -39,7 +55,7 @@ console.log(menuItems)
       } ${bgStyles[status]}`}
     >
       <div className="flex  gap-7">
-        <div className="w-40">
+        <div className="w-40 min-w-20">
           <img
             src={image}
             alt={title}
@@ -89,29 +105,27 @@ console.log(menuItems)
           )}
         </div>
 
-        <div className="relative pr-10">
+        <div className="relative" ref={menuRef}>
           <button
             className="text-gray-500 hover:text-gray-700"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
+            onClick={toggleMenu}
           >
             <MoreHorizontal className="w-6 h-6" />
           </button>
 
           {isMenuOpen && (
-            <div className="absolute right-[-2rem] top-[1.2rem] bg-white shadow-lg rounded-md border-1 border-gray-600 text-sm fustat border z-10">
+            <div className="absolute  bg-white shadow-lg rounded-md border-1 border-gray-600 text-sm fustat border opacity-100">
               {menuItems &&
-                menuItems.map((item,index) => (
-                  <>
-                    <button key={index} className="flex items-center gap-2 w-full text-left px-3 font-semibold py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
+                menuItems.map((item, index) => (
+                
+                    <button
+                      key={index}
+                      className="flex items-center gap-2 w-full text-left px-3 font-semibold py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
                       {item}
                     </button>
-                    {/* <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
-                      Return
-                    </button>
-                    <button className="flex font-semibold items-center gap-2 w-full text-left px-3 py-[5px] hover:bg-gray-100 border-b-[1px] border-gray-500">
-                      Rate
-                    </button> */}
-                  </>
+                  
                 ))}
             </div>
           )}

@@ -6,13 +6,14 @@ const CustomButton = ({
     className,
     textColor = "text-[#9A3131]", 
     bgColor = "#9A3131",
-    borderColor = "border-blue-500", 
+    borderColor = "border-blue-500",
+    px="px-5" 
   }) => {
     
     const buttonStyles =
       type === "outlined"
         ? `${borderColor} border-[1px] ${textColor} bg-transparent hover:${bgColor} hover:${textColor.replace("text-", "text-white")}`
-        : `${bgColor} ${textColor} hover:${bgColor.replace("bg-", "bg-opacity-80")} hover:${textColor.replace("text-", "text-white")}`;
+        : `${bgColor} ${textColor} ${borderColor} border-[2px] hover:${bgColor.replace("bg-", "bg-opacity-80")} hover:${textColor.replace("text-", "text-white")}`;
   
     
     const textTransform =
@@ -21,7 +22,8 @@ const CustomButton = ({
     return (
       <button
         onClick={onClick}
-        className={`px-6 py-[0.4rem] rounded-md text-sm  transition duration-200 ${buttonStyles} ${textTransform} ${className}`}
+        type="button"
+        className={`${px} py-[0.4rem] rounded-md text-sm  transition duration-200 ${buttonStyles} ${textTransform} ${className}`}
       >
         {text}
       </button>

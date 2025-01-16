@@ -4,7 +4,7 @@ const ProfileLayout = () => {
   const location = useLocation();
 
   return (
-    <div className="relative pt-36 px-8">
+    <div className="relative pt-44 px-8 pb-6">
       <h1 className="text-2xl px-4 border-b pb-2 fustat font-bold">Hello User</h1>
       <div className="flex justify-start  pt-3">
         <Link
