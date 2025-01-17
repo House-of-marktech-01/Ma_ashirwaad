@@ -99,7 +99,7 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12">
+    <div className="bg-gray-100 min-h-screen ">
       {/* HeroCarousel is now only rendered once here */}
       <div className="pt-24">
         <HeroCarousel />

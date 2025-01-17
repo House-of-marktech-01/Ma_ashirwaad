@@ -27,12 +27,12 @@ const ProductSection = ({ category, wishlist, toggleWishlist }) => {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-6">
-      <h2 className="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-gray-800 pb-2">
+    <div className="max-w-7xl mx-auto py-10 pt-24">
+      <h2 className="text-3xl font-extrabold text-gray-900  border-b-4 border-gray-800 pt-10 ">
         {category} Collection
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
         {currentProducts.map((product) => (
           <div key={product.id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl relative">
             <button className="absolute top-4 right-4 text-2xl" onClick={() => toggleWishlist(product.id)}>
@@ -85,7 +85,7 @@ export default function Men() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 mb-2 mt-0 pb-7">
+    <div className="bg-gray-100 min-h-screen mb-2 mt-0 pb-7">
       <div className="pt-24">
         <HeroCarousel />
       </div>

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaStar, FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import { Heart, Share2 } from "lucide-react";
+import downloadImage from "../assets/images/download.png";
+import downloadImage2 from "../assets/images/download2.png";
+import downloadImage3 from "../assets/images/download3.png";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -58,25 +61,25 @@ const ProductDetail = () => {
         id: "2",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "/api/placeholder/200/250",
+        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "3",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "/api/placeholder/200/250",
+        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "4",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "/api/placeholder/200/250",
+        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "5",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "/api/placeholder/200/250",
+        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
     ],
   };
@@ -111,9 +114,7 @@ const ProductDetail = () => {
 
     switch (platform) {
       case "facebook":
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${url}`
-        );
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
         break;
       case "twitter":
         window.open(
@@ -131,281 +132,292 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-4 pt-4 ">
-      {/* Breadcrumb */}
-      <div className="text-sm text-gray-500 mb-5 mt-10">
-        Home / Women / Yellow Short Kurti
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-        {/* Left side - Image Gallery */}
-        <div className="space-y-4">
-          <div className="aspect-[3/4] w-full mt-10">
-            <img
-              src={selectedImage}
-              alt={product.name}
-              className="w-full h-full object-cover rounded-lg mt-10"
-            />
-          </div>
-          <div className="grid grid-cols-4 gap-2 mt-10">
-            {product.images.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Thumbnail ${index}`}
-                className={`w-full aspect-[3/4] object-cover rounded-md cursor-pointer 
-                      ${selectedImage === img ? "ring-2 ring-black" : ""}`}
-                onClick={() => setSelectedImage(img)}
-              />
-            ))}
-          </div>
+    <>
+      <div className="max-w-screen-xl mx-auto px-4 p-36 ">
+        {/* Breadcrumb - Reduced padding and margin */}
+        <div className="text-sm text-gray-500 py-3 ">
+          Home / Women / Yellow Short Kurti
         </div>
 
-        {/* Right side - Product Details */}
-        <div className="space-y-6 mt-10">
-          <div className="flex justify-between items-start mt-10">
-            <div>
-              <h1 className="text-xl font-medium">{product.name}</h1>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-xl">₹{product.price}</span>
-                <span className="text-gray-500 line-through text-sm">
-                  ₹{product.originalPrice}
-                </span>
-                <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
-                  -50%
-                </span>
+        {/* Main Content - Adjusted top spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+          {/* Left side - Image Gallery */}
+          <div className="space-y-4">
+            <div className="aspect-[3/4] w-full">
+              <img
+                src={selectedImage}
+                alt={product.name}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+            
+            <div className="grid grid-cols-4 gap-2 mt-10">
+              {product.images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Thumbnail ${index}`}
+                  className={`w-full aspect-[3/4] object-cover rounded-md cursor-pointer 
+                      ${selectedImage === img ? "ring-2 ring-black" : ""}`}
+                  onClick={() => setSelectedImage(img)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right side - Product Details */}
+          <div className="space-y-6 mt-10">
+            <div className="flex justify-between items-start mb-5">
+              <div>
+                <h1 className="text-2xl font-medium">{product.name}</h1>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-xl">₹{product.price}</span>
+                  <span className="text-gray-500 line-through text-sm">
+                    ₹{product.originalPrice}
+                  </span>
+                  <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
+                    -50%
+                  </span>
+                </div>
+              </div>
+              <button>
+                <Heart className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Rating Summary */}
+            <div className="flex items-center gap-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < Math.floor(product.rating)
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-gray-500">
+                ({product.reviews} reviews)
+              </span>
+            </div>
+
+            {/* Color Selection */}
+            <div className="space-y-2">
+              <p className="font-medium">Color: {selectedColor}</p>
+              <div className="flex gap-2">
+                {product.specifications.color.map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => handleColorSelect(color)}
+                    className={`w-8 h-8 rounded-full border-2 ${
+                      selectedColor === color
+                        ? "border-black"
+                        : "border-transparent"
+                    }`}
+                    style={{
+                      backgroundColor: color.toLowerCase(),
+                      boxShadow:
+                        selectedColor === color
+                          ? "0 0 0 2px white, 0 0 0 4px black"
+                          : "none",
+                    }}
+                    aria-label={`Select ${color} color`}
+                  />
+                ))}
               </div>
             </div>
-            <button>
-              <Heart className="w-6 h-6" />
-            </button>
-          </div>
 
-          {/* Rating Summary */}
-          <div className="flex items-center gap-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < Math.floor(product.rating)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-sm text-gray-500">
-              ({product.reviews} reviews)
-            </span>
-          </div>
-
-          {/* Color Selection */}
-          <div className="space-y-2">
-            <p className="font-medium">Color: {selectedColor}</p>
-            <div className="flex gap-2">
-              {product.specifications.color.map((color) => (
-                <button
-                  key={color}
-                  onClick={() => handleColorSelect(color)}
-                  className={`w-8 h-8 rounded-full border-2 ${
-                    selectedColor === color ? "border-black" : "border-transparent"
-                  }`}
-                  style={{
-                    backgroundColor: color.toLowerCase(),
-                    boxShadow: selectedColor === color ? '0 0 0 2px white, 0 0 0 4px black' : 'none' 
-                  }}
-                  aria-label={`Select ${color} color`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Size Selection */}
-          <div className="space-y-2">
-            <p className="font-medium">Size: {selectedSize}</p>
-            <div className="flex gap-2">
-              {product.specifications.size.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => handleSizeSelect(size)}
-                  className={`w-10 h-10 border rounded-md flex items-center justify-center
+            {/* Size Selection */}
+            <div className="space-y-2">
+              <p className="font-medium">Size: {selectedSize}</p>
+              <div className="flex gap-2">
+                {product.specifications.size.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => handleSizeSelect(size)}
+                    className={`w-10 h-10 border rounded-md flex items-center justify-center
                       ${
                         selectedSize === size
                           ? "border-2 border-black bg-gray-100"
                           : "border-gray-300 hover:border-black"
                       }`}
-                  // aria-label={`Select size ${size}`}
+                    // aria-label={`Select size ${size}`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Quantity and Add to Cart */}
+            <div className="flex gap-4">
+              <div className="flex border rounded-md">
+                <button
+                  className="px-4 py-2 hover:bg-gray-100"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
-                  {size}
+                  -
                 </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Quantity and Add to Cart */}
-          <div className="flex gap-4">
-            <div className="flex border rounded-md">
-              <button
-                className="px-4 py-2 hover:bg-gray-100"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              >
-                -
+                <span className="px-4 py-2 border-x">{quantity}</span>
+                <button
+                  className="px-4 py-2 hover:bg-gray-100"
+                  onClick={() => setQuantity(quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+              <button className="flex-1 bg-red-700 text-white py-2 px-4 rounded">
+                Add to Bag
               </button>
-              <span className="px-4 py-2 border-x">{quantity}</span>
-              <button
-                className="px-4 py-2 hover:bg-gray-100"
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                +
+              <button className="border px-4 py-3 rounded">
+                <Heart className="w-5 h-5" />
               </button>
             </div>
-            <button className="flex-1 bg-red-700 text-white py-2 px-4 rounded">
-              Add to Bag
-            </button>
-            <button className="border px-4 py-3 rounded">
-              <Heart className="w-5 h-5" />
-            </button>
-          </div>
 
-          {/* Delivery Information */}
-          <div className="space-y-4 border-t pt-4">
-            <h3 className="font-medium">Get it on {product.deliveryTime}</h3>
-            <p className="text-sm text-gray-600">Pay on delivery available</p>
-            <p className="text-sm text-gray-600">
-              Easy return & exchange available
-              <button className="text-red-700 hover:underline ml-2">
-                More Info.
+            {/* Delivery Information */}
+            <div className="space-y-4 border-t pt-4">
+              <h3 className="font-medium">Get it on {product.deliveryTime}</h3>
+              <p className="text-sm text-gray-600">Pay on delivery available</p>
+              <p className="text-sm text-gray-600">
+                Easy return & exchange available
+                <button className="text-red-700 hover:underline ml-2">
+                  More Info.
+                </button>
+              </p>
+            </div>
+
+            {/* Share Options */}
+            <div className="flex items-center gap-4 border-t pt-4">
+              <span className="text-gray-600">Share:</span>
+              <button
+                onClick={() => handleShare("copy")}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                <Share2 className="w-5 h-5" />
               </button>
+              <button
+                onClick={() => handleShare("facebook")}
+                className="p-2 hover:bg-blue-100 rounded-full"
+              >
+                <FaFacebookF className="w-5 h-5 text-blue-600" />
+              </button>
+              <button
+                onClick={() => handleShare("twitter")}
+                className="p-2 hover:bg-blue-100 rounded-full"
+              >
+                <FaTwitter className="w-5 h-5 text-blue-400" />
+              </button>
+              <button
+                onClick={() => handleShare("pinterest")}
+                className="p-2 hover:bg-red-100 rounded-full"
+              >
+                <FaPinterest className="w-5 h-5 text-red-600" />
+              </button>
+            </div>
+
+            {/* Payment Methods */}
+            <div className="flex mt-4 size-32 gap-6 max-h-[15]">
+              <img src={downloadImage} alt="Visa" className="h-6" />
+              <img src={downloadImage2} alt="Mastercard" className="h-6" />
+              <img src={downloadImage3} alt="PayPal" className="h-6" />
+            </div>
+          </div>
+        </div>
+
+        {/* Review Summary */}
+        <div className="grid grid-cols-3 gap-8 mt-12 border-t pt-8">
+          <div>
+            <h3 className="font-medium mb-2">Total Reviews</h3>
+            <p className="text-2xl font-semibold">
+              {product.reviews.toLocaleString()}
             </p>
           </div>
-
-          {/* Share Options */}
-          <div className="flex items-center gap-4 border-t pt-4">
-            <span className="text-gray-600">Share:</span>
-            <button
-              onClick={() => handleShare("copy")}
-              className="p-2 hover:bg-gray-100 rounded-full"
-            >
-              <Share2 className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => handleShare("facebook")}
-              className="p-2 hover:bg-blue-100 rounded-full"
-            >
-              <FaFacebookF className="w-5 h-5 text-blue-600" />
-            </button>
-            <button
-              onClick={() => handleShare("twitter")}
-              className="p-2 hover:bg-blue-100 rounded-full"
-            >
-              <FaTwitter className="w-5 h-5 text-blue-400" />
-            </button>
-            <button
-              onClick={() => handleShare("pinterest")}
-              className="p-2 hover:bg-red-100 rounded-full"
-            >
-              <FaPinterest className="w-5 h-5 text-red-600" />
-            </button>
-          </div>
-
-          {/* Payment Methods */}
-          <div className="flex gap-2 mt-4">
-            <img src="/api/placeholder/50/30" alt="Visa" className="h-6" />
-            <img src="/api/placeholder/50/30" alt="Mastercard" className="h-6" />
-            <img src="/api/placeholder/50/30" alt="PayPal" className="h-6" />
-          </div>
-        </div>
-      </div>
-
-      {/* Review Summary */}
-      <div className="grid grid-cols-3 gap-8 mt-12 border-t pt-8">
-        <div>
-          <h3 className="font-medium mb-2">Total Reviews</h3>
-          <p className="text-2xl font-semibold">
-            {product.reviews.toLocaleString()}
-          </p>
-        </div>
-        <div>
-          <h3 className="font-medium mb-2">Average Rating</h3>
-          <div className="flex items-center gap-2">
-            <p className="text-2xl font-semibold">{product.rating}</p>
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < Math.floor(product.rating)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
+          <div>
+            <h3 className="font-medium mb-2">Average Rating</h3>
+            <div className="flex items-center gap-2">
+              <p className="text-2xl font-semibold">{product.rating}</p>
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < Math.floor(product.rating)
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h3 className="font-medium mb-2">Customer Reviews</h3>
-          {Object.entries(reviewPercentages)
-            .reverse()
-            .map(([stars, percentage]) => (
-              <div key={stars} className="flex items-center gap-2 mt-1">
-                <span className="text-sm w-8">{stars}★</span>
-                <div className="flex-1 bg-gray-200 h-2 rounded-full">
-                  <div
-                    className="bg-yellow-400 h-full rounded-full"
-                    style={{ width: `${percentage}%` }}
-                  />
+          <div>
+            <h3 className="font-medium mb-2">Customer Reviews</h3>
+            {Object.entries(reviewPercentages)
+              .reverse()
+              .map(([stars, percentage]) => (
+                <div key={stars} className="flex items-center gap-2 mt-1">
+                  <span className="text-sm w-8">{stars}★</span>
+                  <div className="flex-1 bg-gray-200 h-2 rounded-full">
+                    <div
+                      className="bg-yellow-400 h-full rounded-full"
+                      style={{ width: `${percentage}%` }}
+                    />
+                  </div>
+                  <span className="text-sm text-gray-500 w-8">
+                    {percentage}%
+                  </span>
                 </div>
-                <span className="text-sm text-gray-500 w-8">{percentage}%</span>
+              ))}
+          </div>
+        </div>
+
+        {/* Customer Reviews */}
+        <div className="mt-8">
+          <h2 className="text-lg font-medium mb-4">Customer Reviews</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {product.customerReviews.map((review, index) => (
+              <div key={index} className="border p-4 rounded-lg">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="font-medium">{review.name}</p>
+                    <div className="flex mt-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <FaStar key={i} className="w-4 h-4 text-yellow-400" />
+                      ))}
+                    </div>
+                  </div>
+                  {review.verified && (
+                    <span className="text-xs text-green-600">✓ Verified</span>
+                  )}
+                </div>
+                <p className="text-sm text-gray-600 mt-2">{review.comment}</p>
               </div>
             ))}
+          </div>
         </div>
-      </div>
 
-      {/* Customer Reviews */}
-      <div className="mt-8">
-        <h2 className="text-lg font-medium mb-4">Customer Reviews</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {product.customerReviews.map((review, index) => (
-            <div key={index} className="border p-4 rounded-lg">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="font-medium">{review.name}</p>
-                  <div className="flex mt-1">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <FaStar key={i} className="w-4 h-4 text-yellow-400" />
-                    ))}
-                  </div>
-                </div>
-                {review.verified && (
-                  <span className="text-xs text-green-600">✓ Verified</span>
-                )}
+        {/* Similar Products */}
+        <div className="mt-12">
+          <h2 className="text-lg font-medium mb-4">View Similar</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {product.relatedProducts.map((item, index) => (
+              <div key={index} className="space-y-2">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full aspect-[3/4] object-cover rounded-lg"
+                />
+                <h3 className="text-sm font-medium">{item.name}</h3>
+                <p className="text-sm">₹{item.price}</p>
               </div>
-              <p className="text-sm text-gray-600 mt-2">{review.comment}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Similar Products */}
-      <div className="mt-12">
-        <h2 className="text-lg font-medium mb-4">View Similar</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {product.relatedProducts.map((item, index) => (
-            <div key={index} className="space-y-2">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full aspect-[3/4] object-cover rounded-lg"
-              />
-              <h3 className="text-sm font-medium">{item.name}</h3>
-              <p className="text-sm">₹{item.price}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

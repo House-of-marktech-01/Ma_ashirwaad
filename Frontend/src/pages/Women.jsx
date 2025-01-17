@@ -50,7 +50,7 @@ const ProductSection = ({ category, wishlist, toggleWishlist, filterCategory, se
 
   return (
     <div className="max-w-7xl mx-auto py-10 px-6">
-      <h2 className="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-gray-800 pb-2">
+      <h2 className="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-gray-800 pt-10">
         {category} Collection
       </h2>
 
@@ -150,7 +150,7 @@ export default function Women() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 mb-2 mt-0 pb-7">
+    <div className="bg-gray-100 min-h-screen mb-2 mt-0 pb-7">
       {/* HeroCarousel is now only rendered once here */}
       <div className="pt-24">
         <HeroCarousel />

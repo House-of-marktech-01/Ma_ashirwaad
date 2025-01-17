@@ -33,8 +33,8 @@ export default function Navbar() {
             <div className="w-full flex items-center justify-between py-4">
               {/* Logo */}
               <div className="w-1/3">
-                <Link to="/" className="text-3xl font-light text-white">
-                  Logo
+                <Link to="/" className="text-4xl text-left font-bold text-white">
+                  LOGO
                 </Link>
               </div>
 

@@ -13,7 +13,7 @@ const Testimonials = () => {
       text: "The quality of the clothes exceeded my expectations. The attention to detail in the stitching and the premium fabric used make these pieces stand out. The customer service team was incredibly helpful throughout my purchase journey.",
       image:
         "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
-      clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
+      clothImage: "https://s3-alpha-sig.figma.com/img/6460/5589/9ab7413ebc6cc6d0123596ca88fdaf92?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IsOQR-~9TK4uCO8x-xrmqka13m3eP~bDCsCQ29iNqV7i1cKYIX482rYO5IDGtecm6d3nA22P5Rs2znlSPycS8T~xdOPefDLib5DtyJ9nKyXqLFM8TJnNXVceLs1SrxpL3B2nXUAvIFDWOgc9A8zmK13H194l5HmwdTac4QaOT88fQv3HijDiKC0JwKreIJwutZMQT4civMyPm0P-Ps1xooYfaPo4kD5fW6u7mnYXJt4-wx6PWvG6K0ftPZOzTmpO3Huny2pMWb1plO02FxsfeIQF8MPDoRjkcT8neQ~~MSIi6aVnyb6JwLZFPSboQo13PCI-oRmGgEQ6lt0YJMPvgA__", // Cloth image URL
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const Testimonials = () => {
       text: "As a fashion designer, I'm particularly impressed with the craftsmanship. The fusion of traditional and modern elements is executed beautifully. The clothing not only looks great but is also comfortable for daily wear.",
       image:
         "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
-      clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
+      clothImage: "https://s3-alpha-sig.figma.com/img/6460/5589/9ab7413ebc6cc6d0123596ca88fdaf92?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IsOQR-~9TK4uCO8x-xrmqka13m3eP~bDCsCQ29iNqV7i1cKYIX482rYO5IDGtecm6d3nA22P5Rs2znlSPycS8T~xdOPefDLib5DtyJ9nKyXqLFM8TJnNXVceLs1SrxpL3B2nXUAvIFDWOgc9A8zmK13H194l5HmwdTac4QaOT88fQv3HijDiKC0JwKreIJwutZMQT4civMyPm0P-Ps1xooYfaPo4kD5fW6u7mnYXJt4-wx6PWvG6K0ftPZOzTmpO3Huny2pMWb1plO02FxsfeIQF8MPDoRjkcT8neQ~~MSIi6aVnyb6JwLZFPSboQo13PCI-oRmGgEQ6lt0YJMPvgA__", // Cloth image URL
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Testimonials = () => {
       text: "I've been a regular customer for over a year now, and I'm consistently impressed with the quality and style of each piece. The shipping is always prompt, and the packaging is excellent.",
       image:
         "https://s3-alpha-sig.figma.com/img/e111/a35c/2e4dfbd3ba647c843975444ef1357b6c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akgqEbLN87uZwO5gSjzyftCkGdyPJZLS8ynWxm-Zm8-VvYUnxof9Pq6kkXWh3g2wI9rxm9kJUCkaAGX-Rqx79f41pUJPY97XphUiaLgQ2qtC9IKQZks7YdSKb~gQ7VoTSaJ~2dqKcyf1ZwpSd6zzEyQ1HVURKmsUOqHdngLHd82fxSg7M1LeyDPN87J2pfvArIztidOlTbf736VehUzB2y5XriV50wrHBsDkK8ieNa4jRqb-nzPXE1pqbapXmGucJSxB5gCFfxHAqrXYqt1lF46L9vqPulr11TKxPylL9q63vX~lsFqtDWw13yEaMZCjCCufl3-jJdU6rJabT0vEBw__", // Manually added image URL here
-      clothImage: "https://your-cloth-image-url.com/cloth-image.jpg", // Cloth image URL
+      clothImage: "https://s3-alpha-sig.figma.com/img/6460/5589/9ab7413ebc6cc6d0123596ca88fdaf92?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IsOQR-~9TK4uCO8x-xrmqka13m3eP~bDCsCQ29iNqV7i1cKYIX482rYO5IDGtecm6d3nA22P5Rs2znlSPycS8T~xdOPefDLib5DtyJ9nKyXqLFM8TJnNXVceLs1SrxpL3B2nXUAvIFDWOgc9A8zmK13H194l5HmwdTac4QaOT88fQv3HijDiKC0JwKreIJwutZMQT4civMyPm0P-Ps1xooYfaPo4kD5fW6u7mnYXJt4-wx6PWvG6K0ftPZOzTmpO3Huny2pMWb1plO02FxsfeIQF8MPDoRjkcT8neQ~~MSIi6aVnyb6JwLZFPSboQo13PCI-oRmGgEQ6lt0YJMPvgA__", // Cloth image URL
     },
   ];
 
