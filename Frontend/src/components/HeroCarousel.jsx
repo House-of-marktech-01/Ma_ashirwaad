@@ -4,18 +4,18 @@ const HeroCarousel = () => {
   const slides = [
     {
       id: 1,
-      image: "https://s3-alpha-sig.figma.com/img/5e0e/24aa/8a88ba4dec037f1f95362d28c74476a4?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ECXrkEeFEh-F1vGkocCFmZajquKTBJimp0CAEmzhZghMO4V5ub3Ziba0ErbbRiHsNxfJgq13Lp74lweXA3qdnzyzeuw1ib3RO7nny1t7VyrRhKmL~Y1kHGtIDU3X-Ql4sirv1l0Mt3xR~n4lJ0Is5vMKqIew2eDPduchSWZcduuypZ4UnaCah2z6DF2OLC8Rcu41eSU~-5aCEPtVAkIz6r2qJKuGjV2o8TxeAYbwfRIqyxNnvI5qalAvKyRAJGcJfA6g7GAuTTc3dyMmDfdwLGQWftfxhljU0fBBeYMOguMlz3Bqu7RI~GT5hl2pUk2vl6mLxoIYYJilsF2ZIqDP-Q__",
+      image:"https://s3-alpha-sig.figma.com/img/5e0e/24aa/8a88ba4dec037f1f95362d28c74476a4?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Vs7RDqCnjk4q9Lx8pM2F8mFdw45w4pWN7lSlD9sgoaPW-9noP-b2TnFC-6~PZVQE~6rvGiHUh3pLDPX7ilIbHRVjq19GQSxYgARyhUmEPB1gq6pDD9BNI2Xm8FyDZcSF9dZRQUy5NZunsHcUkW59-5kPUwbdm9Oy0NrMQLpij7ecik9WRAQlFS59SulQth74bup5Zs-iUre0ArFVdZQWm55hajeTOLYq0VSveNaJZ6OP4~mJKYNq32JWBTrfNgJ3MJeikNU23SliwMx-SXW-uxSmzv6QFVmJx8SszfqMPDTrwHpEc~R1e4Bwp5GVHYPlOzmSELkPcxiUKAkDgrxDnQ__",
       title: "Premium Quality Wardrobe Picks",
     },
     {
       id: 2,
-      image: "https://s3-alpha-sig.figma.com/img/f7c9/0855/4e02df6eef8e23963217d8677a2340e0?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IrAP3ttPLRbVjnj39W0Hz3IJrnmA3ESFnjdVVer66yf1nF4e0DItH7sSL-Bqzz9xN-Vtp2Bzav1Ur52N9Sw7FhH~7xSeWpxu4KnltEKFhd8vq8dgv-On~SsaqFZR7~ZvjpfIfLeyQntrlqb-M2DSMtTC37msnXM83J75c1z0JwRSvyYC4HB04uMLXurDLao6KJ~jwPty1j2HYaj58rHpBYwL~FJFiAmQsgNOXHUiilcZ9rod-TZ1ERejHS7Zurdtl3NzEi6Zh5uQyZm8na061Ho7hkaB7t~4~dWhv967RxAaZRmU5ExZXCHf8w2NGLNOeaT4RLHrRM8i6GdIeJZCvA__",
+      image: "https://s3-alpha-sig.figma.com/img/f7c9/0855/4e02df6eef8e23963217d8677a2340e0?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OZJonI51TjfHTBx1ae5KXSSUkfMiXec9zB45xZASdmoZ2aD7zG7gsBjeKfJgCececCHDlnoYL6Q8cT3Il9oM~SSbPrmBGt0TSG5Ktd7k9R-8vfZKuDO1bhThzojDRNM~~VNnPN43CMF8MOgSyR4qcVS7iM6txhkrdn4jIFqazVQ7uowOzdWubIU18KWXeHYnn2-5~NWuGBKS-l7GKu7WPHO3N8cYmHe3ozrnAN18jJ3ftXTnJVoNDmr-XM4f4Z9PGtqjlQFn-WnbOPehF0~CRmKKhDg1tcjjRhjRrRXrpu8Y1U0eVAEFv8QtIMBE5ukDZcrE2gQfabFByGAuMhmn8w__",
     title: "Elevate Your Style with Elegance",
   },
   {
     id: 3,
-    image: "https://s3-alpha-sig.figma.com/img/50ec/2038/f2a549a8c48e7fb3c77719ba6f75ce15?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eQqItidmz0FIW8y9~TukAnTbWxvmWg8E9UOJWvmtHASjIcWYYrCZbhGE9uJQgQ-oYCwpkxUsg588KKf5UOh7EO06~dvZag12iykgQ3h2Vl5841VuozblrdjNNGdlhidlFFrXDvESkSdG~RWN-TeLL2hGNrFQOnGP5UvSM9-RfdMTCzNTCmCnjg8T9XKl9B7MlpPOEKnk60Hj~pIYdEHTb1PKwUlUWIDiOgKSBbz1qs2W7k8jR~xk0PvEnuOjEUL9xEJLRwfYR-lG5QMyrqJeiNHyNgusletNl2k4E-3y4Hnszrn0mm30Co7GXlLCI2kTPGKDJdurVKv2fTyfXX2YoQ__",
-    title: "Discover the Latest Trends",
+    image:"https://s3-alpha-sig.figma.com/img/50ec/2038/f2a549a8c48e7fb3c77719ba6f75ce15?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JyInbTgeEF1HQDDRQYMfIQPKzp028QZcyCogN9LaaXo3akw2kdKcWHZ7YuWYc3DSyC8Wnms9ENtS0znvO-EDO0QjbqpFcWcWnNokipoFit2lMQYf29JPgkTLIuVlXzJBNIAvKRFgw~bvPz02~Q1g25cK388sOINDWFkLXTJwyyy-c9Rch~Afxk5xabsarfXdRlK1qg768ZFIiDKTMBhjZBdhyVnZbmKRX0ZHS9q8PAjew9jPLVHc7gWRN7ei-tIB69Tuu3Z1TEpKWjDHU6I-THlRg9WZ6rLDLi2BoJttp~1pGI18jsN7AwevJhf-VOqnvxEDnMxLzvGU2SJrERmxfA__",
+ title: "Discover the Latest Trends",
   },
   ];
 
