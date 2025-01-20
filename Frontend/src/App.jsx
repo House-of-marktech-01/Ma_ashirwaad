@@ -100,7 +100,7 @@ function App() {
                   <Route path="/contact" element={<ContactUs />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/shop" element={<ShopPage />} />
-                  <Route path="/men" element={<Men />} />
+                  {/* <Route path="/men" element={<Men />} /> */}
                   <Route path="/women" element={<Women />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
@@ -109,6 +109,7 @@ function App() {
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
                     <Route path="/saved-address" element={<SavedAddress />} />
+                    
                   </Route>
                 </Routes>
               </Layout>
