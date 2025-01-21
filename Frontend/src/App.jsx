@@ -25,6 +25,9 @@ import OrderDetails from './pages/OrderDetails';
 import SavedAddress from './pages/SavedAddress';
 import ProfileLayout from './components/ProfileLayout';
 import WishList from "./pages/Wishlist";
+import SignUpForm from "./pages/SignUpForm";
+import AboutUs from "./pages/AboutUs";
+import { useState } from "react";
 
 const blogs = [
   {
@@ -68,15 +71,17 @@ const blogs = [
   },
 ];
 
-const Layout = ({ children }) => (
+const Layout = ({ children, isLoggedIn, setIsLoggedIn }) => (
   <>
-    <Navbar />
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     {children}
     <Footer />
   </>
 );
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Global login state
+
   return (
     <ContextProvider>
       <Router>
@@ -86,21 +91,24 @@ function App() {
           <Route path="/admin-panel/users" element={<Users />} />
           <Route path="/admin-panel/orders" element={<Orders />} />
           <Route path="/admin-panel/inbox" element={<Inbox />} />
-          <Route path="/login-register" element={<LoginRegister />} />
           <Route
             path="/*"
             element={
-              <Layout>
+              <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
+                  <Route
+                    path="/login"
+                    element={<LoginRegister setIsLoggedIn={setIsLoggedIn} />}
+                  />
+                  <Route path="/signup" element={<SignUpForm />} />
+                  <Route path="/about-us" element={<About />} />
                   <Route path="/blog" element={<Blog blogs={blogs} />} />
                   <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
                   <Route path="/explore-products" element={<ExploreProducts />} />
                   <Route path="/contact" element={<ContactUs />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/shop" element={<ShopPage />} />
-                  {/* <Route path="/men" element={<Men />} /> */}
                   <Route path="/women" element={<Women />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
@@ -109,7 +117,6 @@ function App() {
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
                     <Route path="/saved-address" element={<SavedAddress />} />
-                    
                   </Route>
                 </Routes>
               </Layout>
@@ -120,5 +127,6 @@ function App() {
     </ContextProvider>
   );
 }
+
 
 export default App;
