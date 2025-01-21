@@ -57,7 +57,7 @@ const SavedAddress = () => {
     }
   };
   const AddressCard = ({ address }) => (
-    <div className="border flex flex-row justify-between fustat font-medium rounded-sm p-3 px-8 mb-5 shadow-md">
+    <div className="border flex flex-row justify-between fustat font-medium rounded-sm p-3 px-3 sm:px-8 mb-5 shadow-md">
       <div className="flex flex-col gap-1">
         <div className="text-lg ">{address.name}</div>
         <div className="text-base">{address.addressLine1}</div>
@@ -69,8 +69,8 @@ const SavedAddress = () => {
 
       <div className="flex flex-col justify-between items-end">
         <div className="flex  w-fit py-1 px-3 text-sm mr-0 rounded-full font-semibold bg-[#D9D9D9]">{address.addressType}</div>
-        <div className="flex gap-4 ">
-          <div>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+          <div className="flex justify-end">
             <CustomButton
               textCase="capitalize"
               text="Edit"
@@ -104,7 +104,7 @@ const SavedAddress = () => {
             <ProductCard menuItems={menuItems} key={index} product={product} />
           ))}
         </div> */}
-        <div className=" mt-9 px-10">
+        <div className="mt-9 px-3 sm:px-10">
           {currentAddresses.map((address, index) => (
             <AddressCard key={index} address={address} />
           ))}

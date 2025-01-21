@@ -22,13 +22,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="rounded shadow-md font-poppins pb-14 mb-6">
+    <div className="rounded shadow-md w-full font-poppins pb-14 mb-6">
       <div className="primaryColorBg rounded-t font-poppins text-white p-4 text-center">
         <h1 className="text-lg">Profile</h1>
       </div>
-      <div className="flex flex-col mt-8 px-6">
-        <div className=" flex fex-row justify-between">
-          <div className="flex fex-row gap-4 items-center ">
+      <div className="flex flex-col mt-8 px-4 sm:px-6">
+        <div className="flex fex-row justify-between">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <div>
               <img
                 src={profile}
@@ -43,7 +43,6 @@ const Profile = () => {
           </div>
 
           <div>
-            {/* <button className="text-blue-500 ml-auto">Edit</button> */}
             <CustomButton
               textCase="capitalize"
               text="Edit"
@@ -54,7 +53,7 @@ const Profile = () => {
         </div>
 
         <div>
-          <div className="grid grid-cols-2 my-6 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 my-6 gap-6">
             <CustomInput
               type="text"
               placeholder="Full Name"
@@ -105,7 +104,7 @@ const Profile = () => {
       </div>
       <div className="mt-4 px-6">
         <p className="font-semibold poppins text-lg">My email Address</p>
-        <div className="pt-2 flex flex-row gap-6 items-center">
+        <div className="pt-2 flex flex-wrap flex-row gap-2 sm:gap-6 items-center">
           <div className="bg-blue-100 rounded-full justify-center flex items-center w-10 h-10">
             <img src={sms} alt="sms" />
           </div>

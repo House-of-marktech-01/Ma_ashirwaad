@@ -38,9 +38,9 @@ const CategoryCircle = () => {
 
   return (
     <div className="w-full py-10 bg-white ">
-      <div className="max-w-7xl mx-auto px-4 relative">
+      <div className="ml-4 sm:ml-8 mx-auto px-4 relative">
         {/* Categories Title Card */}
-        <div className="bg-red-500 text-white rounded-lg py-3 px-6 absolute left-0 top-1/2 -translate-y-1/2 z-10 shadow-md w-28 h-28 flex items-center justify-center">
+        <div className="bg-red-500 z text-white rounded-lg py-3 px-6 absolute left-0 top-1/2 -translate-y-1/2 z-10 shadow-md w-28 h-28 flex items-center justify-center">
           <h2 className="text-lg font-medium text-center">Categories</h2>
         </div>
 

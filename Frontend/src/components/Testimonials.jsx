@@ -52,9 +52,9 @@ const Testimonials = () => {
       <div className="flex justify-center items-center flex-row">
         {/* Review and Cloth Box Wrapper */}
         <div className="flex flex-col items-center">
-          <div className="flex justify-center items-center flex-row mb-6">
+          <div className="flex justify-center items-center flex-col sm:flex-row mb-6">
             {/* Left Review Box */}
-            <div className="w-[400px] h-[400px] bg-white p-6 mx-4 rounded-lg shadow-xl text-black flex flex-col justify-between">
+            <div className="sm:max-w-[370px] max-w-[400px] h-[400px] lg:max-w-[400px] bg-white p-6 mx-4 sm:mx-0 md:mx-4 rounded-lg shadow-xl text-black flex flex-col justify-between">
               <div className="flex flex-col justify-center items-center mb-4">
                 {/* Reviewer's Rounded Photo */}
                 <img
@@ -93,7 +93,7 @@ const Testimonials = () => {
             </div>
 
             {/* Right Cloth Box */}
-            <div className="w-[400px] h-[400px] bg-gray-200 p-6 mx-4 rounded-lg shadow-xl text-black flex flex-col justify-between">
+            <div className="hidden sm:max-w-[370px] sm:w-[370px] h-[400px] lg:max-w-[400px] lg:w-[400px] bg-gray-200 p-6 mx-4 rounded-lg shadow-xl text-black sm:flex flex-col justify-between">
               {/* Random Cloth Image */}
               <img
                 src={reviews[currentReviewIndex].clothImage}
@@ -104,7 +104,7 @@ const Testimonials = () => {
           </div>
 
           {/* Arrows Below Review Box */}
-          <div className="flex justify-start w-full max-w-[550px] mt-6 space-x-2 pl-0 ml-0">
+          <div className="flex justify-start  max-w-[550px] mt-6 space-x-2 ">
             <button
               onClick={prevReview}
               className="p-4 text-black border-2 text-2xl font-extrabold border-black bg-white hover:bg-blue-800  transition"

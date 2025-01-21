@@ -21,9 +21,9 @@ import Men from "./pages/Men";
 import Women from "./pages/Women";
 import ProductDetail from "./pages/ProductDetail";
 import { ContextProvider } from "./context/cartContext";
-import OrderDetails from './pages/OrderDetails';
-import SavedAddress from './pages/SavedAddress';
-import ProfileLayout from './components/ProfileLayout';
+import OrderDetails from "./pages/OrderDetails";
+import SavedAddress from "./pages/SavedAddress";
+import ProfileLayout from "./components/ProfileLayout";
 import WishList from "./pages/Wishlist";
 
 const blogs = [
@@ -95,8 +95,14 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/blog" element={<Blog blogs={blogs} />} />
-                  <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
-                  <Route path="/explore-products" element={<ExploreProducts />} />
+                  <Route
+                    path="/blog/:id"
+                    element={<BlogPost blogs={blogs} />}
+                  />
+                  <Route
+                    path="/explore-products"
+                    element={<ExploreProducts />}
+                  />
                   <Route path="/contact" element={<ContactUs />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/shop" element={<ShopPage />} />
@@ -109,7 +115,6 @@ function App() {
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
                     <Route path="/saved-address" element={<SavedAddress />} />
-                    
                   </Route>
                 </Routes>
               </Layout>

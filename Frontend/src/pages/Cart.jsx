@@ -79,12 +79,12 @@ const Cart = () => {
       </div>
 
       {/* Delivery Address */}
-      <div className="flex items-center justify-between mb-6 mt-10">
+      <div className="flex sm:items-center sm:justify-between mb-6 mt-10 flex-col sm:flex-row">
         <p className="text-gray-700">
           Deliver to: Aryan Khare, 485001 <br />
           Gurgaon, Sector 46, Lavender Society, B flat, B-9
         </p>
-        <button className="text-blue-500 hover:underline">
+        <button className="text-blue-500 mt-2 sm:mt-0 hover:underline">
           Change Address
         </button>
       </div>

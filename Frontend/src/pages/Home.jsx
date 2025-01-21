@@ -54,7 +54,7 @@ const sarees = [
 
 const Home = () => {
   return (
-    <div>
+    <>
       <div className="pt-24">
         <HeroCarousel />
       </div>
@@ -63,10 +63,8 @@ const Home = () => {
       {/* <ProductGrid title="Women nighties" products={sarees} /> */}
       <Gallery />
       <Testimonials />
-    </div>
+    </>
   );
 };
 
 export default Home;
-
-

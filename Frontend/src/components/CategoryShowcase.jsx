@@ -51,14 +51,14 @@ const CategoryShowcase = () => {
   return (
     <div className="bg-gray-50 w-full min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-  {/* Header Section - Responsive text sizes */}
-  <div className="text-center mb-8 sm:mb-12">
-    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-sans flex items-center justify-center gap-2 text-black">
-      <WiStars className="text-[#8B2121] sm:text-2xl lg:text-6xl font-extrabold" />
-      <span>Fashion Of Your Sense</span>
-      <WiStars className="text-[#8B2121] sm:text-2xl lg:text-6xl font-extrabold" />
-    </h1>
-  </div>
+        {/* Header Section - Responsive text sizes */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-sans flex items-center justify-center gap-2 text-black">
+            <WiStars className="text-[#8B2121] sm:text-2xl lg:text-6xl font-extrabold" />
+            <span>Fashion Of Your Sense</span>
+            <WiStars className="text-[#8B2121] sm:text-2xl lg:text-6xl font-extrabold" />
+          </h1>
+        </div>
 
         {/* Categories Grid - Responsive grid layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
@@ -107,7 +107,7 @@ const CategoryShowcase = () => {
         {/* Modal - Responsive sizing and padding */}
         {selectedCategory && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div 
+            <div
               className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-auto"
               onClick={(e) => e.stopPropagation()}
             >
@@ -148,7 +148,9 @@ const CategoryShowcase = () => {
                       {selectedCategory.price}
                     </span>
                     <div>
-                      <h5 className="text-lg font-medium mb-2">Available Colors</h5>
+                      <h5 className="text-lg font-medium mb-2">
+                        Available Colors
+                      </h5>
                       <div className="flex gap-3">
                         {selectedCategory.colors.map((color, index) => (
                           <div

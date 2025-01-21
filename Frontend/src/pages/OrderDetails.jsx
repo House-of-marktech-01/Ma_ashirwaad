@@ -138,7 +138,7 @@ const OrderDetails = () => {
           <h1 className="text-lg">Order Details</h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-5 mt-8 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 md:gap-x-7 gap-y-5 mt-8  sm:px-6 px-4">
           {currentProducts.map((product, index) => (
             <ProductCard  key={index} product={product} menuItems={menuItems} />
           ))}
