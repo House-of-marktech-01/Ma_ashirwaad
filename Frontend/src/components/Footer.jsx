@@ -6,14 +6,14 @@ import { motion } from "framer-motion";
 export default function Footer() {
   return (
     <>
-      <div className="text-center mb-0 border-4 rounded-2xl border-red-900 p-8 "> 
+      <div className="text-center mb-0 border-4 rounded-2xl border-red-900 p-8 ">
         <h2 className="font-bold mb-6 text-6xl sm:text-7xl md:text-9xl leading-tight text-red-900">
           Join Us
         </h2>
 
         <div className="flex justify-center space-x-4 md:space-x-6 mb-12 font-bold text-9xl leading-tight mt-4 sm:mt-10 text-red-900 gap-4 sm:gap-12 md:gap-24 lg:gap-52 ">
           <a href="#" className="hover:opacity-80 transition-opacity">
-            <FaFacebook className="text-6xl sm:text-8xl md:text-9xl"  />{" "}
+            <FaFacebook className="text-6xl sm:text-8xl md:text-9xl" />{" "}
             {/* Increase size to 120px for giant icons */}
           </a>
           <a href="#" className="hover:opacity-80 transition-opacity">
@@ -183,6 +183,11 @@ export default function Footer() {
                 <li>
                   <Link to="/feedback" className="hover:text-gray-300">
                     Feedback
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about-us" className="hover:text-gray-300">
+                    About Us
                   </Link>
                 </li>
                 <li>
