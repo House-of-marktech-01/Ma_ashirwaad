@@ -2,6 +2,7 @@ import { useRef } from "react";
 
 const CategoryCircle = () => {
   const scrollContainer = useRef(null);
+  
   const categories = [
     {
       name: "Long Kurti",
