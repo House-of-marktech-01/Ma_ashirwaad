@@ -1,152 +1,96 @@
+import React from "react";
+
 const AboutUs = () => {
   return (
-    <div className="max-w-4xl mx-auto p-8 pt-32">
-      <h1 className="text-3xl md:text-5xl text-[#000000] text-left mb-4 py-8">
-        About Us
-      </h1>
-
-      <div className="mb-8">
-        <p className="text-gray-700 mb-4">
-          Our team is dedicated to making sure we do everything we can to
-          address your questions or concerns. If you&apos;d like to discuss any
-          feedback about your experience, or have a product question, don&apos;t
-          hesitate to reach out via mail Monday through Friday 10:00am to
-          6:00pm.
-        </p>
-
-        <div className="mb-4">
-          <p className="text-gray-700">
-            <span className="font-extrabold">Address :</span> Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit, sed
-          </p>
-          <p className="text-gray-700">
-            <span className="font-extrabold">Email :</span> Lorem ipsum dolor
-            sit amet
-          </p>
-        </div>
-
-        <div className="rounded-lg mb-8">
-          <h1 className="text-3xl md:text-4xl text-[#000000] text-left mb-4 py-8">
-            Who are we?
-          </h1>
-          <p className="text-gray-700 mb-4">
-            If you have any inquiries about your order or would like to schedule
-            a call with us, please send us an email at info@loremipsum.com.
-            Kindly include your contact number and a brief description of the
-            issue you&apos;re facing.
-          </p>
-          <p className="text-gray-700 mb-4">
-            Please note that if you call us directly, we may not be able to
-            attend to your call. Sending an email will ensure that our team can
-            assist you promptly.
-          </p>
-          <p className="text-gray-700">
-            Our team will get in touch with you shortly to help you.
-          </p>
-        </div>
-        <div className="rounded-lg mb-8">
-          <h1 className="text-3xl md:text-4xl text-[#000000] text-left mb-4 py-8">
-            Why Ma Ashirwaad?
-          </h1>
-          <p className="text-gray-700 mb-4">
-            If you have any inquiries about your order or would like to schedule
-            a call with us, please send us an email at info@loremipsum.com.
-            Kindly include your contact number and a brief description of the
-            issue you&apos;re facing.
-          </p>
-          <p className="text-gray-700 mb-4">
-            Please note that if you call us directly, we may not be able to
-            attend to your call. Sending an email will ensure that our team can
-            assist you promptly.
-          </p>
-          <p className="text-gray-700">
-            Our team will get in touch with you shortly to help you.
-          </p>
-        </div>
-        <div>
-          {" "}
-          <img
-            src="https://images.unsplash.com/photo-1624970415682-3f99fae61a94?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="max-w-full h-[55vh] rounded-xl"
-          />
-        </div>
+    <div className="w-full pt-32">
+      {/* Hero Section */}
+      <div className="relative w-full h-[300px] mb-16 ">
+        <img
+          src="https://s3-alpha-sig.figma.com/img/32d2/2fc2/4c77e9dc49f44ede65222b0d24f032a6?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=I-yGvgk4bMWoOhUzTRj7~zr8cjtDUDgH97kHabdAalKjdLmRc-4wPEjo2wjIN1ABHLH-mXytaNxR74OyNHyWkZVv-~Vmg1CIr~OquT0cVKg10OsliaC3UqLhssCVueWQo~1NLUGxf7Y84c4vUOOz1dOLysM4xNieYTjV1I~LwagsaIpwRHfqaX03mW60XDDPsuU5Ff1stwsxhKj6iJVZd71bhMHksRc4Jca2bCsiLjoFVCzv2W-SM6hoeafPSb-~McGg~eL~GP~9CTTcIvJ2wpZJrc3Sxe6SWD6IeeykxqgJv3k5-~5m8jqjvHzE0tMgVdyeyr646r~rFWwp0P2X4w__"
+          alt="Hero background"
+          className="w-full h-full object-cover brightness-50"
+        />
+        <div className="absolute inset-0 bg-black/30" />
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-light text-white">
+          About Us
+        </h1>
       </div>
 
-      {/* <div className="flex flex-col md:flex-row justify-between">
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-2/3"
-        >
-          <div className="col-span-1">
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1">
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1 md:col-span-2">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1">
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1">
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1 md:col-span-2">
-            <textarea
-              name="message"
-              placeholder="Type your message here"
-              rows={4}
-              onChange={handleChange}
-              className="w-full p-3 bg-[#E9E7D0] rounded-2xl border-gray-200 border placeholder:text-gray-600"
-            />
-          </div>
-          <div className="col-span-1 md:col-span-2">
-            <button
-              type="submit"
-              className="w-full bg-black text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-colors"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-        <div className="w-full md:w-1/3 flex justify-center items-center mt-4 md:mt-0">
-          <img
-            src="https://th.bing.com/th/id/OIP.j8yd8dJ5215WbgQ0NsLzuAHaNK?rs=1&pid=ImgDetMain"
-            className="max-w-full h-[55vh] rounded-xl"
-          />
+      {/* Content Container */}
+      <div className="max-w-6xl mx-auto px-4">
+        {/* First Text Block */}
+        <div className="mb-16">
+          <p className="text-gray-600 leading-relaxed">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
         </div>
-      </div> */}
+
+        {/* Who Are We Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-light mb-8">Who Are We?</h2>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-1/2">
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco.
+              </p>
+            </div>
+            <div className="md:w-1/2">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/af41/6f49/8c919ff880125146bff6140f00ba6dc2?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C6VY7an959HsXmIyBzCNbOl9GUqJqSbuVHSwiGsDyQ6PaHlM2qqpdIiY2z~e~gEma~h22IyhDzHmepROI6VGVem91pSiEUQLWx3QSj3N93LGoPWJpvjfy33vfirrM0VnS24LDkAuN352K48xdsmIXEs7m57WtryThHDHoSVuNk9cD6T0~qRZMHT6BA7F1WtSZBQVV-kMDghe3HqTx8YVbgtJX~Vq4AatqdwNCQJ7VzpUPy51rRierXVqdrCVgFLQUjWJ1V8oY6XMnRjMmkpMYhbnkg9lu~-msDAzCXWranIqZXsYNqdRfSi3v1bnkcmpbJgxG5wV8NvCDQx6SxdGxw__"
+                alt="Pink dress fashion"
+                className="w-full h-[300px] object-cover rounded"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Why Ma Ashewad Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-light mb-8">Why Ma Ashirwad?</h2>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-1/2">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/c54d/b53b/eb4cbf56217b758b72a2bcde3c897919?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Py45hZHSmHGn0OLFXIc8CLHvJ~Z-pNZmhpmkWYgPJhjubTHgz13E4BCe7MfzMiT6rH~Dlt2ym0VePtcca8RKE63uJm9CBOLU0rnsE7yMjkzrXeKrf8M8DWOXJoCVvJQNZ1~YJjd0qhaI5eghcfgQPtTVEO4z8DvYNDc7P2ZP1CKhyKhplAnX2wyWmaiaNU9NNdFCTAJzDgH5dePUThXPIh~ofm-y-Di~bTT-AE-wk-Mc2L-RoHEjuQG77xFR8txJankJw34H74OLzxlWcu7hZdZEi1D-wy1H7xquXKo7hQReTICXwFopb6C4rp5rOk6ODQyACWBCwzKOrliC5UsTGg__"
+                alt="Purple dress fashion"
+                className="w-full h-[300px] object-cover rounded"
+              />
+            </div>
+            <div className="md:w-1/2">
+              <p className="text-gray-600 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Our Promise Section */}
+        <div className="mb-16">
+          {/* <h2 className="text-3xl font-light mb-8">Our Promise</h2> */}
+          <div className="bg-red-900 p-8 rounded">
+            <p className="text-white leading-relaxed text-center">
+            Our Promise
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

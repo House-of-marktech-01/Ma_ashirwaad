@@ -4,10 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../context/cartContext.jsx";
 
 export default function Navbar() {
-  const { items, setItems } = useContext(Context);
+  const { items } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  // Example: Authentication state
+  const isLoggedIn = !!localStorage.getItem("authToken"); // Replace with your actual logic
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -27,7 +30,6 @@ export default function Navbar() {
       {/* Main Navbar */}
       <div className="bg-black text-white">
         <div className="max-w-screen-xl mx-auto px-6">
-          {/* Layout Container */}
           <div className="flex flex-col items-center">
             {/* Top Row - Logo, Search, and Icons */}
             <div className="w-full flex items-center justify-between py-4">
@@ -57,15 +59,25 @@ export default function Navbar() {
 
               {/* Icons */}
               <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                <Link to="/profile">
-                  <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                </Link>
-                <Link to="/wishlist">
-                  <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                </Link>
-                <Link to="/cart">
-                  <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                </Link>
+                {isLoggedIn ? (
+                  <>
+                    <Link to="/profile">
+                      <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                    <Link to="/wishlist">
+                      <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                    <Link to="/cart">
+                      <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                  </>
+                ) : (
+                  <Link to="/login">
+                    <button className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition">
+                      Login
+                    </button>
+                  </Link>
+                )}
               </div>
 
               {/* Mobile Menu Button */}
@@ -77,7 +89,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Navigation Links - Now centered with the search box */}
+            {/* Navigation Links */}
             <div className="hidden md:flex justify-center w-full pb-3">
               <div className="w-1/3 flex items-center justify-between">
                 <Link
@@ -108,7 +120,7 @@ export default function Navbar() {
                   to="/new-arrival"
                   className="text-sm text-white hover:text-gray-300 transition-colors"
                 >
-                  New arrival
+                  New Arrival
                 </Link>
               </div>
             </div>
@@ -131,15 +143,23 @@ export default function Navbar() {
               </form>
 
               <div className="flex justify-start gap-4">
-                <Link to="/profile" className="text-white hover:text-gray-300">
-                  <User className="h-5 w-5" />
-                </Link>
-                <Link to="/wishlist" className="text-white hover:text-gray-300">
-                  <Heart className="h-5 w-5" />
-                </Link>
-                <Link to="/cart" className="text-white hover:text-gray-300">
-                  <ShoppingBag className="h-5 w-5" />
-                </Link>
+                {isLoggedIn ? (
+                  <>
+                    <Link to="/profile" className="text-white hover:text-gray-300">
+                      <User className="h-5 w-5" />
+                    </Link>
+                    <Link to="/wishlist" className="text-white hover:text-gray-300">
+                      <Heart className="h-5 w-5" />
+                    </Link>
+                    <Link to="/cart" className="text-white hover:text-gray-300">
+                      <ShoppingBag className="h-5 w-5" />
+                    </Link>
+                  </>
+                ) : (
+                  <Link to="/login" className="text-white hover:text-gray-300">
+                    Login
+                  </Link>
+                )}
               </div>
 
               <div className="flex flex-col space-y-2 mt-4">
@@ -171,7 +191,7 @@ export default function Navbar() {
                   to="/new-arrival"
                   className="text-sm text-white hover:text-gray-300 transition-colors"
                 >
-                  New arrival
+                  New Arrival
                 </Link>
               </div>
             </div>
