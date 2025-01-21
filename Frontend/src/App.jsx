@@ -25,7 +25,7 @@ import OrderDetails from "./pages/OrderDetails";
 import SavedAddress from "./pages/SavedAddress";
 import ProfileLayout from "./components/ProfileLayout";
 import WishList from "./pages/Wishlist";
-import SignUpForm from "./pages/SignUpForm";
+import SignUpForm from "./pages/SignupForm";
 import AboutUs from "./pages/AboutUs";
 import { useState } from "react";
 
