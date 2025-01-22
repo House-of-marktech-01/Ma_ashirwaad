@@ -47,7 +47,7 @@ const SignupForm = () => {
           />
           <button
             type="submit"
-            className="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition duration-300"
+            className="w-full bg-red-900 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition duration-300"
           >
             Sign Up
           </button>

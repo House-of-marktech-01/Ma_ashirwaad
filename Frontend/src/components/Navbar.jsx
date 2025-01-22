@@ -150,7 +150,7 @@ export default function Navbar() {
               </form>
 
               <div className="flex justify-start gap-4">
-              {auth?.isAuthenticated ? (
+                {isLoggedIn ? (
                   <>
                     <Link
                       to="/profile"
