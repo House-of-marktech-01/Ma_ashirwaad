@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 
+
 // Add a new product
 export const addProduct = async (req, res) => {
     try {
@@ -53,5 +54,28 @@ export const getAllProducts = async (req, res) => {
         res.json(products);
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+};
+
+// Get products by category
+export const getProductByCategory = async (req, res) => {
+    try {
+        const { id } = req.query;
+        
+        if (!id) {
+            return res.status(400).json({ message: 'Category ID is required' });
+        }
+
+        const products = await Product.find({ category: id })
+            .populate('category')
+            .sort({ createdAt: -1 }); 
+
+        if (!products.length) {
+            return res.status(404).json({ message: 'No products found in this category' });
+        }
+
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
