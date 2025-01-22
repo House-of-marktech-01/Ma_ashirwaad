@@ -11,9 +11,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   // Example: Authentication state
-  
 
-// Then use isAuthenticated instead of isLoggedIn in your conditionals
+  // Then use isAuthenticated instead of isLoggedIn in your conditionals
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -37,16 +36,16 @@ export default function Navbar() {
             <div className="w-full flex items-center justify-between py-4">
               {/* Logo */}
               <div className="w-1/3">
-                <Link to="/" className="text-4xl text-left font-bold text-white">
+                <Link
+                  to="/"
+                  className="text-4xl text-left font-bold text-white"
+                >
                   LOGO
                 </Link>
               </div>
 
               {/* Search Bar */}
-              <form
-                onSubmit={handleSearch}
-                className="hidden md:block w-1/3"
-              >
+              <form onSubmit={handleSearch} className="hidden md:block w-1/3">
                 <div className="relative w-full">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
@@ -61,32 +60,32 @@ export default function Navbar() {
 
               {/* Icons */}
               <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-  {auth?.isAuthenticated ? (
-    <>
-      <Link to="/profile">
-        <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-      </Link>
-      <Link to="/wishlist">
-        <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-      </Link>
-      <Link to="/cart">
-        <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-      </Link>
-      <button 
-        onClick={auth.logout}
-        className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition"
-      >
-        Logout
-      </button>
-    </>
-  ) : (
-    <Link to="/login">
-      <button className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition">
-        Login
-      </button>
-    </Link>
-  )}
-</div>
+                {auth?.isAuthenticated ? (
+                  <>
+                    <Link to="/profile">
+                      <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                    <Link to="/wishlist">
+                      <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                    <Link to="/cart">
+                      <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                    </Link>
+                    <button
+                      onClick={auth.logout}
+                      className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link to="/login">
+                    <button className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition">
+                      Login
+                    </button>
+                  </Link>
+                )}
+              </div>
 
               {/* Mobile Menu Button */}
               <button
@@ -151,12 +150,18 @@ export default function Navbar() {
               </form>
 
               <div className="flex justify-start gap-4">
-                {auth?.isAuthenticated ? (
+                {isLoggedIn ? (
                   <>
-                    <Link to="/profile" className="text-white hover:text-gray-300">
+                    <Link
+                      to="/profile"
+                      className="text-white hover:text-gray-300"
+                    >
                       <User className="h-5 w-5" />
                     </Link>
-                    <Link to="/wishlist" className="text-white hover:text-gray-300">
+                    <Link
+                      to="/wishlist"
+                      className="text-white hover:text-gray-300"
+                    >
                       <Heart className="h-5 w-5" />
                     </Link>
                     <Link to="/cart" className="text-white hover:text-gray-300">
