@@ -22,7 +22,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="rounded shadow-md w-full font-poppins pb-14 mb-6">
+    <div className="rounded shadow-md w-full font-poppins pb-2 mb-6">
       <div className="primaryColorBg rounded-t font-poppins text-white p-4 text-center">
         <h1 className="text-lg">Profile</h1>
       </div>

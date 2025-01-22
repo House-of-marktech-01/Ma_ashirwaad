@@ -135,33 +135,12 @@ function App() {
                   <Route path="/explore-products" element={<ExploreProducts />} />
 
                   {/* Protected Routes */}
-                  <Route path="/profile" element={
-                    <ProtectedRoute>
-                      <ProfileLayout>
-                        <UserProfile />
-                      </ProfileLayout>
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/cart" element={
-                    <ProtectedRoute>
-                      <Cart />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/wishlist" element={
-                    <ProtectedRoute>
-                      <WishList />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/order-details" element={
-                    <ProtectedRoute>
-                      <OrderDetails />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/saved-address" element={
-                    <ProtectedRoute>
-                      <SavedAddress />
-                    </ProtectedRoute>
-                  } />
+                  <Route path="/" element={<ProfileLayout />}>
+                    <Route path="/profile" element={<UserProfile />} />
+                    <Route path="/order-details" element={<OrderDetails />} />
+                    <Route path="/wishlist" element={<WishList />} />
+                    <Route path="/saved-address" element={<SavedAddress />} />
+                  </Route>
                 </Routes>
               <Footer/>
               </>

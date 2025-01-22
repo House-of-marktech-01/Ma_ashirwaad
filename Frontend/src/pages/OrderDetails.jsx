@@ -133,7 +133,7 @@ const OrderDetails = () => {
   const menuItems = ["Cancel", "Return", "Rate"];
   return (
     <>
-      <div className="rounded shadow-md font-poppins pb-10">
+      <div className="rounded shadow-md font-poppins pb-10 ">
         <div className="primaryColorBg rounded-t font-poppins text-white p-4 text-center">
           <h1 className="text-lg">Order Details</h1>
         </div>
