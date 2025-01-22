@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/authContext";
+import { ContextProvider } from "./context/cartContext";
 import About from "./pages/AboutUs";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -20,7 +22,6 @@ import NewArrivals from "./pages/NewArrivals";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
 import ProductDetail from "./pages/ProductDetail";
-import { ContextProvider } from "./context/cartContext";
 import OrderDetails from "./pages/OrderDetails";
 import SavedAddress from "./pages/SavedAddress";
 import ProfileLayout from "./components/ProfileLayout";
@@ -71,68 +72,105 @@ const blogs = [
   },
 ];
 
-const Layout = ({ children, isLoggedIn, setIsLoggedIn }) => (
-  <>
-    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-    {children}
-    <Footer />
-  </>
-);
+// Protected Route wrapper component
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = !!localStorage.getItem('authToken');
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Global login state
-
   return (
-    <ContextProvider>
-      <Router>
-        <Routes>
-          <Route path="/admin-panel" element={<AdminPanel />} />
-          <Route path="/admin-panel/dashboard" element={<Dashboard />} />
-          <Route path="/admin-panel/users" element={<Users />} />
-          <Route path="/admin-panel/orders" element={<Orders />} />
-          <Route path="/admin-panel/inbox" element={<Inbox />} />
-          <Route
-            path="/*"
-            element={
-              <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
+    <AuthProvider>
+      <ContextProvider>
+        <Router>
+          <Routes>
+            {/* Admin Routes - No Header/Footer */}
+            <Route path="/admin-panel" element={
+              <ProtectedRoute>
+                <AdminPanel />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin-panel/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin-panel/users" element={
+              <ProtectedRoute>
+                <Users />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin-panel/orders" element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin-panel/inbox" element={
+              <ProtectedRoute>
+                <Inbox />
+              </ProtectedRoute>
+            } />
+
+            {/* Main Routes - With Header/Footer */}
+            <Route path="*" element={
+              <>
+              <Navbar/>
                 <Routes>
+                  {/* Public Routes */}
                   <Route path="/" element={<Home />} />
-                  <Route
-                    path="/login"
-                    element={<LoginRegister setIsLoggedIn={setIsLoggedIn} />}
-                  />
+                  <Route path="/login" element={<LoginRegister />} />
                   <Route path="/signup" element={<SignUpForm />} />
                   <Route path="/about-us" element={<About />} />
                   <Route path="/blog" element={<Blog blogs={blogs} />} />
-                  <Route
-                    path="/blog/:id"
-                    element={<BlogPost blogs={blogs} />}
-                  />
-                  <Route
-                    path="/explore-products"
-                    element={<ExploreProducts />}
-                  />
+                  <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
                   <Route path="/contact" element={<ContactUs />} />
-                  <Route path="/cart" element={<Cart />} />
                   <Route path="/shop" element={<ShopPage />} />
                   <Route path="/women" element={<Women />} />
+                  <Route path="/men" element={<Men />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
-                  <Route path="/" element={<ProfileLayout />}>
-                    <Route path="/profile" element={<UserProfile />} />
-                    <Route path="/order-details" element={<OrderDetails />} />
-                    <Route path="/wishlist" element={<WishList />} />
-                    <Route path="/saved-address" element={<SavedAddress />} />
-                  </Route>
+                  <Route path="/explore-products" element={<ExploreProducts />} />
+
+                  {/* Protected Routes */}
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <ProfileLayout>
+                        <UserProfile />
+                      </ProfileLayout>
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/cart" element={
+                    <ProtectedRoute>
+                      <Cart />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/wishlist" element={
+                    <ProtectedRoute>
+                      <WishList />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/order-details" element={
+                    <ProtectedRoute>
+                      <OrderDetails />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/saved-address" element={
+                    <ProtectedRoute>
+                      <SavedAddress />
+                    </ProtectedRoute>
+                  } />
                 </Routes>
-              </Layout>
-            }
-          />
-        </Routes>
-      </Router>
-    </ContextProvider>
+              <Footer/>
+              </>
+            } />
+          </Routes>
+        </Router>
+      </ContextProvider>
+    </AuthProvider>
   );
 }
-
 
 export default App;

@@ -2,16 +2,18 @@ import { useContext, useState } from "react";
 import { Menu, Search, User, Heart, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../context/cartContext.jsx";
+import { AuthContext } from "../context/authContext";
 
 export default function Navbar() {
   const { items } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
+  const auth = useContext(AuthContext);
   // Example: Authentication state
-  const isLoggedIn = !!localStorage.getItem("authToken"); // Replace with your actual logic
+  
 
+// Then use isAuthenticated instead of isLoggedIn in your conditionals
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -59,26 +61,32 @@ export default function Navbar() {
 
               {/* Icons */}
               <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                {isLoggedIn ? (
-                  <>
-                    <Link to="/profile">
-                      <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                    </Link>
-                    <Link to="/wishlist">
-                      <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                    </Link>
-                    <Link to="/cart">
-                      <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
-                    </Link>
-                  </>
-                ) : (
-                  <Link to="/login">
-                    <button className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition">
-                      Login
-                    </button>
-                  </Link>
-                )}
-              </div>
+  {auth?.isAuthenticated ? (
+    <>
+      <Link to="/profile">
+        <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+      </Link>
+      <Link to="/wishlist">
+        <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+      </Link>
+      <Link to="/cart">
+        <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+      </Link>
+      <button 
+        onClick={auth.logout}
+        className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition"
+      >
+        Logout
+      </button>
+    </>
+  ) : (
+    <Link to="/login">
+      <button className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition">
+        Login
+      </button>
+    </Link>
+  )}
+</div>
 
               {/* Mobile Menu Button */}
               <button
