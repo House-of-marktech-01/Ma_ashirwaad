@@ -20,9 +20,9 @@ const ContactUs = () => {
   };
 
   return (
-    <div className=" fustat pt-44 mb-4">
-      <div className="flex gap-4 justify-around  p-2 px-6 text-white">
-        <div className="flex flex-col rounded-xl justify-center py-10 w-[29%] primaryColorBg items-center">
+    <div className="fustat pt-36 sm:pt-44 mb-4">
+      <div className="flex flex-col sm:flex-row gap-4 justify-around  p-2 px-6 text-white">
+        <div className="flex flex-col rounded-xl justify-center py-10 w-full sm:w-[29%] primaryColorBg items-center">
           <div className="w-10 h-10">
             <img src={location} alt="email" />
           </div>
@@ -36,14 +36,14 @@ const ContactUs = () => {
             Ahmedabad 380006, Gujarat
           </p>
         </div>
-        <div className="flex rounded-xl  py-10 w-[29%] justify-center primaryColorBg flex-col items-center">
+        <div className="flex rounded-xl  py-10 w-full sm:w-[29%] justify-center primaryColorBg flex-col items-center">
           <div className="w-10 h-10">
             <img src={email} alt="email" />
           </div>
           <h3 className="text-lg font-semibold">Email</h3>
           <p className="mt-5">hello@jadeblueindia.com</p>
         </div>
-        <div className="flex rounded-xl  py-10  w-[29%]  justify-center primaryColorBg flex-col items-center">
+        <div className="flex rounded-xl  py-10 w-full sm:w-[29%]  justify-center primaryColorBg flex-col items-center">
           <div className="w-10 h-10">
             <img src={phone} alt="email" />
           </div>
@@ -64,16 +64,16 @@ const ContactUs = () => {
         }}
       >
         {/* <img src={anarkali_kurta} alt="Background" className="w-full h-full object-cover" /> */}
-        <div className=" rounded-lg my-4 w-[80%] fustat flex flex-col items-center bg-[#050505] bg-opacity-30">
+        <div className=" rounded-lg my-4 w-[94%] sm:w-[80%] fustat flex flex-col items-center bg-[#050505] bg-opacity-30">
           <h2 className="text-white text-3xl font-bold mb-4 mt-6">
             Contact Us
           </h2>
-          <p className="text-white text-lg mb-8 mt-4 px-12 text-center">
+          <p className="text-white text-lg mb-8 mt-4 px-4 sm:px-12 text-center">
             Fill in the text to remind customers to fill in the form correctly
             so that your support team could contact them to help with the issues
             and answer all the questions.
           </p>
-          <form className="p-6 rounded-lg  w-1/2">
+          <form className="p-2 px-6 sm:p-6 rounded-lg w-full  sm:w-1/2">
             {/* <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2">Name</label>
               <input

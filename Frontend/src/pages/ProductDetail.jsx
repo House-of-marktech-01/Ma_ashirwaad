@@ -61,25 +61,29 @@ const ProductDetail = () => {
         id: "2",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
+        image:
+          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "3",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
+        image:
+          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "4",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
+        image:
+          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
       {
         id: "5",
         name: "Hosiery Fit & Flare Printed Kurti",
         price: 1100,
-        image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
+        image:
+          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
     ],
   };
@@ -111,29 +115,36 @@ const ProductDetail = () => {
   const handleShare = (platform) => {
     const url = window.location.href;
     const text = `Check out this ${product.name}!`;
-  
+
     switch (platform) {
       case "facebook":
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`
+        );
         break;
       case "twitter":
         window.open(
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+            url
+          )}&text=${encodeURIComponent(text)}`
         );
         break;
       case "pinterest":
         window.open(
-          `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(text)}`
+          `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+            url
+          )}&description=${encodeURIComponent(text)}`
         );
         break;
       default:
         navigator.clipboard.writeText(url);
     }
- 
   };
 
   return (
-    <div className="max-w-screen-xl min-h-screen w-max mx-auto px-4 py-4 md:p-36">
+    <div className="max-w-screen-xl min-h-screen mx-auto px-4 py-4 pt-36 md:p-36 ">
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 py-2 md:py-3">
         Home / Women / Yellow Short Kurti
@@ -143,14 +154,14 @@ const ProductDetail = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         {/* Left side - Image Gallery */}
         <div className="space-y-2 md:space-y-4">
-          <div className="aspect-[3/4] w-full">
+          <div className="aspect[3/4] w-full">
             <img
               src={selectedImage}
               alt={product.name}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
-          
+
           <div className="grid grid-cols-4 gap-2 mt-4 md:mt-10">
             {product.images.map((img, index) => (
               <img
@@ -171,7 +182,9 @@ const ProductDetail = () => {
           {/* Product Header */}
           <div className="flex justify-between items-start mb-2 md:mb-5">
             <div>
-              <h1 className="text-xl md:text-2xl font-medium">{product.name}</h1>
+              <h1 className="text-xl md:text-2xl font-medium">
+                {product.name}
+              </h1>
               <div className="flex flex-wrap items-center gap-2 mt-2">
                 <span className="text-lg md:text-xl">₹{product.price}</span>
                 <span className="text-gray-500 line-through text-sm">
@@ -344,7 +357,9 @@ const ProductDetail = () => {
         <div>
           <h3 className="font-medium mb-1 md:mb-2">Average Rating</h3>
           <div className="flex items-center gap-2">
-            <p className="text-xl md:text-2xl font-semibold">{product.rating}</p>
+            <p className="text-xl md:text-2xl font-semibold">
+              {product.rating}
+            </p>
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <FaStar
@@ -410,16 +425,20 @@ const ProductDetail = () => {
       {/* Similar Products - 2 columns on mobile, 4 on desktop */}
       <div className="mt-8 md:mt-12">
         <h2 className="text-lg font-medium mb-3 md:mb-4">View Similar</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {product.relatedProducts.map((item, index) => (
-            <div key={index} className="space-y-1 md:space-y-2">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full aspect-[3/4] object-cover rounded-lg"
-              />
-              <h3 className="text-xs md:text-sm font-medium">{item.name}</h3>
-              <p className="text-xs md:text-sm">₹{item.price}</p>
+            <div className="flex flex-col" key={index}>
+              <div className="h-full w-full rounded-lg">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-auto object-cover rounded-lg"
+                />
+              </div>
+              <div className="mt-2">
+                <h3 className="text-xs md:text-sm font-medium">{item.name}</h3>
+                <p className="text-xs md:text-sm">₹{item.price}</p>
+              </div>
             </div>
           ))}
         </div>
