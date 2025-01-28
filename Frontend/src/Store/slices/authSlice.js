@@ -43,8 +43,10 @@ export const googleSignup = createAsyncThunk("auth/googleSignup", async (respons
 });
 
 export const verifyEmail = createAsyncThunk("auth/verifyEmail", async (data, thunkAPI) => {
+    console.log(data)
     try {
         const res = await axios.post(`${BASE_URL}/auth/verify-email`, data);
+        console.log(res)
         return res.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);

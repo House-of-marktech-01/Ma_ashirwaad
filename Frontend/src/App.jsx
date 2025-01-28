@@ -29,6 +29,7 @@ import WishList from "./pages/Wishlist";
 import SignUpForm from "./pages/SignupForm";
 import AboutUs from "./pages/AboutUs";
 import { useState } from "react";
+import VerfiOtp from "./pages/VerifyOtp";
 
 const blogs = [
   {
@@ -123,6 +124,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<LoginRegister />} />
                   <Route path="/signup" element={<SignUpForm />} />
+                  <Route path="/verify-otp" element={<VerfiOtp />} />
                   <Route path="/about-us" element={<About />} />
                   <Route path="/blog" element={<Blog blogs={blogs} />} />
                   <Route path="/blog/:id" element={<BlogPost blogs={blogs} />} />
