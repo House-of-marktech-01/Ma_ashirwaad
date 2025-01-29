@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../context/cartContext.jsx";
 import { AuthContext } from "../context/authContext";
 
+
 export default function Navbar() {
   const { items } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);

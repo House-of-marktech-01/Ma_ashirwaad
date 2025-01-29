@@ -1,28 +1,44 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext"; // Ensure the path is correct
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { login } from "../Store/slices/authSlice";
 
 const LoginRegister = () => {
-  const { login } = useContext(AuthContext); // Destructure login from context
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
-    emailOrPhone: "",
+    emailorphone: "",
     password: "",
+    rememberMe: false,
   });
 
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    const success = login(formData);
-    if (success) {
-      navigate("/");
-    } else {
-      setError("Invalid credentials. Please try again.");
+  
+    try {
+      const resultAction = await dispatch(login(formData));
+      console.log('Login result:', resultAction); // Add this for debugging
+      
+      // Check if the action was fulfilled
+      if (resultAction.payload && !resultAction.error) {
+        navigate("/"); // Navigate to the dashboard after successful login
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
+    } catch (e) {
+      console.error('Login error:', e); // Add this for debugging
+      setError("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -51,24 +67,24 @@ const LoginRegister = () => {
           <div className="mb-4">
             <input
               type="text"
+              name="emailorphone"
               placeholder="Email Id or Phone Number"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.emailOrPhone}
-              onChange={(e) =>
-                setFormData({ ...formData, emailOrPhone: e.target.value })
-              }
+              value={formData.emailorphone || ""}
+              onChange={handleChange}
+              autoComplete="username"
             />
           </div>
 
           <div className="mb-4">
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
+              value={formData.password || ""}
+              onChange={handleChange}
+              autoComplete="current-password"
             />
           </div>
 
@@ -109,3 +125,9 @@ const LoginRegister = () => {
 };
 
 export default LoginRegister;
+
+
+
+
+
+
