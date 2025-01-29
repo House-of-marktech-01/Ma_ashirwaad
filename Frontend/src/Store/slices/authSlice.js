@@ -7,6 +7,7 @@ const initialState = {
     loading: false,
     error: null,
     user: {},
+    isAuthenticated: false,
 }
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
@@ -43,8 +44,10 @@ export const googleSignup = createAsyncThunk("auth/googleSignup", async (respons
 });
 
 export const verifyEmail = createAsyncThunk("auth/verifyEmail", async (data, thunkAPI) => {
+    console.log(data)
     try {
         const res = await axios.post(`${BASE_URL}/auth/verify-email`, data);
+        console.log(res)
         return res.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -55,10 +58,10 @@ export const getUser = createAsyncThunk(
     "auth/getUser", 
     async (id, thunkAPI) => {
         try {  
-            const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`,{},{
+            const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },  
+                },
             });
             return res.data;
         } catch (error) {
@@ -73,6 +76,7 @@ export const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.user = {};
+            state.isAuthenticated = false;
             localStorage.removeItem("token");
             localStorage.removeItem("user");
         },
@@ -85,6 +89,7 @@ export const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
+                state.isAuthenticated = true; 
                 toast.success(action.payload.message);
             })
             .addCase(login.rejected, (state, action) => {
@@ -99,6 +104,7 @@ export const authSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
+                state.isAuthenticated = true; 
                 toast.success(action.payload.message);
             })
             .addCase(register.rejected, (state, action) => {
@@ -112,6 +118,7 @@ export const authSlice = createSlice({
             .addCase(googleSignup.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
+                state.isAuthenticated = true; 
                 toast.success(action.payload.message);
             })
             .addCase(googleSignup.rejected, (state, action) => {

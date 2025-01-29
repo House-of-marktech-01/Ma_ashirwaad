@@ -1,18 +1,20 @@
-import { useContext, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { Menu, Search, User, Heart, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../context/cartContext.jsx";
-import { AuthContext } from "../context/authContext";
+import { logout } from "../Store/slices/authSlice.js";
 
 export default function Navbar() {
-  const { items } = useContext(Context);
+  const { isAuthenticated } = useSelector((state) => state.auth); // Access auth state
+  const dispatch = useDispatch(); // To dispatch actions
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const auth = useContext(AuthContext);
-  // Example: Authentication state
 
-  // Then use isAuthenticated instead of isLoggedIn in your conditionals
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch logout action
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -60,7 +62,7 @@ export default function Navbar() {
 
               {/* Icons */}
               <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                {auth?.isAuthenticated ? (
+                {isAuthenticated ? (
                   <>
                     <Link to="/profile">
                       <User className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
@@ -72,7 +74,7 @@ export default function Navbar() {
                       <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
                     </Link>
                     <button
-                      onClick={auth.logout}
+                      onClick={handleLogout}
                       className="bg-white text-black py-1 px-3 rounded-md hover:bg-gray-300 transition"
                     >
                       Logout
@@ -150,7 +152,7 @@ export default function Navbar() {
               </form>
 
               <div className="flex justify-start gap-4">
-              {auth?.isAuthenticated ? (
+                {isAuthenticated ? (
                   <>
                     <Link
                       to="/profile"

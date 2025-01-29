@@ -1,37 +1,56 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../context/authContext'; // Ensure the path is correct
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../Store/slices/authSlice";
 
 const LoginRegister = () => {
-  const { login } = useContext(AuthContext); // Destructure login from context
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
-    emailOrPhone: "",
+    emailorphone: "",
     password: "",
+    rememberMe: false,
   });
-  
+
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    const success = login(formData);
-    if (success) {
-      navigate('/');
-    } else {
-      setError("Invalid credentials. Please try again.");
+  
+    try {
+      const resultAction = await dispatch(login(formData));
+      console.log('Login result:', resultAction); // Add this for debugging
+      
+      // Check if the action was fulfilled
+      if (resultAction.payload && !resultAction.error) {
+        navigate("/"); // Navigate to the dashboard after successful login
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
+    } catch (e) {
+      console.error('Login error:', e); // Add this for debugging
+      setError("An unexpected error occurred. Please try again later.");
     }
   };
 
   return (
-<div className="min-h-screen flex items-center justify-center pt-36"
+    <div
+      className="min-h-screen flex items-center justify-center pt-36"
       style={{
         backgroundImage: `url('https://s3-alpha-sig.figma.com/img/f7c9/0855/4e02df6eef8e23963217d8677a2340e0?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OZJonI51TjfHTBx1ae5KXSSUkfMiXec9zB45xZASdmoZ2aD7zG7gsBjeKfJgCececCHDlnoYL6Q8cT3Il9oM~SSbPrmBGt0TSG5Ktd7k9R-8vfZKuDO1bhThzojDRNM~~VNnPN43CMF8MOgSyR4qcVS7iM6txhkrdn4jIFqazVQ7uowOzdWubIU18KWXeHYnn2-5~NWuGBKS-l7GKu7WPHO3N8cYmHe3ozrnAN18jJ3ftXTnJVoNDmr-XM4f4Z9PGtqjlQFn-WnbOPehF0~CRmKKhDg1tcjjRhjRrRXrpu8Y1U0eVAEFv8QtIMBE5ukDZcrE2gQfabFByGAuMhmn8w')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-      }}>
+      }}
+    >
       <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-semibold text-center mb-2">SIGN IN</h2>
         <p className="text-gray-600 text-sm text-center mb-6">
@@ -48,24 +67,24 @@ const LoginRegister = () => {
           <div className="mb-4">
             <input
               type="text"
+              name="emailorphone"
               placeholder="Email Id or Phone Number"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.emailOrPhone}
-              onChange={(e) =>
-                setFormData({ ...formData, emailOrPhone: e.target.value })
-              }
+              value={formData.emailorphone || ""}
+              onChange={handleChange}
+              autoComplete="username"
             />
           </div>
 
           <div className="mb-4">
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
+              value={formData.password || ""}
+              onChange={handleChange}
+              autoComplete="current-password"
             />
           </div>
 
@@ -94,15 +113,21 @@ const LoginRegister = () => {
             <button
               type="button"
               className="flex-1 bg-white text-[#8B2121] py-3 px-4 rounded-lg border border-red-900 hover:bg-gray-100 transition duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate("/signup")}
             >
               Sign Up
             </button>
           </div>
         </form>
       </div>
-      </div>
+    </div>
   );
 };
 
 export default LoginRegister;
+
+
+
+
+
+
