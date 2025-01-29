@@ -28,8 +28,10 @@ import ProfileLayout from "./components/ProfileLayout";
 import WishList from "./pages/Wishlist";
 import SignUpForm from "./pages/SignupForm";
 import AboutUs from "./pages/AboutUs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VerfiOtp from "./pages/VerifyOtp";
+import { useDispatch, useSelector } from "react-redux"; // Add this
+import { login } from "./Store/slices/authSlice";
 
 const blogs = [
   {
@@ -75,7 +77,7 @@ const blogs = [
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = !!localStorage.getItem('authToken');
+  const { isAuthenticated } = useSelector((state) => state.auth);
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -83,6 +85,17 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  const dispatch = useDispatch(); // Add this
+
+  // Add this useEffect
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    if (token && user) {
+      dispatch(login({ token, user: JSON.parse(user) }));
+    }
+  }, [dispatch]);
+
   return (
     <AuthProvider>
       <ContextProvider>
@@ -141,6 +154,7 @@ function App() {
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
+                    <Route path="/cart" element={<Cart />} />
                     <Route path="/saved-address" element={<SavedAddress />} />
                   </Route>
                 </Routes>
