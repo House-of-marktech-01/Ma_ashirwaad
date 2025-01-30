@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Store/slices/authSlice";
-
+import { login,googleSignup } from "../Store/slices/authSlice";
+import { GoogleLogin } from '@react-oauth/google';
 const LoginRegister = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -21,7 +21,14 @@ const LoginRegister = () => {
       [name]: value,
     }));
   };
-
+const handleGoogleLogin = async (response) => {
+    const res = await dispatch(googleSignup(response));
+    if (res.type === 'auth/googleSignup/fulfilled') {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -118,6 +125,21 @@ const LoginRegister = () => {
               Sign Up
             </button>
           </div>
+          <div className="mt-4 flex justify-center">
+                      <GoogleLogin
+                        onSuccess={(response) => {
+                          console.log(response);
+                          handleGoogleLogin(response);
+                        }}
+                        onError={() => {
+                          // console.log("Login failed");
+                        }}
+                        type="standard"
+                        text="continue_with"
+                        theme="dark"
+                        shape='square'
+                      />
+                    </div>
         </form>
       </div>
     </div>

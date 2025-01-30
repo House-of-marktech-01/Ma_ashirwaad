@@ -4,12 +4,23 @@ import CustomSelect from "./../components/CustomSelect";
 import profile from "../assets/images/profile.jpg";
 import sms from "../assets/images/sms.png";
 import CustomButton from "../components/CustomButton";
+import {getUser} from '../Store/slices/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import { useEffect } from "react";
 const Profile = () => {
+  const dispatch = useDispatch();
+  const {user} = useSelector(state => state.auth);
+  console.log(user);  
+  useEffect(() => {
+    if (!user){
+      dispatch(getUser());
+    }
+  }, []);
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullName: user.name||"",
     phoneNumber: "",
     alternatePhone: "",
-    gender: "",
+    gender: user.gender||"",
     city: "",
     language: "",
   });
@@ -31,14 +42,14 @@ const Profile = () => {
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <div>
               <img
-                src={profile}
+                src={user.avatar||profile}
                 alt="Profile"
                 className="rounded-full w-20 h-20"
               />
             </div>
             <div>
-              <p className="font-semibold text-lg">Alexa Rawles</p>
-              <p className="text-gray-500 text-base">alexarawles@gmail.com</p>
+              <p className="font-semibold text-lg">{user?.name}</p>
+              <p className="text-gray-500 text-base">{user?.email}</p>
             </div>
           </div>
 
@@ -109,7 +120,7 @@ const Profile = () => {
             <img src={sms} alt="sms" />
           </div>
           <div>
-            <p className="font-medium popins">alexarawles@gmail.com</p>
+            <p className="font-medium popins">{user?.email}</p>
             <p className="text-gray-500 poppins mt-1 text-sm">1 month ago</p>
           </div>
         </div>
