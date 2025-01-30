@@ -1,53 +1,71 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import art1 from "../assets/images/Flower-Brooch.jpg";
+import nightdress1 from "../assets/images/nightdress1.jpg";
+import hairclip from "../assets/images/hairclip.jpg";
 
 const CategoryCircle = () => {
   const scrollContainer = useRef(null);
+  const navigate = useNavigate();
 
   const categories = [
     {
-      name: "Long Kurti",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "Night Suits",
+      image: nightdress1,
+      path: "/women",
+      filterValue: "Nightsuits"
     },
     {
-      name: "Woollen Kurti",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "Arts and Crafts",
+      image: art1,
+      path: "/artsandcrafts",
+      filterValue: "ArtsAndCrafts"
     },
     {
-      name: "Short Kurti",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "Hair Accessories",
+      image: hairclip,
+      path: "/women",
+      filterValue: "Hairclips"
     },
     {
-      name: "Men's Kurta",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "Loungewear",
+      image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      path: "/women",
+      filterValue: "Loungewear"
     },
     {
-      name: "Night Suit",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "ComingSoon",
+      image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      path: "",
+      filterValue: ""
     },
     {
-      name: "Pathani Kurta",
-      image:
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "ComingSoon",
+      image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      path: "",
+      filterValue: ""
     },
   ];
 
+  const handleCategoryClick = (category) => {
+    if (category.name === "ComingSoon") {
+      return;
+    }
+    navigate(`${category.path}?filter=${category.filterValue}`);
+  };
+
   return (
     <div className="w-full py-10 bg-white">
-      <div className="ml-4 sm:ml-8 mx-auto px-4 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Categories Title Card */}
-        <div className="bg-red-500 text-white rounded-full py-3 px-6 absolute left-0 top-1/2 -translate-y-1/2 z-10 shadow-md w-28 h-28 flex items-center justify-center">
+        <div className="bg-red-500 text-white rounded-full absolute left-4 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 shadow-md w-28 h-28 flex items-center justify-center">
           <h2 className="text-lg font-medium text-center">Categories</h2>
         </div>
 
         {/* Scrollable Categories Container */}
         <div
           ref={scrollContainer}
-          className="flex overflow-x-auto space-x-6 ml-32 scrollbar-hide"
+          className="flex overflow-x-auto space-x-6 pl-36 sm:pl-40 scrollbar-hide"
           style={{
             scrollBehavior: "smooth",
             scrollbarWidth: "none",
@@ -57,7 +75,10 @@ const CategoryCircle = () => {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center space-y-2"
+              className={`flex flex-col items-center space-y-2 flex-shrink-0 ${
+                category.name !== "ComingSoon" ? "cursor-pointer" : "cursor-not-allowed opacity-70"
+              }`}
+              onClick={() => handleCategoryClick(category)}
             >
               <div className="w-36 h-36 rounded-full shadow-md bg-white flex items-center justify-center transition hover:scale-105">
                 <img

@@ -19,7 +19,6 @@ import LoginRegister from "./pages/LoginRegister";
 import Inbox from "./admin/Inbox";
 import ShopPage from "./pages/ShopPage";
 import NewArrivals from "./pages/NewArrivals";
-import Men from "./pages/Men";
 import Women from "./pages/Women";
 import ProductDetail from "./pages/ProductDetail";
 import OrderDetails from "./pages/OrderDetails";
@@ -32,6 +31,7 @@ import { useEffect, useState } from "react";
 import VerfiOtp from "./pages/VerifyOtp";
 import { useDispatch, useSelector } from "react-redux"; // Add this
 import { login } from "./Store/slices/authSlice";
+import ArtsandCrafts from "./pages/ArtsandCrafts";
 
 const blogs = [
   {
@@ -144,7 +144,7 @@ function App() {
                   <Route path="/contact" element={<ContactUs />} />
                   <Route path="/shop" element={<ShopPage />} />
                   <Route path="/women" element={<Women />} />
-                  <Route path="/men" element={<Men />} />
+                  <Route path="/artsandcrafts" element={<ArtsandCrafts />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/explore-products" element={<ExploreProducts />} />

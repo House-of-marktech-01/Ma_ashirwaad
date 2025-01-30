@@ -114,10 +114,10 @@ export default function Navbar() {
                   Women
                 </Link>
                 <Link
-                  to="/men"
+                  to="/artsandcrafts"
                   className="text-sm text-white hover:text-gray-300 transition-colors"
                 >
-                  Men
+                  Arts and Crafts
                 </Link>
                 <Link
                   to="/shop"
@@ -191,10 +191,10 @@ export default function Navbar() {
                   Women
                 </Link>
                 <Link
-                  to="/men"
+                  to="/artsandcrafts"
                   className="text-sm text-white hover:text-gray-300 transition-colors"
                 >
-                  Men
+                  Arts and Crafts
                 </Link>
                 <Link
                   to="/shop"

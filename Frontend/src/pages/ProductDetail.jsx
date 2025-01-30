@@ -30,6 +30,7 @@ const ProductDetail = () => {
       color: ["Yellow", "Green", "Pink"],
       size: ["S", "M", "L", "XL"],
     },
+    
     rating: 4.0,
     reviews: 10000,
     deliveryTime: "Fri, 7 Dec",
