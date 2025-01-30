@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FaStar, FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import { Heart, Share2 } from "lucide-react";
+import { addToCart } from "../Store/slices/cartSlice";
 import downloadImage from "../assets/images/download.png";
 import downloadImage2 from "../assets/images/download2.png";
 import downloadImage3 from "../assets/images/download3.png";
 
 const ProductDetail = () => {
+  const dispatch = useDispatch()
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -31,6 +34,17 @@ const ProductDetail = () => {
       size: ["S", "M", "L", "XL"],
     },
     
+    id: "2",
+    name: "Yellow Long Kurti",
+    price: 1550.5,
+    originalPrice: 2000,
+    images: [
+      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    ],
+  
     rating: 4.0,
     reviews: 10000,
     deliveryTime: "Fri, 7 Dec",
@@ -97,6 +111,32 @@ const ProductDetail = () => {
     1: 2,
   };
 
+  const handleAddToCart = () => {
+    const cartItem = {
+      product: {
+        _id: product.id,
+        name: product.name,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        images: product.images
+      },
+      quantity: quantity,
+      size: selectedSize,
+      color: selectedColor
+    };
+
+    dispatch(addToCart(cartItem))
+      .unwrap()
+      .then(() => {
+        // You can show a success message here
+        alert('Product added to cart successfully!');
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Failed to add to cart:', error);
+      });
+  };
+
   useEffect(() => {
     if (product) {
       setSelectedImage(product.images[0]);
@@ -142,6 +182,8 @@ const ProductDetail = () => {
       default:
         navigator.clipboard.writeText(url);
     }
+
+
   };
 
   return (
@@ -285,7 +327,8 @@ const ProductDetail = () => {
                 +
               </button>
             </div>
-            <button className="flex-1 bg-red-700 text-white py-2 px-4 rounded">
+            <button className="flex-1 bg-red-700 text-white py-2 px-4 rounded" 
+             onClick={handleAddToCart}>
               Add to Bag
             </button>
             <button className="hidden sm:block border px-4 py-3 rounded">

@@ -29,9 +29,11 @@ import SignUpForm from "./pages/SignupForm";
 import AboutUs from "./pages/AboutUs";
 import { useEffect, useState } from "react";
 import VerfiOtp from "./pages/VerifyOtp";
-import { useDispatch, useSelector } from "react-redux"; // Add this
+import { Provider, useDispatch, useSelector } from "react-redux"; // Add this
 import { login } from "./Store/slices/authSlice";
 import ArtsandCrafts from "./pages/ArtsandCrafts";
+import { persistor, store } from "./Store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const blogs = [
   {
@@ -97,6 +99,8 @@ function App() {
   }, [dispatch]);
 
   return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <AuthProvider>
       <ContextProvider>
         <Router>
@@ -148,13 +152,14 @@ function App() {
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/explore-products" element={<ExploreProducts />} />
+                  <Route path="/cart" element={<Cart />} />
 
                   {/* Protected Routes */}
                   <Route path="/" element={<ProfileLayout />}>
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
-                    <Route path="/cart" element={<Cart />} />
+                    
                     <Route path="/saved-address" element={<SavedAddress />} />
                   </Route>
                 </Routes>
@@ -165,6 +170,8 @@ function App() {
         </Router>
       </ContextProvider>
     </AuthProvider>
+    </PersistGate>
+    </Provider>
   );
 }
 

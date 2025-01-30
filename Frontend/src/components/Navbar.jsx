@@ -1,18 +1,37 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Search, User, Heart, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Store/slices/authSlice.js";
 
 export default function Navbar() {
-  const { isAuthenticated } = useSelector((state) => state.auth); // Access auth state
-  const dispatch = useDispatch(); // To dispatch actions
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const cartState = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
 
+  const cartItemsCount = cartState?.cart?.products?.length || 0;
+
+  // Handle cart notification
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showNotification]);
+
+  // Listen for cart changes
+  useEffect(() => {
+    setShowNotification(true);
+  }, [cartItemsCount]);
+
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch logout action
+    dispatch(logout());
   };
 
   const handleSearch = (e) => {
@@ -25,6 +44,13 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full z-50 font-sans">
+      {/* Notification Toast */}
+      {showNotification && cartItemsCount > 0 && (
+        <div className="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg transition-all duration-500 ease-in-out">
+          Item added to cart successfully!
+        </div>
+      )}
+
       {/* Announcement Bar */}
       <div className="bg-[#9A3131] py-2 text-white text-center text-sm">
         Buy 20% Off
@@ -36,17 +62,14 @@ export default function Navbar() {
           <div className="flex flex-col items-center">
             {/* Top Row - Logo, Search, and Icons */}
             <div className="w-full flex items-center justify-between py-4">
-              {/* Logo */}
+              {/* ... Logo section remains the same ... */}
               <div className="w-1/3">
-                <Link
-                  to="/"
-                  className="text-4xl text-left font-bold text-white"
-                >
+                <Link to="/" className="text-4xl text-left font-bold text-white">
                   LOGO
                 </Link>
               </div>
 
-              {/* Search Bar */}
+              {/* ... Search Bar remains the same ... */}
               <form onSubmit={handleSearch} className="hidden md:block w-1/3">
                 <div className="relative w-full">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -60,7 +83,7 @@ export default function Navbar() {
                 </div>
               </form>
 
-              {/* Icons */}
+              {/* Updated Icons Section */}
               <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
                 {isAuthenticated ? (
                   <>
@@ -70,8 +93,13 @@ export default function Navbar() {
                     <Link to="/wishlist">
                       <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
                     </Link>
-                    <Link to="/cart">
+                    <Link to="/cart" className="relative">
                       <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                      {cartItemsCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                          {cartItemsCount}
+                        </span>
+                      )}
                     </Link>
                     <button
                       onClick={handleLogout}
@@ -98,37 +126,22 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Navigation Links */}
+            {/* ... Navigation Links remain the same ... */}
             <div className="hidden md:flex justify-center w-full pb-3">
               <div className="w-1/3 flex items-center justify-between">
-                <Link
-                  to="/"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Home
                 </Link>
-                <Link
-                  to="/women"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/women" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Women
                 </Link>
-                <Link
-                  to="/artsandcrafts"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/artsandcrafts" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Arts and Crafts
                 </Link>
-                <Link
-                  to="/shop"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/shop" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Shop
                 </Link>
-                <Link
-                  to="/new-arrival"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/new-arrival" className="text-sm text-white hover:text-gray-300 transition-colors">
                   New Arrival
                 </Link>
               </div>
@@ -136,7 +149,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Updated Mobile Menu */}
         {isOpen && (
           <div className="md:hidden border-t border-gray-800">
             <div className="px-4 py-3 space-y-3">
@@ -154,20 +167,19 @@ export default function Navbar() {
               <div className="flex justify-start gap-4">
                 {isAuthenticated ? (
                   <>
-                    <Link
-                      to="/profile"
-                      className="text-white hover:text-gray-300"
-                    >
+                    <Link to="/profile" className="text-white hover:text-gray-300">
                       <User className="h-5 w-5" />
                     </Link>
-                    <Link
-                      to="/wishlist"
-                      className="text-white hover:text-gray-300"
-                    >
+                    <Link to="/wishlist" className="text-white hover:text-gray-300">
                       <Heart className="h-5 w-5" />
                     </Link>
-                    <Link to="/cart" className="text-white hover:text-gray-300">
+                    <Link to="/cart" className="text-white hover:text-gray-300 relative">
                       <ShoppingBag className="h-5 w-5" />
+                      {cartItemsCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                          {cartItemsCount}
+                        </span>
+                      )}
                     </Link>
                   </>
                 ) : (
@@ -177,35 +189,21 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* ... Mobile menu links remain the same ... */}
               <div className="flex flex-col space-y-2 mt-4">
-                <Link
-                  to="/"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Home
                 </Link>
-                <Link
-                  to="/women"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/women" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Women
                 </Link>
-                <Link
-                  to="/artsandcrafts"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/artsandcrafts" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Arts and Crafts
                 </Link>
-                <Link
-                  to="/shop"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/shop" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Shop
                 </Link>
-                <Link
-                  to="/new-arrival"
-                  className="text-sm text-white hover:text-gray-300 transition-colors"
-                >
+                <Link to="/new-arrival" className="text-sm text-white hover:text-gray-300 transition-colors">
                   New Arrival
                 </Link>
               </div>
