@@ -19,7 +19,6 @@ import LoginRegister from "./pages/LoginRegister";
 import Inbox from "./admin/Inbox";
 import ShopPage from "./pages/ShopPage";
 import NewArrivals from "./pages/NewArrivals";
-import Men from "./pages/Men";
 import Women from "./pages/Women";
 import ProductDetail from "./pages/ProductDetail";
 import OrderDetails from "./pages/OrderDetails";
@@ -28,8 +27,14 @@ import ProfileLayout from "./components/ProfileLayout";
 import WishList from "./pages/Wishlist";
 import SignUpForm from "./pages/SignupForm";
 import AboutUs from "./pages/AboutUs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VerfiOtp from "./pages/VerifyOtp";
+import { Provider, useDispatch, useSelector } from "react-redux"; // Add this
+import { login } from "./Store/slices/authSlice";
+import ArtsandCrafts from "./pages/ArtsandCrafts";
+import { persistor, store } from "./Store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import ProductCard from "./pages/Wishlist";
 
 const blogs = [
   {
@@ -75,7 +80,7 @@ const blogs = [
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = !!localStorage.getItem('authToken');
+  const { isAuthenticated } = useSelector((state) => state.auth);
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -83,7 +88,20 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  const dispatch = useDispatch(); // Add this
+
+  // Add this useEffect
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    if (token && user) {
+      dispatch(login({ token, user: JSON.parse(user) }));
+    }
+  }, [dispatch]);
+
   return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <AuthProvider>
       <ContextProvider>
         <Router>
@@ -131,16 +149,18 @@ function App() {
                   <Route path="/contact" element={<ContactUs />} />
                   <Route path="/shop" element={<ShopPage />} />
                   <Route path="/women" element={<Women />} />
-                  <Route path="/men" element={<Men />} />
+                  <Route path="/artsandcrafts" element={<ArtsandCrafts />} />
                   <Route path="/new-arrival" element={<NewArrivals />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/explore-products" element={<ExploreProducts />} />
+                  <Route path="/cart" element={<Cart />} />
 
                   {/* Protected Routes */}
                   <Route path="/" element={<ProfileLayout />}>
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/order-details" element={<OrderDetails />} />
                     <Route path="/wishlist" element={<WishList />} />
+                    
                     <Route path="/saved-address" element={<SavedAddress />} />
                   </Route>
                 </Routes>
@@ -151,6 +171,8 @@ function App() {
         </Router>
       </ContextProvider>
     </AuthProvider>
+    </PersistGate>
+    </Provider>
   );
 }
 

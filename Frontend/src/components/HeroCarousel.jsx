@@ -16,8 +16,11 @@ const HeroCarousel = () => {
     },
     {
       id: 3,
-      image:
-        "https://s3-alpha-sig.figma.com/img/50ec/2038/f2a549a8c48e7fb3c77719ba6f75ce15?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JyInbTgeEF1HQDDRQYMfIQPKzp028QZcyCogN9LaaXo3akw2kdKcWHZ7YuWYc3DSyC8Wnms9ENtS0znvO-EDO0QjbqpFcWcWnNokipoFit2lMQYf29JPgkTLIuVlXzJBNIAvKRFgw~bvPz02~Q1g25cK388sOINDWFkLXTJwyyy-c9Rch~Afxk5xabsarfXdRlK1qg768ZFIiDKTMBhjZBdhyVnZbmKRX0ZHS9q8PAjew9jPLVHc7gWRN7ei-tIB69Tuu3Z1TEpKWjDHU6I-THlRg9WZ6rLDLi2BoJttp~1pGI18jsN7AwevJhf-VOqnvxEDnMxLzvGU2SJrERmxfA__",
+      image:[
+        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/q/p/z/free-red-single-dandiya-aakarshana-original-imah6hehcbxsp34w.jpeg",
+        
+
+        ],
       title: "Discover the Latest Trends",
     },
   ];
@@ -81,7 +84,7 @@ const HeroCarousel = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain pt-10"
             />
             <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-4 sm:px-6">
               {/* Slide Title */}

@@ -2,135 +2,38 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa"; // Import heart icons
 import HeroCarousel from "../components/HeroCarousel";
-import nightdress1 from "../assets/images/nightdress1.jpg";
-import nightdress2 from "../assets/images/yellow kitkat front.jpg";
+import art1 from "../assets/images/Flower-Brooch.jpg";
+import art2 from "../assets/images/swg2.webp";
+
 
 const products = [
   {
     id: 1,
     name: "Men's Jacket",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+    image: art1,
     price: "$49.99",
-    category: "Women",
+    category: "Arts and Crafts",
   },
   {
     id: 2,
     name: "Loungewear",
-    image: nightdress1,
+    image: art1,
     price: "$79.99",
-    category: "Women",
+    category: "Arts and Crafts",
   },
   {
     id: 3,
     name: "Loungewear",
-    image: nightdress2,
+    image: art2,
     price: "$59.99",
-    category: "Women",
+    category: "Arts and Crafts",
   },
   {
     id: 4,
     name: "Men's Jeans",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+    image: art2,
     price: "$69.99",
-    category: "Women",
-  },
-  {
-    id: 5,
-    name: "Men's T-Shirt",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$29.99",
-    category: "Women",
-  },
-  {
-    id: 6,
-    name: "Men's Coat",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$89.99",
-    category: "Women",
-  },
-  {
-    id: 7,
-    name: "Women's Dress",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$99.99",
-    category: "Women",
-  },
-  {
-    id: 8,
-    name: "Women's Skirt",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$39.99",
-    category: "Women",
-  },
-  {
-    id: 9,
-    name: "Women's Blouse",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$49.99",
-    category: "Women",
-  },
-  {
-    id: 1,
-    name: "Men's Jacket",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$49.99",
-    category: "Women",
-  },
-  {
-    id: 2,
-    name: "Men's Sneakers",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$79.99",
-    category: "Women",
-  },
-  {
-    id: 3,
-    name: "Men's Hoodie",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    price: "$59.99",
-    category: "Women",
-  },
-  {
-    id: 4,
-    name: "Loungewear",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/w/r/s/free-red-single-dandiya-aakarshana-original-imah6hehd7wgz6wa.jpeg",
-    price: "$69.99",
-    category: "Women",
-  },
-  {
-    id: 5,
-    name: "Nightsuits",
-    image:
-      "https://img.fkcdn.com/image/xif0q/ethnic-set/f/g/a/xl-deals-toomley-original-imahyzfw4dkvdkwh.jpeg",
-    price: "$29.99",
-    category: "Women",
-  },
-  {
-    id: 6,
-    name: "Nightsuits",
-    image:
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/q/p/z/free-red-single-dandiya-aakarshana-original-imah6hehcbxsp34w.jpeg",
-    price: "$89.99",
-    category: "Women",
-  },
-  {
-    id: 7,
-    name: "Nightsuits",
-    image:
-      "https://img.fkcdn.com/image/xif0q/ethnic-set/5/y/r/xl-deals-toomley-original-imahyzfw9s3hshzv.jpeg",
-    price: "$99.99",
-    category: "Women",
+    category: "Arts and Crafts",
   },
 ];
 
@@ -177,19 +80,6 @@ const ProductSection = ({
           {/* <option value="Hoodie">Hoodie</option>
           <option value="Jeans">Jeans</option>
           <option value="T-Shirt">T-Shirt</option> */}
-        </select>
-
-        <select
-          className="px-4 py-2 rounded-lg border  border-red-900 bg-white text-red-900"
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
-        >
-          <option value="All">Hair Accessories</option>
-          <option value="Hairclips">Hair Clips</option>
-          <option value="Clipcards">Clip Cards</option>
-          <option value="Backclip">Back Clip</option>
-          <option value="Hairbands">Hair Bands</option>
-          <option value="Rings">Rings</option>
         </select>
       </div>
 
@@ -260,7 +150,7 @@ const ProductSection = ({
   );
 };
 
-export default function Women() {
+export default function ArtsandCrafts() {
   const [wishlist, setWishlist] = useState([]);
   const [filterCategory, setFilterCategory] = useState("All");
 
@@ -282,7 +172,7 @@ export default function Women() {
 
       {/* Women Section */}
       <ProductSection
-        category="Women"
+        category="Arts and Crafts"
         wishlist={wishlist}
         toggleWishlist={toggleWishlist}
         filterCategory={filterCategory}

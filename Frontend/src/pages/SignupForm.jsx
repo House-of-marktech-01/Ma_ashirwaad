@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { register } from "../Store/slices/authSlice";
+import { register,googleSignup } from "../Store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom"; 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,14 @@ const SignupForm = () => {
   });
  const dispatch = useDispatch()
  const navigate = useNavigate();
-
+ const handleGoogleLogin = async (response) => {
+    const res = await dispatch(googleSignup(response));
+    if (res.type === 'auth/googleSignup/fulfilled') {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }
  const handleChange = (e) => {
    const { name, value } = e.target;
    setFormData((prevData) => ({
@@ -107,6 +115,21 @@ const SignupForm = () => {
           >
             Sign Up
           </button>
+          <div className="mt-4 flex justify-center">
+                      <GoogleLogin
+                        onSuccess={(response) => {
+                          console.log(response);
+                          handleGoogleLogin(response);
+                        }}
+                        onError={() => {
+                          // console.log("Login failed");
+                        }}
+                        type="standard"
+                        text="continue_with"
+                        theme="dark"
+                        shape='square'
+                      />
+                    </div>
         </form>
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
