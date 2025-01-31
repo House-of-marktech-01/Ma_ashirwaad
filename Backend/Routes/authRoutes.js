@@ -14,6 +14,6 @@ router.post('/login', login);
 // Verify email
 router.post('/verify-email', verifyEmail);
 router.get('/getAllUsers', getAllUsers);
-router.get('/getUser/:id',authenticateToken, getUser);
+router.get('/getUser/:id', getUser);
 
 export default router;

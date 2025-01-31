@@ -1,4 +1,4 @@
-import Review from '../models/Review.js';
+import Review from '../Models/Review.js';
 import User from '../models/User.js';
 
 export const addReview = async (req, res) => {
@@ -20,7 +20,7 @@ export const getAllReviews = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
-};
+}
 
 export const getReviewsByUser = async (req, res) => {
     try {
