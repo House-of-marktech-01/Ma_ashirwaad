@@ -80,11 +80,11 @@ const CategoryCircle = () => {
               }`}
               onClick={() => handleCategoryClick(category)}
             >
-              <div className="w-36 h-36 rounded-full shadow-md bg-white flex items-center justify-center transition hover:scale-105">
+              <div className="w-36 h-36 rounded-full shadow-md bg-white flex items-center justify-center transition hover:scale-105 ">
                 <img
                   src={category.image}
                   alt={category.name}
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-full h-full object-contain rounded-full bg-cover"
                 />
               </div>
               <h3 className="text-gray-900 font-medium text-center text-sm">

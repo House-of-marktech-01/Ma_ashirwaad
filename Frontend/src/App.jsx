@@ -34,6 +34,7 @@ import { login } from "./Store/slices/authSlice";
 import ArtsandCrafts from "./pages/ArtsandCrafts";
 import { persistor, store } from "./Store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import ProductCard from "./pages/Wishlist";
 
 const blogs = [
   {
