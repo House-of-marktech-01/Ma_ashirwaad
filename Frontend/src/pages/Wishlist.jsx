@@ -1,121 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import long_kurti from "../assets/images/long_kurti.png";
 import Pagination from "../components/Pagination";
+import { getWishlist } from "../Store/slices/wishlistSlice";
 
 const WishList = () => {
-  const products = [
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Delivery by 15 Jan",
-      // deliveryDate: "Delivery by 15 Jan",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Out for delivery",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Delivered",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Cancelled",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Delivered",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Cancelled",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Delivery by 15 Jan",
-      // deliveryDate: "Delivery by 15 Jan",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Out for delivery",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Delivery by 15 Jan",
-      // deliveryDate: "Delivery by 15 Jan",
-    },
-    {
-      image: long_kurti,
-      title: "Yellow Long Kurti",
-      price: "Rs15.50",
-      discount: "Rs31.00",
-      size: "M",
-      sizes: ["S", "M", "L", "XL"],
-      quantity: 2,
-      // status: "Out for delivery",
-    },
-  ];
-  const menuItems = ["Remove"]
+  const dispatch = useDispatch();
+  const { wishlist, loading } = useSelector((state) => state.wishlist);
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  useEffect(() => {
+    dispatch(getWishlist());
+  }, [dispatch]);
 
-  const currentProducts = products.slice(
+  const totalPages = Math.ceil(wishlist.length / itemsPerPage);
+
+  const currentProducts = wishlist.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -131,6 +32,20 @@ const WishList = () => {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
+
+  const menuItems = ["Remove"];
+
+  if (!loading) {
+    return (
+      <div className="rounded shadow-md font-poppins pb-10">
+        <div className="primaryColorBg rounded-t font-poppins text-white p-4 text-center">
+          <h1 className="text-lg">Wishlist</h1>
+        </div>
+        <div className="text-center py-8">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="rounded shadow-md font-poppins pb-10">
@@ -138,18 +53,38 @@ const WishList = () => {
           <h1 className="text-lg">Wishlist</h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-7 gap-y-5 mt-8  sm:px-6 px-4">
-          {currentProducts.map((product, index) => (
-            <ProductCard menuItems={menuItems} key={index} product={product} />
-          ))}
-        </div>
+        {wishlist.length === 0 ? (
+          <div className="text-center py-8">
+            Your wishlist is empty
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-7 gap-y-5 mt-8 sm:px-6 px-4">
+            {currentProducts.map((product, index) => (
+              <ProductCard 
+                menuItems={menuItems} 
+                key={product._id} 
+                product={{
+                  image: product.images[0],
+                  title: product.name,
+                  price: `Rs${product.price}`,
+                  discount: product.originalPrice ? `Rs${product.originalPrice}` : null,
+                  size: product.size,
+                  sizes: product.specifications?.size || [],
+                  quantity: 1
+                }} 
+              />
+            ))}
+          </div>
+        )}
       </div>
-      <Pagination
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        disablePrevious={currentPage === 1}
-        disableNext={currentPage === totalPages}
-      />
+      {wishlist.length > itemsPerPage && (
+        <Pagination
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          disablePrevious={currentPage === 1}
+          disableNext={currentPage === totalPages}
+        />
+      )}
     </>
   );
 };

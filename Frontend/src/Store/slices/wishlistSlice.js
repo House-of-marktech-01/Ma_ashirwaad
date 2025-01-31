@@ -1,78 +1,43 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { BASE_URL } from "../../utils/url";
-import { toast } from "react-toastify";
+// Example action and reducer for wishlistSlice
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    loading: false,
-    error: null,
-    wishlist: [],
+  wishlist: [],
+  loading: false,
 };
 
-export const getWishlist = createAsyncThunk("wishlist/getWishlist", async (_, thunkAPI) => {
-    try {
-        const res = await axios.get(`${BASE_URL}/wishlist`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        });
-        return res.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
-    }
-});
-
-export const updateWishlist = createAsyncThunk("wishlist/updateWishlist", async (data, thunkAPI) => {
-    try {
-        const res = await axios.put(`${BASE_URL}/wishlist`, data, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        });
-        return res.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
-    }
-});
-
-export const wishlistSlice = createSlice({
-    name: "wishlist",
-    initialState,
-    reducers: {
-        clearWishlist: (state) => {
-            state.wishlist = [];
-        },
+const wishlistSlice = createSlice({
+  name: 'wishlist',
+  initialState,
+  reducers: {
+    getWishlist: (state) => {
+      state.loading = true;
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(getWishlist.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(getWishlist.fulfilled, (state, action) => {
-                state.loading = false;
-                state.wishlist = action.payload.products;
-            })
-            .addCase(getWishlist.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-                toast.error(action.payload?.message || "Error fetching wishlist");
-            })
-
-            .addCase(updateWishlist.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(updateWishlist.fulfilled, (state, action) => {
-                state.loading = false;
-                state.wishlist = action.payload.wishlist.products;
-                toast.success(action.payload.message);
-            })
-            .addCase(updateWishlist.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-                toast.error(action.payload?.message || "Error updating wishlist");
-            });
+    setWishlist: (state, action) => {
+      state.loading = false;
+      state.wishlist = action.payload;
     },
+    addToWishlist: (state, action) => {
+      const productExists = state.wishlist.some(
+        (product) => product.id === action.payload.id
+      );
+      if (!productExists) {
+        state.wishlist.push(action.payload);
+      }
+    },
+    removeFromWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter(
+        (product) => product.id !== action.payload.id
+      );
+    },
+  },
 });
 
-export const { clearWishlist } = wishlistSlice.actions;
+export const {
+  getWishlist,
+  setWishlist,
+  addToWishlist,
+  removeFromWishlist,
+} = wishlistSlice.actions;
+
 export default wishlistSlice.reducer;

@@ -7,6 +7,7 @@ import { logout } from "../Store/slices/authSlice.js";
 export default function Navbar() {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const cartState = useSelector((state) => state.cart);
+  const wishlistState = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,6 +15,8 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const cartItemsCount = cartState?.cart?.products?.length || 0;
+
+  const wishlistItemsCount = wishlistState?.cart?.products?.length || 0;
 
   // Handle cart notification
   useEffect(() => {
@@ -29,6 +32,10 @@ export default function Navbar() {
   useEffect(() => {
     setShowNotification(true);
   }, [cartItemsCount]);
+
+  useEffect(() => {
+    setShowNotification(true);
+  }, [wishlistItemsCount]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -48,6 +55,12 @@ export default function Navbar() {
       {showNotification && cartItemsCount > 0 && (
         <div className="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg transition-all duration-500 ease-in-out">
           Item added to cart successfully!
+        </div>
+      )}
+
+{showNotification && wishlistItemsCount > 0 && (
+        <div className="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg transition-all duration-500 ease-in-out">
+          Item added to wishlist successfully!
         </div>
       )}
 
@@ -92,6 +105,11 @@ export default function Navbar() {
                     </Link>
                     <Link to="/wishlist">
                       <Heart className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
+                      {wishlistItemsCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                          {wishlistItemsCount}
+                        </span>
+                      )}
                     </Link>
                     <Link to="/cart" className="relative">
                       <ShoppingBag className="h-5 w-5 cursor-pointer hover:text-gray-300 transition-colors" />
