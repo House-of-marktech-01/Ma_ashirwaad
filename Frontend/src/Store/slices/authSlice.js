@@ -8,67 +8,64 @@ const initialState = {
     error: null,
     user: {},
     isAuthenticated: false,
-}
+};
+
+const handleError = (error) => {
+    return error.response?.data || { message: "Server error. Please try again later." };
+};
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
     try {
         const res = await axios.post(`${BASE_URL}/auth/login`, data);
-        localStorage.setItem("token",res.data.token);  
-        localStorage.setItem("user",JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         return res.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(handleError(error));
     }
 });
 
 export const register = createAsyncThunk("auth/register", async (data, thunkAPI) => {
     try {
         const res = await axios.post(`${BASE_URL}/auth/register`, data);
-        localStorage.setItem("token",res.data.token);  
-        localStorage.setItem("user",JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         return res.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(handleError(error));
     }
 });
 
 export const googleSignup = createAsyncThunk("auth/googleSignup", async (response, thunkAPI) => {
     try {
         const res = await axios.post(`${BASE_URL}/auth/google-signup`, response);
-        localStorage.setItem("token",res.data.token);
-        localStorage.setItem("user",JSON.stringify(res.data.user));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         return res.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(handleError(error));
     }
 });
 
 export const verifyEmail = createAsyncThunk("auth/verifyEmail", async (data, thunkAPI) => {
-    console.log(data)
     try {
         const res = await axios.post(`${BASE_URL}/auth/verify-email`, data);
-        console.log(res)
         return res.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(handleError(error));
     }
 });
 
-export const getUser = createAsyncThunk(
-    "auth/getUser", 
-    async (id, thunkAPI) => {
-        try {  
-            const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
-            return res.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
-        }
+export const getUser = createAsyncThunk("auth/getUser", async (id, thunkAPI) => {
+    try {
+        const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        return res.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(handleError(error));
     }
-);
+});
 
 export const authSlice = createSlice({
     name: "auth",
@@ -89,28 +86,27 @@ export const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
-                state.isAuthenticated = true; 
+                state.isAuthenticated = true;
                 toast.success(action.payload.message);
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload.message);
+                toast.error(action.payload?.message || "Login failed. Please try again.");
             })
-
             .addCase(register.pending, (state) => {
                 state.loading = true;
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
-                state.isAuthenticated = true; 
+                state.isAuthenticated = true;
                 toast.success(action.payload.message);
             })
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload.message);
+                toast.error(action.payload?.message || "Registration failed. Please try again.");
             })
             .addCase(googleSignup.pending, (state) => {
                 state.loading = true;
@@ -118,15 +114,14 @@ export const authSlice = createSlice({
             .addCase(googleSignup.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload.user;
-                state.isAuthenticated = true; 
+                state.isAuthenticated = true;
                 toast.success(action.payload.message);
             })
             .addCase(googleSignup.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload.message);
+                toast.error(action.payload?.message || "Google signup failed. Please try again.");
             })
-
             .addCase(verifyEmail.pending, (state) => {
                 state.loading = true;
             })
@@ -137,9 +132,8 @@ export const authSlice = createSlice({
             .addCase(verifyEmail.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload.message);
+                toast.error(action.payload?.message || "Email verification failed.");
             })
-
             .addCase(getUser.pending, (state) => {
                 state.loading = true;
             })
@@ -150,7 +144,7 @@ export const authSlice = createSlice({
             .addCase(getUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            })
+            });
     },
 });
 

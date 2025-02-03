@@ -5,17 +5,19 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
 import wishlistReducer from "./slices/wishlistSlice";
+import reviewReducer from "./slices/reviewSlice";
 
 const rootReducer = combineReducers({
     auth: authReducer,
     cart: cartReducer,
     wishlist: wishlistReducer,
+    review: reviewReducer  // Added review reducer
 });
 
 const persistConfig = {
     key: "ma-aashirvad",
     storage,
-    whitelist: ["auth", "cart", "wishlist"],
+    whitelist: ["auth", "cart", "wishlist"], // Review data doesn't need to be persisted as it's fetched from server
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

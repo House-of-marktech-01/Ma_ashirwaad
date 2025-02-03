@@ -1,87 +1,88 @@
-import Review from '../models/Review.js';
-import User from '../models/User.js';
+import mongoose from 'mongoose';
+import Review from '../models/Review.js'; 
+import Product from '../models/Product.js';
 
 export const addReview = async (req, res) => {
     try {
-        const { product, rating, comment } = req.body;
-        const user = req.user.userId; // Assuming user ID is stored in req.user
-        const review = new Review({ user, product, rating, comment });
+        console.log("Received Review Data:", req.body); // Debugging Log
+
+        const { productId, rating, comment } = req.body;
+        const user = req.user?.userId; // Ensure userId is present
+
+        // Validate required fields
+        if (!productId || !rating || !comment) {
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+
+        // Validate MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            return res.status(400).json({ message: 'Invalid product ID' });
+        }
+
+        // Validate rating range
+        if (rating < 1 || rating > 5) {
+            return res.status(400).json({ message: 'Rating must be between 1 and 5' });
+        }
+
+        // Check if product exists
+        const productExists = await Product.findById(productId);
+        if (!productExists) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        // Check if user has already reviewed the product
+        const existingReview = await Review.findOne({ user, product: productId });
+        if (existingReview) {
+            return res.status(400).json({ message: 'You have already reviewed this product' });
+        }
+
+        // Create new review
+        const review = new Review({
+            user,
+            product: productId,
+            rating,
+            comment
+        });
+
         await review.save();
-        res.status(201).json({ message: 'Review added successfully', review });
+
+        // Populate user details before sending response
+        const populatedReview = await Review.findById(review._id).populate('user', 'name');
+
+        res.status(201).json({ 
+            message: 'Review added successfully', 
+            review: populatedReview 
+        });
+
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Add Review Error:', error); // Log error
+        res.status(500).json({ 
+            message: 'Internal server error', 
+            error: error.message 
+        });
     }
 };
 
-export const getAllReviews = async (req, res) => {
-    try {
-        const reviews = await Review.find().populate('user product');
-        res.status(200).json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
-export const getReviewsByUser = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const reviews = await Review.find({ user: userId }).populate('product');
-        res.status(200).json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
+// ✅ Improved `getReviewsByProduct` function
 export const getReviewsByProduct = async (req, res) => {
     try {
         const { productId } = req.params;
-        const reviews = await Review.find({ product: productId }).populate('user');
+
+        // Validate MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            return res.status(400).json({ message: 'Invalid product ID' });
+        }
+
+        const reviews = await Review.find({ product: productId })
+            .populate('user', 'name') // Populate user name only
+            .sort({ createdAt: -1 }); // Sort by newest first
+
         res.status(200).json(reviews);
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
-export const updateReview = async (req, res) => {
-    try {
-        const { reviewId } = req.params;
-        const { rating, comment } = req.body;
-        const review = await Review.findById(reviewId);
-        
-        if (!review) {
-            return res.status(404).json({ message: 'Review not found' });
-        }
-        
-        if (review.user.toString() !== req.user.userId) {
-            return res.status(403).json({ message: 'Not authorized to update this review' });
-        }
-
-        review.rating = rating;
-        review.comment = comment;
-        review.updateOne=Date.now();
-        await review.save();
-        res.status(200).json({ message: 'Review updated successfully', review });
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
-export const deleteReview = async (req, res) => {
-    try {
-        const { reviewId } = req.params;
-        const review = await Review.findById(reviewId);
-        
-        if (!review) {
-            return res.status(404).json({ message: 'Review not found' });
-        }
-        
-        if (review.user.toString() !== req.user.userId) {
-            return res.status(403).json({ message: 'Not authorized to delete this review' });
-        }
-
-        await Review.findByIdAndDelete(reviewId);
-        res.status(200).json({ message: 'Review deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Get Reviews Error:', error); // Log error
+        res.status(500).json({ 
+            message: 'Internal server error',
+            error: error.message 
+        });
     }
 };

@@ -12,18 +12,33 @@ const initialState = {
 };
 
 // Add a new review
-export const addReview = createAsyncThunk("review/addReview", async (data, thunkAPI) => {
-    try {
-        const res = await axios.post(`${BASE_URL}/review`, data, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        });
-        return res.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+export const addReview = createAsyncThunk(
+    "review/addReview",
+    async (data, thunkAPI) => {
+        try {
+            const response = await axios.post(`${BASE_URL}/review`, data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            // Return the entire response.data
+            return response.data;
+        } catch (error) {
+            // Properly handle different types of errors
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                return thunkAPI.rejectWithValue(error.response.data);
+            } else if (error.request) {
+                // The request was made but no response was received
+                return thunkAPI.rejectWithValue({ message: "No response from server" });
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                return thunkAPI.rejectWithValue({ message: error.message });
+            }
+        }
     }
-});
+);
 
 // Get all reviews
 export const getAllReviews = createAsyncThunk("review/getAllReviews", async (_, thunkAPI) => {
@@ -46,14 +61,25 @@ export const getReviewsByUser = createAsyncThunk("review/getReviewsByUser", asyn
 });
 
 // Get reviews by product
-export const getReviewsByProduct = createAsyncThunk("review/getReviewsByProduct", async (productId, thunkAPI) => {
-    try {
-        const res = await axios.get(`${BASE_URL}/review/product/${productId}`);
-        return res.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+export const getReviewsByProduct = createAsyncThunk(
+    "review/getReviewsByProduct",
+    async (productId, thunkAPI) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/review/product/${productId}`);
+            // Return the entire response.data
+            return response.data;
+        } catch (error) {
+            if (error.response) {
+                return thunkAPI.rejectWithValue(error.response.data);
+            } else if (error.request) {
+                return thunkAPI.rejectWithValue({ message: "No response from server" });
+            } else {
+                return thunkAPI.rejectWithValue({ message: error.message });
+            }
+        }
     }
-});
+);
+
 
 // Update review
 export const updateReview = createAsyncThunk("review/updateReview", async ({ reviewId, data }, thunkAPI) => {
@@ -98,11 +124,15 @@ export const reviewSlice = createSlice({
             // Add Review
             .addCase(addReview.pending, (state) => {
                 state.loading = true;
+                state.error = null;
             })
             .addCase(addReview.fulfilled, (state, action) => {
                 state.loading = false;
-                state.reviews.push(action.payload.review);
-                toast.success(action.payload.message);
+                // Handle both possible response formats
+                const review = action.payload.review || action.payload;
+                state.reviews.push(review);
+                state.productReviews.push(review);
+                toast.success(action.payload.message || "Review added successfully");
             })
             .addCase(addReview.rejected, (state, action) => {
                 state.loading = false;
@@ -110,45 +140,22 @@ export const reviewSlice = createSlice({
                 toast.error(action.payload?.message || "Error adding review");
             })
 
-            // Get All Reviews
-            .addCase(getAllReviews.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(getAllReviews.fulfilled, (state, action) => {
-                state.loading = false;
-                state.reviews = action.payload;
-            })
-            .addCase(getAllReviews.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-                toast.error(action.payload?.message || "Error fetching reviews");
-            })
-
-            // Get User Reviews
-            .addCase(getReviewsByUser.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(getReviewsByUser.fulfilled, (state, action) => {
-                state.loading = false;
-                state.userReviews = action.payload;
-            })
-            .addCase(getReviewsByUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-
             // Get Product Reviews
             .addCase(getReviewsByProduct.pending, (state) => {
                 state.loading = true;
+                state.error = null;
             })
             .addCase(getReviewsByProduct.fulfilled, (state, action) => {
                 state.loading = false;
+                // Handle the reviews array directly
                 state.productReviews = action.payload;
             })
             .addCase(getReviewsByProduct.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                toast.error(action.payload?.message || "Error fetching reviews");
             })
+            
 
             // Update Review
             .addCase(updateReview.pending, (state) => {

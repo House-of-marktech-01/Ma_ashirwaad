@@ -7,110 +7,178 @@ import { addToCart } from "../Store/slices/cartSlice";
 import downloadImage from "../assets/images/download.png";
 import downloadImage2 from "../assets/images/download2.png";
 import downloadImage3 from "../assets/images/download3.png";
-import { addToWishlist, removeFromWishlist } from "../Store/slices/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../Store/slices/wishlistSlice";
+import { addReview, getReviewsByProduct } from "../Store/slices/reviewSlice";
 
 
 const ProductDetail = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.wishlist);
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [userReview, setUserReview] = useState(null);
+
+  // Get reviews from Redux store
+  const { productReviews, loading } = useSelector((state) => state.review);
+  const { user } = useSelector((state) => state.auth);
 
   const product = {
     id: "1",
+
     name: "Yellow Long Kurti",
+
     price: 1550.5,
+
     originalPrice: 2000,
+
     images: [
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
     ],
+
     description: "A beautiful traditional kurti with intricate designs.",
+
     specifications: {
       material: "Cotton",
+
       color: ["Yellow", "Green", "Pink"],
+
       size: ["S", "M", "L", "XL"],
     },
-    
+
     id: "2",
+
     name: "Yellow Long ",
+
     price: 1550.5,
+
     originalPrice: 2000,
+
     images: [
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
     ],
 
     id: "3",
+
     name: "Yellow Long ",
+
     price: 1550.5,
+
     originalPrice: 2000,
+
     images: [
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
+
       "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
     ],
-  
+
     rating: 4.0,
+
     reviews: 10000,
+
     deliveryTime: "Fri, 7 Dec",
+
     customerReviews: [
       {
         name: "Aryan K.",
+
         rating: 4,
+
         comment:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
         verified: true,
       },
+
       {
         name: "Aryan K.",
+
         rating: 4,
+
         comment:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
         verified: true,
       },
+
       {
         name: "Aryan K.",
+
         rating: 4,
+
         comment:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
         verified: true,
       },
     ],
+
     relatedProducts: [
       {
         id: "2",
+
         name: "Hosiery Fit & Flare Printed Kurti",
+
         price: 1100,
+
         image:
           "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
+
       {
         id: "3",
+
         name: "Hosiery Fit & Flare Printed Kurti",
+
         price: 1100,
+
         image:
           "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
+
       {
         id: "4",
+
         name: "Hosiery Fit & Flare Printed Kurti",
+
         price: 1100,
+
         image:
           "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
+
       {
         id: "5",
+
         name: "Hosiery Fit & Flare Printed Kurti",
+
         price: 1100,
+
         image:
           "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
       },
@@ -125,7 +193,65 @@ const ProductDetail = () => {
     1: 2,
   };
 
-  const isInWishlist = wishlist.some(item => item._id === product.id);
+  useEffect(() => {
+    if (id) {
+      dispatch(getReviewsByProduct(id));
+    }
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (productReviews && user) {
+      const existingReview = productReviews.find(
+        (review) => review.user?._id === user._id
+      );
+      setUserReview(existingReview);
+    }
+  }, [productReviews, user]);
+
+   const handleEditReview = () => {
+    if (userReview) {  // Changed from 'if (view)' to 'if (userReview)'
+      setReviewRating(userReview.rating);
+      setReviewComment(userReview.comment);
+      setIsEditing(true);
+      setIsReviewModalOpen(true);
+    }
+  };
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!user) {
+      toast.error("Please login to submit a review");
+      return;
+    }
+
+    const reviewData = {
+      productId: id,
+      rating: reviewRating,
+      comment: reviewComment,
+      isEdit: isEditing
+    };
+
+    try {
+      await dispatch(addReview(reviewData)).unwrap();
+      toast.success(isEditing ? "Review updated successfully!" : "Review submitted successfully!");
+      
+      // Reset form and close modal
+      setReviewComment("");
+      setReviewRating(5);
+      setIsEditing(false);
+      setIsReviewModalOpen(false);
+
+      // Refresh reviews
+      dispatch(getReviewsByProduct(id));
+    } catch (error) {
+      console.error('Review Submission Error:', error);
+      toast.error(error.message || "Failed to submit review");
+    }
+  };
+
+
+  const isInWishlist = wishlist.some((item) => item._id === product.id);
 
   const handleWishlist = () => {
     if (isInWishlist) {
@@ -144,22 +270,22 @@ const ProductDetail = () => {
         name: product.name,
         price: product.price,
         originalPrice: product.originalPrice,
-        images: product.images
+        images: product.images,
       },
       quantity: quantity,
       size: selectedSize,
-      color: selectedColor
+      color: selectedColor,
     };
 
     dispatch(addToCart(cartItem))
       .unwrap()
       .then(() => {
         // You can show a success message here
-        alert('Product added to cart successfully!');
+        alert("Product added to cart successfully!");
       })
       .catch((error) => {
         // Handle any errors
-        console.error('Failed to add to cart:', error);
+        console.error("Failed to add to cart:", error);
       });
   };
 
@@ -208,8 +334,6 @@ const ProductDetail = () => {
       default:
         navigator.clipboard.writeText(url);
     }
-
-
   };
 
   return (
@@ -264,17 +388,19 @@ const ProductDetail = () => {
                 </span>
               </div>
             </div>
-            <button 
-    className="p-2" 
-    onClick={handleWishlist}
-    aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
-  >
-    <Heart 
-      className={`w-5 h-5 md:w-6 md:h-6 ${
-        isInWishlist ? "fill-current text-red-500" : ""
-      }`} 
-    />
-  </button>
+            <button
+              className="p-2"
+              onClick={handleWishlist}
+              aria-label={
+                isInWishlist ? "Remove from wishlist" : "Add to wishlist"
+              }
+            >
+              <Heart
+                className={`w-5 h-5 md:w-6 md:h-6 ${
+                  isInWishlist ? "fill-current text-red-500" : ""
+                }`}
+              />
+            </button>
           </div>
 
           {/* Rating Summary - Made more compact on mobile */}
@@ -361,8 +487,10 @@ const ProductDetail = () => {
                 +
               </button>
             </div>
-            <button className="flex-1 bg-red-700 text-white py-2 px-4 rounded" 
-             onClick={handleAddToCart}>
+            <button
+              className="flex-1 bg-red-700 text-white py-2 px-4 rounded"
+              onClick={handleAddToCart}
+            >
               Add to Bag
             </button>
             <button className="hidden sm:block border px-4 py-3 rounded">
@@ -434,23 +562,23 @@ const ProductDetail = () => {
         </div>
         <div>
           <h3 className="font-medium mb-1 md:mb-2">Average Rating</h3>
-          <div className="flex items-center gap-2">
-            <p className="text-xl md:text-2xl font-semibold">
-              {product.rating}
-            </p>
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`w-3 h-3 md:w-4 md:h-4 ${
-                    i < Math.floor(product.rating)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+          <div>
+  <label className="block text-sm font-medium mb-2">Rating</label>
+  <div className="flex gap-2">
+    {Array(5).fill(0).map((_, star) => ( // Use 'star' directly as the key
+      <button
+        key={star}  // Correct key here!
+        type="button"
+        onClick={() => setReviewRating(star + 1)} // Corrected: Set rating from 1 to 5
+        className="focus:outline-none"
+      >
+        <FaStar
+          className={`w-6 h-6 ${star + 1 <= reviewRating? "text-yellow-400": "text-gray-300"}`}
+        />
+      </button>
+    ))}
+  </div>
+</div>
         </div>
         <div>
           <h3 className="font-medium mb-1 md:mb-2">Customer Reviews</h3>
@@ -475,50 +603,160 @@ const ProductDetail = () => {
 
       {/* Customer Reviews - Stack on mobile */}
       <div className="mt-6 md:mt-8">
-        <h2 className="text-lg font-medium mb-3 md:mb-4">Customer Reviews</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {product.customerReviews.map((review, index) => (
-            <div key={index} className="border p-3 md:p-4 rounded-lg">
+        <div className="flex justify-between items-center mb-3 md:mb-4">
+          <h2 className="text-lg font-medium">Customer Reviews</h2>
+          {user && (
+            <>
+              {userReview ? (
+                <button
+                  onClick={handleEditReview}
+                  className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+                >
+                  Edit Your Review
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsReviewModalOpen(true)}
+                  className="bg-red-700 text-white px-4 py-2 rounded text-sm"
+                >
+                  Write a Review
+                </button>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Review Modal */}
+        {isReviewModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg w-full max-w-md">
+              <h3 className="text-lg font-medium mb-4">
+                {isEditing ? "Edit Your Review" : "Write a Review"}
+              </h3>
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                {/*... (review form fields)... */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Rating
+                  </label>
+                  <div className="flex gap-2">
+                    {Array(5)
+                      .fill(0)
+                      .map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setReviewRating(star)}
+                          className="focus:outline-none"
+                        >
+                          <FaStar
+                            className={`w-6 h-6 ${
+                              star <= reviewRating
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        </button>
+                      ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Comment
+                  </label>
+                  <textarea
+                    value={reviewComment}
+                    onChange={(e) => setReviewComment(e.target.value)}
+                    className="w-full border rounded-md p-2 h-32"
+                    placeholder="Write your review here..."
+                    required
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsReviewModalOpen(false);
+                      setIsEditing(false);
+                      setReviewComment(""); // Clear comment on cancel
+                      setReviewRating(5); // Reset rating on cancel
+                    }}
+                    className="px-4 py-2 border rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-red-700 text-white rounded-md"
+                    disabled={loading}
+                  >
+                    {loading
+                      ? "Submitting..."
+                      : isEditing
+                      ? "Update Review"
+                      : "Submit Review"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Display user's review first if it exists */}
+        {userReview && (
+          <div className="mb-6">
+            <h3 className="text-md font-medium mb-3">Your Review</h3>
+            <div className="border p-3 md:p-4 rounded-lg bg-gray-50">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="font-medium">{review.name}</p>
+                  <p className="font-medium">{user.name}</p>
                   <div className="flex mt-1">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <FaStar key={i} className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
+                    {[...Array(userReview.rating)].map((_, i) => (
+                      <FaStar
+                        key={i}
+                        className="w-3 h-3 md:w-4 md:h-4 text-yellow-400"
+                      />
                     ))}
                   </div>
                 </div>
-                {review.verified && (
-                  <span className="text-xs text-green-600">✓ Verified</span>
-                )}
+                <span className="text-xs text-green-600">✓ Verified</span>
               </div>
               <p className="text-xs md:text-sm text-gray-600 mt-2">
-                {review.comment}
+                {userReview.comment}
               </p>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        )}
 
-      {/* Similar Products - 2 columns on mobile, 4 on desktop */}
-      <div className="mt-8 md:mt-12">
-        <h2 className="text-lg font-medium mb-3 md:mb-4">View Similar</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {product.relatedProducts.map((item, index) => (
-            <div className="flex flex-col" key={index}>
-              <div className="h-full w-full rounded-lg">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-auto object-cover rounded-lg"
-                />
+        {/* Reviews Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          {productReviews
+            .filter((review) => review.user?._id !== user?._id)
+            .map((review, index) => (
+              <div key={index} className="border p-3 md:p-4 rounded-lg">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="font-medium">
+                      {review.user?.name || "Anonymous"}
+                    </p>
+                    <div className="flex mt-1">
+                      {[...Array(review.rating || 0)].map((_, i) => (
+                        <FaStar
+                          key={i}
+                          className="w-3 h-3 md:w-4 md:h-4 text-yellow-400"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {review.verified && (
+                    <span className="text-xs text-green-600">✓ Verified</span>
+                  )}
+                </div>
+                <p className="text-xs md:text-sm text-gray-600 mt-2">
+                  {review.comment || "No comment provided"}
+                </p>
               </div>
-              <div className="mt-2">
-                <h3 className="text-xs md:text-sm font-medium">{item.name}</h3>
-                <p className="text-xs md:text-sm">₹{item.price}</p>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
