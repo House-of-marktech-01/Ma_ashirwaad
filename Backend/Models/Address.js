@@ -9,7 +9,7 @@ const AddressSchema = new mongoose.Schema({
     }, 
     isPrimary: { type: Boolean, default: false }, 
     firstName: { type: String, required: true }, 
-    lastName: { type: String, required: true },
+    lastName: { type: String, required: false },
     addressLine1: { type: String, required: true }, 
     addressLine2: { type: String }, 
     landmark: { type: String }, 
