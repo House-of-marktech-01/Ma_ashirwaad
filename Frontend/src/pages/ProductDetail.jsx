@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaStar, FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import { Heart, Share2 } from "lucide-react";
 import { addToCart } from "../Store/slices/cartSlice";
+import { getProduct } from "../Store/slices/productSlice";
 import downloadImage from "../assets/images/download.png";
 import downloadImage2 from "../assets/images/download2.png";
 import downloadImage3 from "../assets/images/download3.png";
@@ -12,11 +13,12 @@ import {
   removeFromWishlist,
 } from "../Store/slices/wishlistSlice";
 import { addReview, getReviewsByProduct } from "../Store/slices/reviewSlice";
-
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.wishlist);
+  const { currentProduct, loading: productLoading } = useSelector((state) => state.product);
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -28,176 +30,23 @@ const ProductDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [userReview, setUserReview] = useState(null);
 
-  // Get reviews from Redux store
-  const { productReviews, loading } = useSelector((state) => state.review);
+  const { productReviews, loading: reviewLoading } = useSelector((state) => state.review);
   const { user } = useSelector((state) => state.auth);
-
-  const product = {
-    id: "1",
-
-    name: "Yellow Long Kurti",
-
-    price: 1550.5,
-
-    originalPrice: 2000,
-
-    images: [
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-    ],
-
-    description: "A beautiful traditional kurti with intricate designs.",
-
-    specifications: {
-      material: "Cotton",
-
-      color: ["Yellow", "Green", "Pink"],
-
-      size: ["S", "M", "L", "XL"],
-    },
-
-    id: "2",
-
-    name: "Yellow Long ",
-
-    price: 1550.5,
-
-    originalPrice: 2000,
-
-    images: [
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-    ],
-
-    id: "3",
-
-    name: "Yellow Long ",
-
-    price: 1550.5,
-
-    originalPrice: 2000,
-
-    images: [
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-
-      "https://img.fkcdn.com/image/xif0q/night-dress-nighty/x/u/g/free-blue-camelr-toomley-original-imahyzgrczujbszc.jpeg",
-    ],
-
-    rating: 4.0,
-
-    reviews: 10000,
-
-    deliveryTime: "Fri, 7 Dec",
-
-    customerReviews: [
-      {
-        name: "Aryan K.",
-
-        rating: 4,
-
-        comment:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-
-        verified: true,
-      },
-
-      {
-        name: "Aryan K.",
-
-        rating: 4,
-
-        comment:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-
-        verified: true,
-      },
-
-      {
-        name: "Aryan K.",
-
-        rating: 4,
-
-        comment:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-
-        verified: true,
-      },
-    ],
-
-    relatedProducts: [
-      {
-        id: "2",
-
-        name: "Hosiery Fit & Flare Printed Kurti",
-
-        price: 1100,
-
-        image:
-          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
-      },
-
-      {
-        id: "3",
-
-        name: "Hosiery Fit & Flare Printed Kurti",
-
-        price: 1100,
-
-        image:
-          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
-      },
-
-      {
-        id: "4",
-
-        name: "Hosiery Fit & Flare Printed Kurti",
-
-        price: 1100,
-
-        image:
-          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
-      },
-
-      {
-        id: "5",
-
-        name: "Hosiery Fit & Flare Printed Kurti",
-
-        price: 1100,
-
-        image:
-          "https://img.fkcdn.com/image/xif0q/night-dress-nighty/2/g/p/free-red-single-dandiya-aakarshana-original-imah6hehdnekxwvq.jpeg",
-      },
-    ],
-  };
-
-  const reviewPercentages = {
-    5: 65,
-    4: 20,
-    3: 10,
-    2: 3,
-    1: 2,
-  };
 
   useEffect(() => {
     if (id) {
+      dispatch(getProduct(id));
       dispatch(getReviewsByProduct(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (currentProduct) {
+      setSelectedImage(currentProduct.images[0]);
+      setSelectedSize(currentProduct.specifications?.size?.[0] || "");
+      setSelectedColor(currentProduct.specifications?.color?.[0] || "");
+    }
+  }, [currentProduct]);
 
   useEffect(() => {
     if (productReviews && user) {
@@ -208,12 +57,85 @@ const ProductDetail = () => {
     }
   }, [productReviews, user]);
 
-   const handleEditReview = () => {
-    if (userReview) {  // Changed from 'if (view)' to 'if (userReview)'
-      setReviewRating(userReview.rating);
-      setReviewComment(userReview.comment);
-      setIsEditing(true);
-      setIsReviewModalOpen(true);
+  if (productLoading) {
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  }
+
+  if (!currentProduct) {
+    return <div className="flex justify-center items-center min-h-screen">Product not found</div>;
+  }
+
+  const isInWishlist = wishlist.some((item) => item._id === currentProduct._id);
+
+  const handleWishlist = () => {
+    if (isInWishlist) {
+      dispatch(removeFromWishlist({ id: currentProduct._id }));
+    } else {
+      dispatch(addToWishlist(currentProduct));
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedSize || !selectedColor) {
+      toast.error("Please select size and color");
+      return;
+    }
+
+    const cartItem = {
+      product: {
+        _id: currentProduct._id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        originalPrice: currentProduct.originalPrice,
+        images: currentProduct.images,
+      },
+      quantity,
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    dispatch(addToCart(cartItem))
+      .unwrap()
+      .then(() => {
+        toast.success("Product added to cart successfully!");
+      })
+      .catch((error) => {
+        toast.error("Failed to add to cart");
+        console.error("Failed to add to cart:", error);
+      });
+  };
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+  };
+
+  const handleShare = (platform) => {
+    const url = window.location.href;
+    const text = `Check out this ${currentProduct.name}!`;
+
+    switch (platform) {
+      case "facebook":
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+        );
+        break;
+      case "twitter":
+        window.open(
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+        );
+        break;
+      case "pinterest":
+        window.open(
+          `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(text)}`
+        );
+        break;
+      default:
+        navigator.clipboard.writeText(url);
+        toast.success("Link copied to clipboard!");
     }
   };
 
@@ -236,13 +158,11 @@ const ProductDetail = () => {
       await dispatch(addReview(reviewData)).unwrap();
       toast.success(isEditing ? "Review updated successfully!" : "Review submitted successfully!");
       
-      // Reset form and close modal
       setReviewComment("");
       setReviewRating(5);
       setIsEditing(false);
       setIsReviewModalOpen(false);
 
-      // Refresh reviews
       dispatch(getReviewsByProduct(id));
     } catch (error) {
       console.error('Review Submission Error:', error);
@@ -250,97 +170,37 @@ const ProductDetail = () => {
     }
   };
 
-
-  const isInWishlist = wishlist.some((item) => item._id === product.id);
-
-  const handleWishlist = () => {
-    if (isInWishlist) {
-      // Remove from wishlist
-      dispatch(removeFromWishlist({ id: product.id }));
-    } else {
-      // Add to wishlist
-      dispatch(addToWishlist(product));
-    }
-  };
-
-  const handleAddToCart = () => {
-    const cartItem = {
-      product: {
-        _id: product.id,
-        name: product.name,
-        price: product.price,
-        originalPrice: product.originalPrice,
-        images: product.images,
-      },
-      quantity: quantity,
-      size: selectedSize,
-      color: selectedColor,
+  // Calculate review statistics
+  const calculateReviewPercentages = (reviews) => {
+    const total = reviews.length;
+    const percentages = {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0
     };
 
-    dispatch(addToCart(cartItem))
-      .unwrap()
-      .then(() => {
-        // You can show a success message here
-        alert("Product added to cart successfully!");
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error("Failed to add to cart:", error);
-      });
+    reviews.forEach(review => {
+      if (percentages.hasOwnProperty(review.rating)) {
+        percentages[review.rating]++;
+      }
+    });
+
+    Object.keys(percentages).forEach(rating => {
+      percentages[rating] = Math.round((percentages[rating] / total) * 100) || 0;
+    });
+
+    return percentages;
   };
 
-  useEffect(() => {
-    if (product) {
-      setSelectedImage(product.images[0]);
-      setSelectedSize(product.specifications.size[0]);
-      setSelectedColor(product.specifications.color[0]);
-    }
-  }, []);
-
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-  };
-
-  const handleSizeSelect = (size) => {
-    setSelectedSize(size);
-  };
-
-  const handleShare = (platform) => {
-    const url = window.location.href;
-    const text = `Check out this ${product.name}!`;
-
-    switch (platform) {
-      case "facebook":
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-            url
-          )}`
-        );
-        break;
-      case "twitter":
-        window.open(
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-            url
-          )}&text=${encodeURIComponent(text)}`
-        );
-        break;
-      case "pinterest":
-        window.open(
-          `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-            url
-          )}&description=${encodeURIComponent(text)}`
-        );
-        break;
-      default:
-        navigator.clipboard.writeText(url);
-    }
-  };
+  const reviewPercentages = calculateReviewPercentages(productReviews);
 
   return (
     <div className="max-w-screen-xl min-h-screen mx-auto px-4 py-4 pt-36 md:p-36 ">
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 py-2 md:py-3">
-        Home / Women / Yellow Short Kurti
+        Home / {currentProduct.category?.name || 'Products'} / {currentProduct.name}
       </div>
 
       {/* Main Content */}
@@ -350,13 +210,13 @@ const ProductDetail = () => {
           <div className="aspect[3/4] w-full">
             <img
               src={selectedImage}
-              alt={product.name}
+              alt={currentProduct.name}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
 
           <div className="grid grid-cols-4 gap-2 mt-4 md:mt-10">
-            {product.images.map((img, index) => (
+            {currentProduct.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
@@ -376,30 +236,28 @@ const ProductDetail = () => {
           <div className="flex justify-between items-start mb-2 md:mb-5">
             <div>
               <h1 className="text-xl md:text-2xl font-medium">
-                {product.name}
+                {currentProduct.name}
               </h1>
               <div className="flex flex-wrap items-center gap-2 mt-2">
-                <span className="text-lg md:text-xl">₹{product.price}</span>
-                <span className="text-gray-500 line-through text-sm">
-                  ₹{product.originalPrice}
-                </span>
-                <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
-                  -50%
-                </span>
+                <span className="text-lg md:text-xl">₹{currentProduct.price}</span>
+                {currentProduct.originalPrice && (
+                  <>
+                    <span className="text-gray-500 line-through text-sm">
+                      ₹{currentProduct.originalPrice}
+                    </span>
+                    <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
+                      -{Math.round(((currentProduct.originalPrice - currentProduct.price) / currentProduct.originalPrice) * 100)}%
+                    </span>
+                  </>
+                )}
               </div>
             </div>
             <button
               className="p-2"
               onClick={handleWishlist}
-              aria-label={
-                isInWishlist ? "Remove from wishlist" : "Add to wishlist"
-              }
+              aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
             >
-              <Heart
-                className={`w-5 h-5 md:w-6 md:h-6 ${
-                  isInWishlist ? "fill-current text-red-500" : ""
-                }`}
-              />
+              <Heart className={`w-5 h-5 md:w-6 md:h-6 ${isInWishlist ? "fill-current text-red-500" : ""}`} />
             </button>
           </div>
 

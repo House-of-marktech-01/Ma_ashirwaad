@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../utils/url";
 import { toast } from "react-toastify";
+import { createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
     loading: false,
@@ -48,6 +49,7 @@ export const productSlice = createSlice({
         clearProducts: (state) => {
             state.products = [];
             state.currentProduct = null;
+            state.categoryProduct = [];
         },
         clearCurrentProduct: (state) => {
             state.currentProduct = null;
@@ -86,15 +88,17 @@ export const productSlice = createSlice({
             // Add these new cases
             .addCase(getProductByCategory.pending, (state) => {
                 state.loading = true;
+                state.error = null;
             })
             .addCase(getProductByCategory.fulfilled, (state, action) => {
                 state.loading = false;
                 state.categoryProduct = action.payload;
+                state.error = null;
             })
             .addCase(getProductByCategory.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload?.message || "Error fetching products by category");
+                state.categoryProduct = [];
             });
     },
 });

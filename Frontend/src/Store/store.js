@@ -6,12 +6,17 @@ import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
 import wishlistReducer from "./slices/wishlistSlice";
 import reviewReducer from "./slices/reviewSlice";
+import productReducer from "./slices/reviewSlice";
+
+
 
 const rootReducer = combineReducers({
     auth: authReducer,
     cart: cartReducer,
     wishlist: wishlistReducer,
-    review: reviewReducer  // Added review reducer
+    review: reviewReducer, // Added review reducer
+    product : productReducer
+    
 });
 
 const persistConfig = {

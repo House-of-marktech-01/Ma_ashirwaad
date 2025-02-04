@@ -1,11 +1,10 @@
-<<<<<<< HEAD
+
 import mongoose from 'mongoose';
 import Review from '../models/Review.js'; 
-import Product from '../models/Product.js';
-=======
-import Review from '../Models/Review.js';
+import Product from '../Models/Product.js';
+// import Review from '../Models/review.js';
 import User from '../models/User.js';
->>>>>>> 5b772077880b6cb3d041b520ca349c83c2bf58ea
+
 
 export const addReview = async (req, res) => {
     try {
@@ -60,13 +59,13 @@ export const addReview = async (req, res) => {
         });
 
     } catch (error) {
-<<<<<<< HEAD
+ 
         console.error('Add Review Error:', error); // Log error
         res.status(500).json({ 
             message: 'Internal server error', 
             error: error.message 
         });
-=======
+
         res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -87,7 +86,7 @@ export const getReviewsByUser = async (req, res) => {
         res.status(200).json(reviews);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
->>>>>>> 5b772077880b6cb3d041b520ca349c83c2bf58ea
+        // 5b772077880b6cb3d041b520ca349c83c2bf58ea
     }
 };
 

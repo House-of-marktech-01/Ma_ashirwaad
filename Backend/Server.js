@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 import authRoutes from "./routes/authRoutes.js"
 import addressRoutes from './routes/addressRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
-import productRoutes from './routes/productRoutes.js'
+import productRoutes from './Routes/productRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import cartRoutes from './routes/cartRoutes.js' 
 import wishlistRoutes from './routes/wishlistRoutes.js'

@@ -8,11 +8,11 @@ import {
     getAllProducts,
     getProductByCategory,
     upload
-} from '../controllers/productController.js';
+} from '../Controllers/productController.js';
 
 const router = express.Router();
 
-router.post('/add', upload.fields([
+router.post('/', upload.fields([
     { name: 'mainImage', maxCount: 1 },
     { name: 'additionalImages', maxCount: 4 }
 ]), addProduct);
@@ -25,6 +25,6 @@ router.put('/edit/:id', upload.fields([
 router.delete('/delete/:id', deleteProduct);
 router.get('/:id', getProduct);
 router.get('/', getAllProducts);
-router.get('/category/:id', getProductByCategory);
+router.get('/category/category?id', getProductByCategory);
 
 export default router;

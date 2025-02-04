@@ -1,21 +1,17 @@
 import Product from '../Models/Product.js';
-
-
 import { uploadToCloudinary, deleteFromCloudinary } from '../Config/Cloudinary.js';
 import multer from 'multer';
 
-// Multer configuration for handling file uploads
+// Multer configuration
 const storage = multer.memoryStorage();
 export const upload = multer({
     storage: storage,
-    limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB limit
-    },
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image/')) {
             cb(null, true);
         } else {
-            cb(new Error('Not an image! Please upload only images.'), false);
+            cb(new Error('Not an image!'), false);
         }
     }
 });
@@ -23,17 +19,17 @@ export const upload = multer({
 // Add a new product with image upload
 export const addProduct = async (req, res) => {
     try {
-        const productData = JSON.parse(req.body.productData);
-        
-        // Upload main image
+        const productData = JSON.parse(req.body.productData); // Parsing JSON data
+
+        // Upload main image if available
         let mainImageUrl = '';
         if (req.files && req.files['mainImage']) {
             const mainImageBuffer = req.files['mainImage'][0].buffer;
             const mainImageBase64 = `data:${req.files['mainImage'][0].mimetype};base64,${mainImageBuffer.toString('base64')}`;
-            mainImageUrl = await uploadToCloudinary(mainImageBase64);
+            mainImageUrl = await uploadToCloudinary(mainImageBase64); // Upload to Cloudinary
         }
 
-        // Upload additional images
+        // Upload additional images if available
         let additionalImageUrls = [];
         if (req.files && req.files['additionalImages']) {
             for (const file of req.files['additionalImages']) {
@@ -44,7 +40,7 @@ export const addProduct = async (req, res) => {
             }
         }
 
-        // Create new product with image URLs
+        // Create and save the product to DB
         const product = new Product({
             ...productData,
             image: {
@@ -53,12 +49,13 @@ export const addProduct = async (req, res) => {
             }
         });
 
-        await product.save();
-        res.status(201).json(product);
+        await product.save(); // Save the product to DB
+        res.status(201).json(product); // Respond with the saved product
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message }); // Error handling
     }
 };
+
 
 // Edit product with image update
 export const editProduct = async (req, res) => {
@@ -162,8 +159,8 @@ export const getProduct = async (req, res) => {
 // Get all products
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find();
-        res.json(products);
+        const product = await Product.find();
+        res.json(product);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
