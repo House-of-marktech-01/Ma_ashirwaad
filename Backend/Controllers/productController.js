@@ -19,8 +19,9 @@ export const upload = multer({
 // Add a new product with image upload
 export const addProduct = async (req, res) => {
     try {
+        console.log(req.body.productData)
         const productData = JSON.parse(req.body.productData); // Parsing JSON data
-
+        // console.log("hii")
         // Upload main image if available
         let mainImageUrl = '';
         if (req.files && req.files['mainImage']) {
@@ -28,6 +29,7 @@ export const addProduct = async (req, res) => {
             const mainImageBase64 = `data:${req.files['mainImage'][0].mimetype};base64,${mainImageBuffer.toString('base64')}`;
             mainImageUrl = await uploadToCloudinary(mainImageBase64); // Upload to Cloudinary
         }
+        console.log(mainImageUrl)
 
         // Upload additional images if available
         let additionalImageUrls = [];
@@ -39,6 +41,7 @@ export const addProduct = async (req, res) => {
                 additionalImageUrls.push(imageUrl);
             }
         }
+        console.log(additionalImageUrls)
 
         // Create and save the product to DB
         const product = new Product({
