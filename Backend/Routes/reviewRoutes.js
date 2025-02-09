@@ -1,6 +1,6 @@
 import express from 'express';
 import { addReview,   getAllReviews,   getReviewsByProduct } from '../Controllers/reviewController.js';
-import {authenticateToken} from '../Middlewares/authMiddleware.js'; // Assuming you have an auth middleware
+import {authenticateToken} from '../Middlewares/AuthMiddleware.js'; // Assuming you have an auth middleware
 
 const router = express.Router();
 
