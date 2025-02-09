@@ -1,7 +1,7 @@
-import Order from '../models/Order.js';
+import Order from '../Models/Order.js';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
-import Cart from '../models/Cart.js';
+import Cart from '../Models/Cart.js';
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,

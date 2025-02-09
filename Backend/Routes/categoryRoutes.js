@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { addcategory, getCategory, getAllCategories, getCategoriesByFor, deleteCategory, editCategory } from '../controllers/categoryController.js';
+import { addcategory, getCategory, getAllCategories, getCategoriesByFor, deleteCategory, editCategory } from '../Controllers/categoryController.js';
 
 router.post('/add-category', addcategory);
 router.get('/category/:id', getCategory);

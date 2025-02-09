@@ -1,6 +1,6 @@
 import express from 'express';
 import { updateWishlist, getWishlist } from '../Controllers/wishlistController.js';
-import {authenticateToken} from '../middlewares/authMiddleware.js';// Assuming you have an auth middleware
+import {authenticateToken} from '../Middlewares/authMiddleware.js';// Assuming you have an auth middleware
 
 const router = express.Router();
 

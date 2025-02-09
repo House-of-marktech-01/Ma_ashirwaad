@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
-import User from '../models/User.js';
+import User from '../Models/User.js';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 

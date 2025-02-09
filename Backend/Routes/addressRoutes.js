@@ -1,5 +1,5 @@
 import express from 'express';
-import {authenticateToken} from '../middlewares/authMiddleware.js';
+import {authenticateToken} from '../Middlewares/authMiddleware.js';
 import { addAddress, getAddress, updateAddress, deleteAddress, getAddressById } from '../Controllers/addressController.js';
 const router = express.Router();
 

@@ -1,9 +1,9 @@
 
 import mongoose from 'mongoose';
-import Review from '../models/Review.js'; 
+import Review from '../Models/Review.js'; 
 import Product from '../Models/Product.js';
 // import Review from '../Models/review.js';
-import User from '../models/User.js';
+import User from '../Models/User.js';
 
 
 export const addReview = async (req, res) => {
