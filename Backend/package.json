@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "Server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "license": "MIT",
   "type": "module",
   "dependencies": {
