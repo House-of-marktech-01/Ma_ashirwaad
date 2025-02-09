@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "Server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon Server.js"
   },
   "license": "MIT",
   "type": "module",
