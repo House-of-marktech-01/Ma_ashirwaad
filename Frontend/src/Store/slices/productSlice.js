@@ -26,6 +26,7 @@ export const getProduct = createAsyncThunk("product/getProduct", async (id, thun
 export const getAllProducts = createAsyncThunk("product/getAllProducts", async (_, thunkAPI) => {
     try {
         const res = await axios.get(`${BASE_URL}/product`);
+        console.log(res.data);
         return res.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);

@@ -6,10 +6,9 @@ import { getCart, updateCart } from "../Store/slices/cartSlice.js";
 const Cart = () => {
   const dispatch = useDispatch();
   // Fix the selector to handle undefined state
-  const cartState = useSelector((state) => state.cart) || {};
-  const { cart, loading } = cartState;
+  const { cart, loading } = useSelector((state) => state.cart);
   const [openAccordion, setOpenAccordion] = React.useState(null);
-
+ console.log(cart)
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
@@ -84,7 +83,7 @@ const Cart = () => {
     (sum, item) => sum + (item.product?.price || 0) * (item.quantity || 0),
     0
   );
-  const shipping = 31;
+  const shipping = 49;
   const total = subtotal + shipping;
 
   return (
@@ -99,7 +98,7 @@ const Cart = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         {/* Cart Items */}
         <div className="md:col-span-2 space-y-4">
-          {cart.products.map((item) => (
+          {cart?.products?.map((item) => (
             <div key={item.product?._id || item._id} className="bg-white shadow-md rounded-lg overflow-hidden">
               <div className="p-4 flex items-start">
                 <img

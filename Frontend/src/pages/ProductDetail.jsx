@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaStar, FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import { Heart, Share2 } from "lucide-react";
 import { addToCart } from "../Store/slices/cartSlice";
-import { getProduct } from "../Store/slices/productSlice";
+import { getProduct,getAllProducts} from "../Store/slices/productSlice";
 import downloadImage from "../assets/images/download.png";
 import downloadImage2 from "../assets/images/download2.png";
 import downloadImage3 from "../assets/images/download3.png";
@@ -14,11 +14,26 @@ import {
 } from "../Store/slices/wishlistSlice";
 import { addReview, getReviewsByProduct } from "../Store/slices/reviewSlice";
 import { toast } from "react-toastify";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const CustomPrevArrow = ({ onClick }) => (
+  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer shadow-lg" onClick={onClick}>
+    <span className="text-3xl font-bold text-black">{"<"}</span>
+  </div>
+);
+
+const CustomNextArrow = ({ onClick }) => (
+  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer shadow-lg" onClick={onClick}>
+    <span className="text-3xl font-bold text-black">{">"}</span>
+  </div>
+);
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.wishlist);
-  const { currentProduct, loading: productLoading } = useSelector((state) => state.product);
+  const { products, loading } = useSelector((state) => state.product);
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -32,22 +47,29 @@ const ProductDetail = () => {
 
   const { productReviews, loading: reviewLoading } = useSelector((state) => state.review);
   const { user } = useSelector((state) => state.auth);
-
+  const currentProduct = products.find((product) => product._id === id);
+  const [images, setImages] = useState([]);
   useEffect(() => {
     if (id) {
-      dispatch(getProduct(id));
+      // dispatch(getProduct(id));
+      dispatch(getAllProducts());
       dispatch(getReviewsByProduct(id));
     }
   }, [id, dispatch]);
 
   useEffect(() => {
     if (currentProduct) {
-      setSelectedImage(currentProduct.images[0]);
+      const allImages = [currentProduct.image.main, ...currentProduct.image.additional];
+    setImages(allImages);
+    setSelectedImage(currentProduct.image.main);
       setSelectedSize(currentProduct.specifications?.size?.[0] || "");
       setSelectedColor(currentProduct.specifications?.color?.[0] || "");
     }
   }, [currentProduct]);
-
+  const handleImageSelect = (image) => {
+    setSelectedImage(image);
+  };
+console.log(currentProduct) 
   useEffect(() => {
     if (productReviews && user) {
       const existingReview = productReviews.find(
@@ -56,8 +78,8 @@ const ProductDetail = () => {
       setUserReview(existingReview);
     }
   }, [productReviews, user]);
-
-  if (productLoading) {
+console.log(productReviews)
+  if (loading) {
     return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
   }
 
@@ -85,9 +107,9 @@ const ProductDetail = () => {
       product: {
         _id: currentProduct._id,
         name: currentProduct.name,
-        price: currentProduct.price,
-        originalPrice: currentProduct.originalPrice,
-        images: currentProduct.images,
+        price: currentProduct.retailPrice,
+        originalPrice: currentProduct.mrp,
+        images:images,
       },
       quantity,
       size: selectedSize,
@@ -193,9 +215,27 @@ const ProductDetail = () => {
 
     return percentages;
   };
-
+const handleEditReview = () => {
+    // setReviewRating(userReview.rating);
+    // setReviewComment(userReview.comment);
+    // setIsEditing(true);
+    // setIsReviewModalOpen(true);
+}
   const reviewPercentages = calculateReviewPercentages(productReviews);
-
+  const sliderSettings = {
+    dots: false, // Disable dots
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4, // Show one image at a time
+    slidesToScroll: 1,
+    autoplay: true, // Enable auto-scrolling
+    autoplaySpeed: 1000, // Set the speed for auto-scrolling
+    pauseOnHover: true, // Pause auto-scrolling on hover
+    draggable: true, // Allow dragging to scroll through images
+    arrows: true, // Enable navigation arrows
+    prevArrow: <CustomPrevArrow />, // Custom previous arrow
+    nextArrow: <CustomNextArrow />, // Custom next arrow
+  };
   return (
     <div className="max-w-screen-xl min-h-screen mx-auto px-4 py-4 pt-36 md:p-36 ">
       {/* Breadcrumb */}
@@ -207,7 +247,7 @@ const ProductDetail = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         {/* Left side - Image Gallery */}
         <div className="space-y-2 md:space-y-4">
-          <div className="aspect[3/4] w-full">
+          <div className="w-full">
             <img
               src={selectedImage}
               alt={currentProduct.name}
@@ -215,19 +255,20 @@ const ProductDetail = () => {
             />
           </div>
 
-          <div className="grid grid-cols-4 gap-2 mt-4 md:mt-10">
-            {currentProduct.images.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Thumbnail ${index}`}
-                className={`w-full aspect-[3/4] object-cover rounded-md cursor-pointer ${
-                  selectedImage === img ? "ring-2 ring-black" : ""
-                }`}
-                onClick={() => setSelectedImage(img)}
-              />
+          <Slider {...sliderSettings}>
+            {images?.map((img, index) => (
+              <div key={index}>
+                <img
+                  src={img}
+                  alt={`Thumbnail ${index}`}
+                  className={`w-full aspect-[3/4] object-cover rounded-md cursor-pointer ${
+                    selectedImage === img ? "ring-2 ring-black" : ""
+                  }`}
+                  onClick={() => handleImageSelect(img)}
+                />
+              </div>
             ))}
-          </div>
+          </Slider>
         </div>
 
         {/* Right side - Product Details */}
@@ -238,15 +279,18 @@ const ProductDetail = () => {
               <h1 className="text-xl md:text-2xl font-medium">
                 {currentProduct.name}
               </h1>
+              <p className="text-sm md:text-base text-gray-500">
+                {currentProduct.description}
+              </p>
               <div className="flex flex-wrap items-center gap-2 mt-2">
-                <span className="text-lg md:text-xl">₹{currentProduct.price}</span>
-                {currentProduct.originalPrice && (
+                <span className="text-lg md:text-xl">₹{currentProduct.retailPrice}</span>
+                {currentProduct.mrp && (
                   <>
                     <span className="text-gray-500 line-through text-sm">
-                      ₹{currentProduct.originalPrice}
+                      ₹{currentProduct.mrp}
                     </span>
                     <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
-                      -{Math.round(((currentProduct.originalPrice - currentProduct.price) / currentProduct.originalPrice) * 100)}%
+                      -{Math.round(((currentProduct.mrp - currentProduct.retailPrice) / currentProduct.mrp) * 100)}%
                     </span>
                   </>
                 )}
@@ -268,7 +312,7 @@ const ProductDetail = () => {
                 <FaStar
                   key={i}
                   className={`w-3 h-3 md:w-4 md:h-4 ${
-                    i < Math.floor(product.rating)
+                    i < Math.floor(productReviews?.reduce((acc, review) => acc + review.rating, 0) / productReviews?.length)
                       ? "text-yellow-400"
                       : "text-gray-300"
                   }`}
@@ -276,7 +320,7 @@ const ProductDetail = () => {
               ))}
             </div>
             <span className="text-xs md:text-sm text-gray-500">
-              ({product.reviews} reviews)
+              ({productReviews?.length||0} reviews)
             </span>
           </div>
 
@@ -284,14 +328,14 @@ const ProductDetail = () => {
           <div className="space-y-1 md:space-y-2">
             <p className="font-medium">Color: {selectedColor}</p>
             <div className="flex gap-2">
-              {product.specifications.color.map((color) => (
+              {currentProduct?.attributes?.color.map((color) => (
                 <button
                   key={color}
                   onClick={() => handleColorSelect(color)}
                   className={`w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${
                     selectedColor === color
-                      ? "border-black"
-                      : "border-transparent"
+                      ? "border-2 border-black"
+                      : "border border-black border-opacity-20"
                   }`}
                   style={{
                     backgroundColor: color.toLowerCase(),
@@ -299,9 +343,28 @@ const ProductDetail = () => {
                       selectedColor === color
                         ? "0 0 0 2px white, 0 0 0 4px black"
                         : "none",
+                    position: 'relative'
                   }}
                   aria-label={`Select ${color} color`}
-                />
+                >
+                  <span
+                    className="absolute text-xs text-white"
+                    style={{
+                      bottom: '100%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      visibility: selectedColor === color ? 'visible' : 'hidden',
+                      opacity: selectedColor === color ? 1 : 0,
+                      transition: 'opacity 0.2s',
+                      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                      padding: '2px 4px',
+                      borderRadius: '4px',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {color}
+                  </span>
+                </button>
               ))}
             </div>
           </div>
@@ -310,7 +373,7 @@ const ProductDetail = () => {
           <div className="space-y-1 md:space-y-2">
             <p className="font-medium">Size: {selectedSize}</p>
             <div className="flex gap-2">
-              {product.specifications.size.map((size) => (
+              {currentProduct?.attributes?.size?.map((size) => (
                 <button
                   key={size}
                   onClick={() => handleSizeSelect(size)}
@@ -320,7 +383,7 @@ const ProductDetail = () => {
                       : "border-gray-300 hover:border-black"
                   }`}
                 >
-                  {size}
+                  {size==='free'?'Free':size}
                 </button>
               ))}
             </div>
@@ -358,7 +421,7 @@ const ProductDetail = () => {
 
           {/* Delivery Information - Adjusted spacing */}
           <div className="space-y-2 md:space-y-4 border-t pt-4">
-            <h3 className="font-medium">Get it on {product.deliveryTime}</h3>
+            <h3 className="font-medium">Get it on {currentProduct?.deliveryTime||0}</h3>
             <p className="text-xs md:text-sm text-gray-600">
               Pay on delivery available
             </p>
@@ -415,7 +478,7 @@ const ProductDetail = () => {
         <div>
           <h3 className="font-medium mb-1 md:mb-2">Total Reviews</h3>
           <p className="text-xl md:text-2xl font-semibold">
-            {product.reviews.toLocaleString()}
+            {currentProduct?.reviews?.toLocaleString()}
           </p>
         </div>
         <div>

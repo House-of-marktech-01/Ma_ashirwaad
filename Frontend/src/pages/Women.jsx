@@ -21,7 +21,7 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
 
       <div className="relative w-80 h-80">
         <img
-          src={product.image?.mainImage || '/placeholder-image.jpg'}
+          src={product.image?.main || '/placeholder-image.jpg'}
           alt={product.name}
           className="w-full h-full object-contain bg-gray-50"
         />
@@ -37,7 +37,24 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
         </div>
         <div className="mt-2 text-sm text-center">
           <p>Available Sizes: {product.attributes?.size.join(", ")}</p>
-          <p>Colors: {product.attributes?.color.join(", ")}</p>
+          <p>Colors: 
+          <span className=""> {/* Align buttons to the left */}
+              {product?.attributes?.color.map((color) => (
+                  <button
+                    key={color}
+                    className={`w-4 h-4 md:w-6 md:h-6 rounded-full border-2 ${ // Adjusted size
+                      color.toLowerCase() === 'white' ? 'border-gray-400' : 'border-transparent'
+                    }`}
+                    style={{
+                      backgroundColor: color.toLowerCase(),
+                      position: 'relative'
+                    }}
+                    aria-label={`Select ${color} color`}
+                  >
+                  </button>
+                ))}
+            </span>
+          </p>
         </div>
         <Link
           to={`/product/${product._id}`}
@@ -52,12 +69,8 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
 
 export default function Women() {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => ({
-    products: state.product.products || [],
-    loading: state.product.loading,
-    error: state.product.error
-  }));
-
+  const { products, loading, error } = useSelector((state) => state.product);
+console.log(products)
   const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
@@ -90,7 +103,7 @@ export default function Women() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
-            {products.map((product) => (
+            {products?.map((product) => (
               <ProductCard
                 key={product?._id}
                 product={product}

@@ -12,6 +12,7 @@ import wishlistRoutes from './routes/wishlistRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import connectDB from "./Config/db.js"
 import bodyParser from "body-parser"
+import morgan from "morgan"
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors({origin: '*', // Replace with your frontend URL
   credentials: true}));
 
 app.use(bodyParser.json());
+app.use(morgan('tiny'));
 connectDB();
 
 

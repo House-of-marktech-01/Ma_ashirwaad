@@ -4,22 +4,18 @@ const HeroCarousel = () => {
   const slides = [
     {
       id: 1,
-      image:
-        "https://s3-alpha-sig.figma.com/img/5e0e/24aa/8a88ba4dec037f1f95362d28c74476a4?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Vs7RDqCnjk4q9Lx8pM2F8mFdw45w4pWN7lSlD9sgoaPW-9noP-b2TnFC-6~PZVQE~6rvGiHUh3pLDPX7ilIbHRVjq19GQSxYgARyhUmEPB1gq6pDD9BNI2Xm8FyDZcSF9dZRQUy5NZunsHcUkW59-5kPUwbdm9Oy0NrMQLpij7ecik9WRAQlFS59SulQth74bup5Zs-iUre0ArFVdZQWm55hajeTOLYq0VSveNaJZ6OP4~mJKYNq32JWBTrfNgJ3MJeikNU23SliwMx-SXW-uxSmzv6QFVmJx8SszfqMPDTrwHpEc~R1e4Bwp5GVHYPlOzmSELkPcxiUKAkDgrxDnQ__",
+      image:"https://s3-alpha-sig.figma.com/img/5e0e/24aa/8a88ba4dec037f1f95362d28c74476a4?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XA6sk7IRPwU-czCbr44tg5i7LgC~JKWl~V1TE1ABz3eFJAvLbWH3zPyLO5n4niZOaFmvAAbPRMyCaDMjitHdHqih~JKuHTm-0cCEMrfO4aqa7EmgLMZfFKSyHla3MbmBBEzzUyjbqxw0SQhYyUnsaRxaJk~76lHh7O6A9lMD8UNqfNEqnlhpXp75dhtV4yRfPVKlyhEs6H~CU0Jz-XcYjGOX49LGaf63Lv~DROExR-gVN4VYgRaGcmptKyzVxSp102vhP2TisUkf1N5ZdoSxKq8HvVwbFEtuUNGdabgAUn8dIDEOHoUNHWn3B1x8~O2-dIK1yNCed9fu9imUSrQiwA__",
       title: "Premium Quality Wardrobe Picks",
     },
     {
       id: 2,
-      image:
-        "https://s3-alpha-sig.figma.com/img/f7c9/0855/4e02df6eef8e23963217d8677a2340e0?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OZJonI51TjfHTBx1ae5KXSSUkfMiXec9zB45xZASdmoZ2aD7zG7gsBjeKfJgCececCHDlnoYL6Q8cT3Il9oM~SSbPrmBGt0TSG5Ktd7k9R-8vfZKuDO1bhThzojDRNM~~VNnPN43CMF8MOgSyR4qcVS7iM6txhkrdn4jIFqazVQ7uowOzdWubIU18KWXeHYnn2-5~NWuGBKS-l7GKu7WPHO3N8cYmHe3ozrnAN18jJ3ftXTnJVoNDmr-XM4f4Z9PGtqjlQFn-WnbOPehF0~CRmKKhDg1tcjjRhjRrRXrpu8Y1U0eVAEFv8QtIMBE5ukDZcrE2gQfabFByGAuMhmn8w__",
+      image:"https://s3-alpha-sig.figma.com/img/50ec/2038/f2a549a8c48e7fb3c77719ba6f75ce15?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cC0WeecCj1kxw-qirdAYi8iBWazd20zDqaCNpV3HCU1aAPnTqsCGN6Rc2DnRcigxX5szqCKzDcUdcRttjZo9lmNpppBNf70rPOjLIDB3a1Ra0cOUwEuZxmz7E5cznOhq~nd6M-7mqKQW8izVYj9nkLqjNfjTeNTp-hCHUC~x8pmJLYSa1PSRMv57M8fm21Jk5OvbEpI6cNbkoxFlENYSmA-nWSppSmnR~etnqsVJxHwpzSvPlpdfYEvgnFV5nO9YsZ0wHSv6bHI5MEIwm3Kou1h7TOwzKD2l8JVTjuLj5R1u2aMHrWaeerJELfM10--rTOXV5q-ELh~4CpzItcQuow__",
       title: "Elevate Your Style with Elegance",
     },
     {
       id: 3,
       image:[
-        "https://img.fkcdn.com/image/xif0q/night-dress-nighty/q/p/z/free-red-single-dandiya-aakarshana-original-imah6hehcbxsp34w.jpeg",
-        
-
+        "https://s3-alpha-sig.figma.com/img/f7c9/0855/4e02df6eef8e23963217d8677a2340e0?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=K384KJsj1UXy2oLQ9t9EcUSTnONC0lkVP0PqHVi5hCjG3Jds76B07VB9z8jdIkvqUDMyi8knQUcdk4p4WHOzr9ORNbLpUUElJ2KPg0ql4Ui3AbsxszYcN7NiHuZPe79WtJt4--hB3orCYoCfhR5VNPixRPIsgHZJOVrljFm7lp~-oHLTglPm4zAe0TThBDTV4H2cZV3fzo21TwflWWHLg3OQcw8WDPqT8O6Lb2uLpnij3~AtapLZEtdGJfRhCTsiPAttKcvim09S5y6B2EZlVy4qXEJ5Vb9BUvmKbu0Izb8veRUg2F92UhWRgmVA2WbMxrIaIiq3JMzdHOd6V1giYQ__",
         ],
       title: "Discover the Latest Trends",
     },

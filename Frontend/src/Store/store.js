@@ -6,8 +6,7 @@ import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
 import wishlistReducer from "./slices/wishlistSlice";
 import reviewReducer from "./slices/reviewSlice";
-import productReducer from "./slices/reviewSlice";
-
+import productReducer from "./slices/productSlice";
 
 
 const rootReducer = combineReducers({
@@ -22,7 +21,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: "ma-aashirvad",
     storage,
-    whitelist: ["auth", "cart", "wishlist"], // Review data doesn't need to be persisted as it's fetched from server
+    whitelist: ["auth", "cart", "wishlist","product"], // Review data doesn't need to be persisted as it's fetched from server
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
