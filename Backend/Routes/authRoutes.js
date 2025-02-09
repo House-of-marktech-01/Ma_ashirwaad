@@ -1,7 +1,7 @@
 // server/routes/authRoutes.js
 import express from 'express';
 const router = express.Router();
-import {authenticateToken} from '../Middlewares/AuthMiddleware.js';
+import {authenticateToken} from '../Middlewares/Authmiddleware.js';
 import {register,googleSignup,login,verifyEmail,getAllUsers,getUser} from '../Controllers/authController.js';
 
 // Register Route
