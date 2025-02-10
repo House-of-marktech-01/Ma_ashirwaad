@@ -4,12 +4,13 @@ import User from '../Models/User.js';
 export const getWishlist = async (req, res) => {
     try {
         const wishlist = await Wishlist.findOne({ user: req.user.userId }).populate('products');
-        if (!wishlist.products.some((id) => id.toString() === productId)) {
-            wishlist.products.push(productId);
-            await wishlist.save();
-            return res.status(200).json({ message: 'Product added to wishlist', wishlist });
-        }
-        
+        // console.log(wishlist);  
+        // if (!wishlist.products.some((id) => id.toString() === productId)) {
+        //     wishlist.products.push(productId);
+        //     await wishlist.save();
+        //     return res.status(200).json({ message: 'Product added to wishlist', wishlist });
+        // }
+        // console.log(wishlist);
         res.status(200).json(wishlist);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });

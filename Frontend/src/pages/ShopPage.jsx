@@ -102,22 +102,38 @@ export default function ShopPage() {
     <div className="bg-gray-100 min-h-screen ">
       {/* HeroCarousel is now only rendered once here */}
       <div className="pt-24">
-        <HeroCarousel />
+        {/* <HeroCarousel /> */}
       </div>
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
+          Shop Collections
+        </h1>
+      </div>
+      {/* <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
+          Shop Collections
+        </h1> */}
+      {/* Coming Soon Section */}
+      <div className="text-center my-20 py-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+          <h1 className="text-6xl font-extrabold text-white drop-shadow-lg">
+            Coming Soon
+          </h1>
+          <p className="text-xl text-white mt-4">
+            Stay tuned for our upcoming products!
+          </p>
+        </div>
       {/* Men Section */}
-      <ProductSection
+      {/* <ProductSection
         category="Men"
         wishlist={wishlist}
         toggleWishlist={toggleWishlist}
-      />
-      
+      /> */}
+
       {/* Women Section */}
-      <ProductSection
+      {/* <ProductSection
         category="Women"
         wishlist={wishlist}
         toggleWishlist={toggleWishlist}
-      />
+      /> */}
     </div>
   );
 }

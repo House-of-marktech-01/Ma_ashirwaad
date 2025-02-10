@@ -162,7 +162,7 @@ export const getProduct = async (req, res) => {
 // Get all products
 export const getAllProducts = async (req, res) => {
     try {
-        const product = await Product.find();
+        const product = await Product.find().populate('category').sort({ createdAt: -1 });
         res.json(product);
     } catch (error) {
         res.status(400).json({ message: error.message });

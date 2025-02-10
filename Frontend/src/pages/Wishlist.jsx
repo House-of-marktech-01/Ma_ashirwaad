@@ -6,20 +6,23 @@ import { getWishlist } from "../Store/slices/wishlistSlice";
 
 const WishList = () => {
   const dispatch = useDispatch();
-  const { wishlist, loading } = useSelector((state) => state.wishlist);
+  const { wishlist } = useSelector((state) => state.wishlist);
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [loading, setLoading] = useState(false);
+  console.log(wishlist);
+  const getItem= async () => {
+    setLoading(true);
+    await dispatch(getWishlist());
+    setLoading(false);
+  }
   useEffect(() => {
-    dispatch(getWishlist());
+    getItem();
   }, [dispatch]);
 
-  const totalPages = Math.ceil(wishlist.length / itemsPerPage);
+  const totalPages = Math.ceil(wishlist?.length / itemsPerPage);
 
-  const currentProducts = wishlist.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const currentProducts = Array.isArray(wishlist) ? wishlist : [];
 
   const handlePrevious = () => {
     if (currentPage > 1) {
@@ -53,13 +56,13 @@ const WishList = () => {
           <h1 className="text-lg">Wishlist</h1>
         </div>
 
-        {wishlist.length === 0 ? (
+        {wishlist?.length === 0 ? (
           <div className="text-center py-8">
             Your wishlist is empty
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-7 gap-y-5 mt-8 sm:px-6 px-4">
-            {currentProducts.map((product, index) => (
+            {currentProducts?.map((product, index) => (
               <ProductCard 
                 menuItems={menuItems} 
                 key={product._id} 
@@ -77,7 +80,7 @@ const WishList = () => {
           </div>
         )}
       </div>
-      {wishlist.length > itemsPerPage && (
+      {wishlist?.length > itemsPerPage && (
         <Pagination
           onPrevious={handlePrevious}
           onNext={handleNext}

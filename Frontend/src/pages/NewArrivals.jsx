@@ -52,8 +52,17 @@ const NewArrivals = () => {
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
           New Arrivals
         </h1>
+        {/* Coming Soon Section */}
+        <div className="text-center my-20 py-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+          <h1 className="text-6xl font-extrabold text-white drop-shadow-lg">
+            Coming Soon
+          </h1>
+          <p className="text-xl text-white mt-4">
+            Stay tuned for our upcoming products!
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {newArrivals.map((product) => (
             <div
               key={product.id}
@@ -73,7 +82,6 @@ const NewArrivals = () => {
                 <p className="text-lg font-semibold text-gray-900 mt-2">{product.price}</p>
               </div>
 
-              {/* Hover Buttons */}
               <div
                 className={`absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
               >
@@ -94,7 +102,7 @@ const NewArrivals = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

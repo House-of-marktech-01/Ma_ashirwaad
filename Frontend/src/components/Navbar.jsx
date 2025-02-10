@@ -151,10 +151,10 @@ export default function Navbar() {
                   Home
                 </Link>
                 <Link to="/women" className="text-sm text-white hover:text-gray-300 transition-colors">
-                  Women
+                  Fashion
                 </Link>
                 <Link to="/artsandcrafts" className="text-sm text-white hover:text-gray-300 transition-colors">
-                  Arts and Crafts
+                  Decoration
                 </Link>
                 <Link to="/shop" className="text-sm text-white hover:text-gray-300 transition-colors">
                   Shop

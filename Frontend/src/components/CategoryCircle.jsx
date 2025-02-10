@@ -10,38 +10,38 @@ const CategoryCircle = () => {
 
   const categories = [
     {
-      name: "Night Suits",
+      name: "Fashion",
       image: nightdress1,
       path: "/women",
-      filterValue: "Nightsuits"
+      filterValue: "All"
     },
     {
-      name: "Arts and Crafts",
+      name: "Decorations",
       image: art1,
       path: "/artsandcrafts",
-      filterValue: "ArtsAndCrafts"
+      filterValue: "All"
     },
     {
       name: "Hair Accessories",
       image: hairclip,
-      path: "/women",
-      filterValue: "Hairclips"
+      path: "",
+      filterValue: ""
     },
     {
       name: "Loungewear",
-      image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
-      path: "/women",
-      filterValue: "Loungewear"
-    },
-    {
-      name: "ComingSoon",
       image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
       path: "",
       filterValue: ""
     },
     {
-      name: "ComingSoon",
-      image: "https://img.fkcdn.com/image/xif0q/night-dress-nighty/e/b/6/xxl-madhya-urban-d-cor-original-imagp4jna8bghrsy.jpeg",
+      name: "Men Collection",
+      image:"https://s3-alpha-sig.figma.com/img/28c7/5265/836787e5bbe2a4630d33f0d1e2b6e126?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DskvrlNDcGNFs20v1uTj8hkSPPYKLa8NBLKDue0REoiZxyJWwhI-RG0QVrgVeYm7KHH~FBI1yashI3gpDs9BekkMQsUW6sWFkN8DlqUZM8qE1FUvnYZTKj-M3mGl6PvfROvyjVztoVRC23slXwseuVsC0pPqDzUKNRIMAkqbkg2ieokcmYznorO-aTcAXO3FKOth9nvhjYqRqC9piK4IB5XaNU0caBWYxmtSPVgn2441AV9Iaacv8~IFh4hGF0QkXVMJeyqOond5geB1~eWEGoiM2XhaOF4cU0CgBJcf30gAzWfgodFkC7gfYi0aWje~02s1TJXhY-At~ozo045JpA__",
+      path: "",
+      filterValue: ""
+    },
+    {
+      name: "New Arrivals", 
+      image:"https://s3-alpha-sig.figma.com/img/9662/436c/8d09a81342202b22ffb289fa1510a726?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=WHXzfUIlha4PSnGRD8eV5N0WMPvkMajRChkUJH8xfgGKjBq~HXq9XABKC7EB~oeKirM~ysVJXgH-tT56fQBd25iTClUBJh0bMctGBkp8EivR0CIcfmoL8aaN3Ld1VQKC4N2PlBoN190bInc54PQ3wxB64xuAXCVCC4Se79-D20qOVMOOziyTmqlqmokqUdSQ3FltPDgkUNjWUoT989djKumxagHuKFdoxX4586w~xCpPbX8kFZWM~FzzPRFEY~rlXQhLh2Qca1sFuy0C6xFbAtcv~r6gy1uIea6tHBLtrZQ-Kz2R3QfLXmxKBkuPKSZLmcpLSwEZdd9ZCmKAYNa9MQ__",
       path: "",
       filterValue: ""
     },
@@ -76,7 +76,7 @@ const CategoryCircle = () => {
             <div
               key={index}
               className={`flex flex-col items-center space-y-2 flex-shrink-0 ${
-                category.name !== "ComingSoon" ? "cursor-pointer" : "cursor-not-allowed opacity-70"
+                category.path !== "" ? "cursor-pointer" : "cursor-not-allowed opacity-70"
               }`}
               onClick={() => handleCategoryClick(category)}
             >

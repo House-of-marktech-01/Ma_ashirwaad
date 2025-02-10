@@ -90,11 +90,8 @@ console.log(productReviews)
   const isInWishlist = wishlist.some((item) => item._id === currentProduct._id);
 
   const handleWishlist = () => {
-    if (isInWishlist) {
-      dispatch(removeFromWishlist({ id: currentProduct._id }));
-    } else {
-      dispatch(addToWishlist(currentProduct));
-    }
+    const product = currentProduct;
+    dispatch(addToWishlist(product));
   };
 
   const handleAddToCart = () => {

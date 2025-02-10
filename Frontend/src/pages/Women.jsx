@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Heart } from 'lucide-react';
 import HeroCarousel from '../components/HeroCarousel';
 import { getAllProducts } from '../Store/slices/productSlice';
+import { addToWishlist, getWishlist } from '../Store/slices/wishlistSlice';
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
   if (!product) return null;
@@ -69,20 +71,27 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
 
 export default function Women() {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => state.product);
+  let { products, loading, error } = useSelector((state) => state.product);
 console.log(products)
   const [wishlist, setWishlist] = useState([]);
-
+  products=products.filter((product) => product.category.for==='Women');
   useEffect(() => {
     dispatch(getAllProducts());  // Fetch all products on mount
   }, [dispatch]);
 
   const toggleWishlist = (productId) => {
     if (!productId) return;
+    if(localStorage.getItem('token')===null){
+      toast.error("Please login to add to wishlist")
+      return;
+    }
+    const product = products.find(p => p._id === productId);
+    dispatch(addToWishlist(product)); // Dispatch the thunk to add to wishlist
+    dispatch(getWishlist()); // Fetch updated wishlist
     setWishlist((prevWishlist) =>
-      prevWishlist.includes(productId)
-        ? prevWishlist.filter((id) => id !== productId)
-        : [...prevWishlist, productId]
+        prevWishlist.includes(productId)
+            ? prevWishlist.filter((id) => id !== productId)
+            : [...prevWishlist, productId]
     );
   };
 
